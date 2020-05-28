@@ -1,6 +1,8 @@
-# covid-19-stats 
+# COVID-19 Stats 
 
 Prerequisites: 
 
+- JDK 11.0.5 or higher
 - Vaadin Pro (or higher) license
-- JDK 11.0.6 or higher
+- Node.js
+
