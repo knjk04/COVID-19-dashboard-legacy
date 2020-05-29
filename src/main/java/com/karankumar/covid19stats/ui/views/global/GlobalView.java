@@ -11,7 +11,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "global", layout = MainView.class)
-@PageTitle("Global")
+@PageTitle("Global statistics")
 public class GlobalView extends VerticalLayout {
     public GlobalView() {
 

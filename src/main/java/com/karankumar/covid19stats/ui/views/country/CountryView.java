@@ -8,7 +8,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "country", layout = MainView.class)
-@PageTitle("Country")
+@PageTitle("Country statistics")
 public class CountryView extends VerticalLayout {
     public CountryView() {
         ComboBox country = new ComboBox("Country");
