@@ -134,6 +134,12 @@
             <artifactId>okhttp</artifactId>
             <version>3.4.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20200518</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -2,15 +2,11 @@ package com.karankumar.covid19stats.ui.views.global;
 
 import com.karankumar.covid19stats.backend.GlobalStats;
 import com.karankumar.covid19stats.ui.MainView;
-import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
-import static com.vaadin.flow.component.Tag.H4;
 
 @Route(value = "global", layout = MainView.class)
 @PageTitle("Global")
@@ -30,7 +26,11 @@ public class GlobalView extends VerticalLayout {
 
         add(summary);
 
-        new GlobalStats();
+        GlobalStats globalStats = new GlobalStats();
+
+        System.out.println("GlobalView: Total deaths: " + globalStats.getTotalDeaths());
+        System.out.println("GlobalView: Total recovered: " + globalStats.getTotalRecovered());
+        System.out.println("GlobalView: Total cases: " + globalStats.getTotalCases());
     }
 
 }
