@@ -16,8 +16,6 @@ public class MainView extends AppLayout {
 
         Tab globalTab = setTab("Global", VaadinIcon.GLOBE);
         Tab countryTab = setTab("Country", VaadinIcon.LOCATION_ARROW_CIRCLE);
-        Tab[] tabArray = {globalTab, countryTab};
-        setTabsThemeVariant(tabArray);
 
         tabs.add(globalTab, countryTab);
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
@@ -25,17 +23,13 @@ public class MainView extends AppLayout {
         addToNavbar(tabs);
     }
 
-    private void setTabsThemeVariant(Tab[] tab) {
-        for (Tab t : tab) {
-            t.addThemeVariants(TabVariant.LUMO_ICON_ON_TOP);
-        }
-    }
-
+    // TODO: configure this to also accept a a link path
     private Tab setTab(String label, VaadinIcon icon) {
         Anchor a = new Anchor();
         a.add(icon.create());
         Tab tab = new Tab(label);
         tab.add(a);
+        tab.addThemeVariants(TabVariant.LUMO_ICON_ON_TOP);
         return tab;
     }
 
