@@ -15,6 +15,7 @@ public class CountryView extends VerticalLayout {
         country.setItems(CountryName.values());
         country.setRequired(true);
         country.setPlaceholder("Select a country");
+        country.setMinWidth("20%");
 
         add(country);
     }

@@ -33,16 +33,16 @@ public class GlobalStats {
             Response response = client.newCall(request).execute();
             String data = response.body().string();
 
-//            System.out.println(data);
+            System.out.println(data);
 
             JSONObject jsonObject = new JSONObject(data);
             JSONObject global = jsonObject.getJSONObject("Global");
 
             System.out.println(global);
 
-            totalDeaths =  global.getInt("TotalDeaths");
-            totalRecovered =  global.getInt("TotalRecovered");
-            totalCases =  global.getInt("TotalConfirmed");
+            totalDeaths = global.getInt("TotalDeaths");
+            totalRecovered = global.getInt("TotalRecovered");
+            totalCases = global.getInt("TotalConfirmed");
 
         } catch (IOException e) {
             e.printStackTrace();
