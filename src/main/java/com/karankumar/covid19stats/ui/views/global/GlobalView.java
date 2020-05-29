@@ -35,9 +35,9 @@ public class GlobalView extends VerticalLayout {
         System.out.println("GlobalView: Total cases: " + globalStats.getTotalCases());
 
         Board board = new Board();
-        Div totalDeathsDiv = createComponent(String.valueOf(globalStats.getTotalDeaths()));
-        Div totalRecoveredDiv = createComponent(String.valueOf(globalStats.getTotalRecovered()));
-        Div totalCasesDiv = createComponent(String.valueOf(globalStats.getTotalCases()));
+        Div totalDeathsDiv = createComponent("Total deaths: " + globalStats.getTotalDeaths());
+        Div totalRecoveredDiv = createComponent("Total recovered: " + globalStats.getTotalRecovered());
+        Div totalCasesDiv = createComponent("Total cases: " + globalStats.getTotalCases());
         board.addRow(totalDeathsDiv, totalRecoveredDiv, totalCasesDiv);
 
         add(board);
