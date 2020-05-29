@@ -1,5 +1,7 @@
 # Contributing
 
+*As multiple versions of this contributing document may exist, please always refer to the [version on the master branch](https://github.com/knjk04/covid-19-stats/blob/master/CONTRIBUTING.md).*
+
 Thank you for taking an interest in contributing!
 
 ## Code of conduct
