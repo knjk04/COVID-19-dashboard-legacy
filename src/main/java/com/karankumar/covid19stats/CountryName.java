@@ -3,7 +3,6 @@ package com.karankumar.covid19stats;
 // This should be kept in alphabetical order
 
 // The country names should match https://api.covid19api.com/countries
-// Exceptions include names that have parentheses or commas in them (this does not apply to Congo as there would be ambiguity)
 // The string representation should be the slug name
 public enum CountryName {
     AFGHANISTAN("afghanistan"),

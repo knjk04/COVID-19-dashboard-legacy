@@ -20,7 +20,7 @@ public class MainView extends AppLayout {
         tabs.add(globalTab, countryTab);
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
 
-        addToNavbar(tabs);
+        addToNavbar(true, tabs);
     }
 
     // TODO: configure this to also accept a a link path
