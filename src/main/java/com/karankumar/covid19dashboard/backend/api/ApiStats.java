@@ -1,4 +1,4 @@
-package com.karankumar.covid19dashboard.backend.global;
+package com.karankumar.covid19dashboard.backend.api;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -10,26 +10,24 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class GlobalStats {
-    private final OkHttpClient client;
-
-    private static final String apiUrl = "https://api.covid19api.com/";
-    private static final String apiSummary = "/summary";
-
+public class ApiStats {
+    private static final OkHttpClient client;
     private static Cache<String, JSONObject> cache;
+    private JSONObject jsonObject;
 
     static {
         cache = Caffeine.newBuilder()
                 .expireAfterWrite(24, TimeUnit.HOURS)
                 .maximumSize(10_000)
                 .build();
-    }
 
-    public GlobalStats() {
         client = new OkHttpClient().newBuilder()
                 .build();
+    }
 
+    public ApiStats() {
         if (getTotalCases() == null || getTotalDeaths() == null || getTotalRecovered() == null) {
+            jsonObject = cache.getIfPresent(ApiConst.SUMMARY);
             fetchSummary();
         } else {
             System.out.println("GlobalStats: none are null");
@@ -38,7 +36,7 @@ public class GlobalStats {
 
     private void fetchSummary() {
         Request request = new Request.Builder()
-                .url(apiUrl + apiSummary)
+                .url(ApiConst.apiUrl + ApiConst.apiSummary)
                 .method("GET", null)
                 .build();
         try {
@@ -48,11 +46,11 @@ public class GlobalStats {
             System.out.println("Data:\n" + data);
 
             JSONObject jsonObject = new JSONObject(data);
-            JSONObject global = jsonObject.getJSONObject(GlobalConst.GLOBAL);
+            JSONObject global = jsonObject.getJSONObject(ApiConst.GLOBAL);
 
             System.out.println(global);
 
-            cache.put(GlobalConst.SUMMARY, jsonObject);
+            cache.put(ApiConst.SUMMARY, jsonObject);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,12 +61,10 @@ public class GlobalStats {
      @return The total number of deaths. This may be null
      */
     public Integer getTotalDeaths() {
-        JSONObject jsonObject = cache.getIfPresent(GlobalConst.SUMMARY);
-
         Integer totalDeaths = null;
         if (jsonObject != null) {
-            JSONObject global = jsonObject.getJSONObject(GlobalConst.GLOBAL);
-            totalDeaths = global.getInt(GlobalConst.TOTAL_DEATHS);
+            JSONObject global = jsonObject.getJSONObject(ApiConst.GLOBAL);
+            totalDeaths = global.getInt(ApiConst.TOTAL_DEATHS);
         } else {
             System.out.println("getTotalDeaths(): jsonObject is null");
         }
@@ -85,12 +81,10 @@ public class GlobalStats {
      @return The total number of people that have recovered. This may be null
      */
     public Integer getTotalRecovered() {
-        JSONObject jsonObject = cache.getIfPresent(GlobalConst.SUMMARY);
-
         Integer totalRecovered = null;
         if (jsonObject != null) {
-            JSONObject global = jsonObject.getJSONObject(GlobalConst.GLOBAL);
-            totalRecovered = global.getInt(GlobalConst.TOTAL_RECOVERED);
+            JSONObject global = jsonObject.getJSONObject(ApiConst.GLOBAL);
+            totalRecovered = global.getInt(ApiConst.TOTAL_RECOVERED);
         } else {
             System.out.println("getTotalRecovered(): json object is null");
         }
@@ -107,12 +101,10 @@ public class GlobalStats {
      @return The total number of confirmed cases. This may be null
      */
     public Integer getTotalCases() {
-        JSONObject jsonObject = cache.getIfPresent(GlobalConst.SUMMARY);
-
         Integer totalCases = null;
         if (jsonObject != null) {
-            JSONObject global = jsonObject.getJSONObject(GlobalConst.GLOBAL);
-            totalCases = global.getInt(GlobalConst.TOTAL_CONFIRMED_CASES);
+            JSONObject global = jsonObject.getJSONObject(ApiConst.GLOBAL);
+            totalCases = global.getInt(ApiConst.TOTAL_CONFIRMED_CASES);
         } else {
             System.out.println("getTotalCases(): json object is null");
         }

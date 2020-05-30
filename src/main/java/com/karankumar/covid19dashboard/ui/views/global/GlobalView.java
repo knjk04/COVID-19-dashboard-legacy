@@ -1,11 +1,10 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
-import com.karankumar.covid19dashboard.backend.global.GlobalStats;
+import com.karankumar.covid19dashboard.backend.api.ApiStats;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -16,7 +15,7 @@ import java.text.NumberFormat;
 @PageTitle("COVID-19: Global statistics")
 public class GlobalView extends VerticalLayout {
     public GlobalView() {
-        GlobalStats globalStats = new GlobalStats();
+        ApiStats globalStats = new ApiStats();
         Integer totalDeaths = globalStats.getTotalDeaths();
         Integer totalRecovered = globalStats.getTotalRecovered();
         Integer totalCases = globalStats.getTotalCases();
@@ -32,8 +31,8 @@ public class GlobalView extends VerticalLayout {
 
         Div totalDeathsDiv = new Div();
         if (totalDeaths != null) {
-            H4 deathsh4 = new H4("Total deaths: " + numberFormat.format(totalDeaths));
-            totalDeathsDiv.add(deathsh4);
+            H4 deathsH4 = new H4("Total deaths: " + numberFormat.format(totalDeaths));
+            totalDeathsDiv.add(deathsH4);
         }
 
         Div totalRecoveredDiv = new Div();
@@ -51,11 +50,5 @@ public class GlobalView extends VerticalLayout {
         board.addRow(totalDeathsDiv, totalRecoveredDiv, totalCasesDiv);
 
         add(board);
-    }
-
-    private Div createComponent(String text) {
-        Div div = new Div();
-        div.setText(text);
-        return div;
     }
 }
