@@ -30,7 +30,6 @@ public class GlobalStats {
                 .build();
 
         if (getTotalCases() == null || getTotalDeaths() == null || getTotalRecovered() == null) {
-            System.out.println("GlobalStats: at least one is null");
             fetchSummary();
         } else {
             System.out.println("GlobalStats: none are null");
@@ -55,7 +54,7 @@ public class GlobalStats {
 
             cache.put(GlobalConst.TOTAL_DEATHS, global.getInt(GlobalConst.TOTAL_DEATHS));
             cache.put(GlobalConst.TOTAL_RECOVERED, global.getInt(GlobalConst.TOTAL_RECOVERED));
-            cache.put(GlobalConst.TOTAL_CASES, global.getInt(GlobalConst.TOTAL_CASES));
+            cache.put(GlobalConst.TOTAL_CONFIRMED_CASES, global.getInt(GlobalConst.TOTAL_CONFIRMED_CASES));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,7 +90,7 @@ public class GlobalStats {
      @return The total number of confirmed cases. This may be null
      */
     public Integer getTotalCases() {
-        Integer totalCases = cache.getIfPresent(GlobalConst.TOTAL_CASES);
+        Integer totalCases = cache.getIfPresent(GlobalConst.TOTAL_CONFIRMED_CASES);
         if (totalCases == null) {
             System.out.println("No total cases present");
         } else {
