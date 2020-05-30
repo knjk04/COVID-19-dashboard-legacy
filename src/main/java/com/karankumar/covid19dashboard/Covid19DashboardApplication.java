@@ -1,14 +1,14 @@
-package com.karankumar.covid19stats;
+package com.karankumar.covid19dashboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class Covid19StatsApplication extends SpringBootServletInitializer {
+public class Covid19DashboardApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(Covid19StatsApplication.class, args);
+        SpringApplication.run(Covid19DashboardApplication.class, args);
     }
 
 }

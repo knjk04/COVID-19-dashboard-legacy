@@ -1,4 +1,4 @@
-package com.karankumar.covid19stats.backend;
+package com.karankumar.covid19dashboard.backend;
 
 // This should be kept in alphabetical order
 
