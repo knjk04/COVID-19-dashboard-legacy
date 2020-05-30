@@ -17,9 +17,9 @@ The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hop
 
 ## Contributing
 
-If you wish to contribute (thanks!), please first see the [contributing guide](https://github.com/knjk04/covid-19-stats/blob/fetch-json/CONTRIBUTING.md).
+If you wish to contribute (thanks!), please first see the [contributing guide](https://github.com/knjk04/COVID-19-dashboard/blob/master/CONTRIBUTING.md).
 
-Please also ensure that you meet the [prerequisites](https://github.com/knjk04/covid-19-stats#prerequisites) (see above) to run the program.
+Please also ensure that you meet the prerequisites (see above) to run the program.
 
 ## Acknowledgements
 
