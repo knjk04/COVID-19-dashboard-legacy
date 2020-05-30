@@ -11,7 +11,7 @@ The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hop
 ### Prerequisites:
 
 - JDK 11.0.5 or higher
-- [Vaadin](https://vaadin.com/) Pro (or higher) license
+- [Vaadin](https://vaadin.com/) Pro (or higher) license (free with the [GitHub student pack](https://education.github.com/pack))
 - Node.js
 - npm
 
