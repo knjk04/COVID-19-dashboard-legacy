@@ -1,6 +1,6 @@
 # Contributor Covenant Code of Conduct
 
-*As multiple versions of this code of conduct may exist, please always refer to the [version on the master branch](https://github.com/knjk04/COVID-19-dashboard/blob/master/CODE_OF_CONDUCT.md).
+*As multiple versions of this code of conduct may exist, please always refer to the [version on the master branch](https://github.com/knjk04/COVID-19-dashboard/blob/master/CODE_OF_CONDUCT.md).*
 
 ## Our Pledge
 
