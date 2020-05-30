@@ -12,6 +12,7 @@ The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hop
 
 - JDK 11.0.5 or higher
 - [Vaadin](https://vaadin.com/) Pro (or higher) license
+- Vaadin 14 or higher
 - Node.js
 - npm
 
