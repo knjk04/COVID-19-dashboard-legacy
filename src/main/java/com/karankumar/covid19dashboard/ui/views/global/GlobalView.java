@@ -17,9 +17,9 @@ import java.text.NumberFormat;
 public class GlobalView extends VerticalLayout {
     public GlobalView() {
         GlobalStats globalStats = new GlobalStats();
-        int totalDeaths = globalStats.getTotalDeaths();
-        int totalRecovered = globalStats.getTotalRecovered();
-        int totalCases = globalStats.getTotalCases();
+        Integer totalDeaths = globalStats.getTotalDeaths();
+        Integer totalRecovered = globalStats.getTotalRecovered();
+        Integer totalCases = globalStats.getTotalCases();
 
         System.out.println("GlobalView: Total deaths: " + totalDeaths);
         System.out.println("GlobalView: Total recovered: " + totalRecovered);
@@ -29,9 +29,25 @@ public class GlobalView extends VerticalLayout {
         numberFormat.setGroupingUsed(true);
 
         Board board = new Board();
-        Div totalDeathsDiv = createComponent("Total deaths: " + numberFormat.format(totalDeaths));
-        Div totalRecoveredDiv = createComponent("Total recovered: " + numberFormat.format(totalRecovered));
-        Div totalCasesDiv = createComponent("Total confirmed cases: " + numberFormat.format(totalCases));
+
+        Div totalDeathsDiv = new Div();
+        if (totalDeaths != null) {
+            H4 deathsh4 = new H4("Total deaths: " + numberFormat.format(totalDeaths));
+            totalDeathsDiv.add(deathsh4);
+        }
+
+        Div totalRecoveredDiv = new Div();
+        if (totalRecovered != null) {
+            H4 totalRecoveredH4 = new H4("Total recovered: " + numberFormat.format(totalRecovered));
+            totalRecoveredDiv.add(totalRecoveredH4);
+        }
+
+        Div totalCasesDiv = new Div();
+        if (totalCases != null) {
+            H4 totalCasesH4 = new H4("Total confirmed cases: " + numberFormat.format(totalCases));
+            totalCasesDiv.add(totalCasesH4);
+        }
+
         board.addRow(totalDeathsDiv, totalRecoveredDiv, totalCasesDiv);
 
         add(board);

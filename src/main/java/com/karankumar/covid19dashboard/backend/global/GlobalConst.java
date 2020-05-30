@@ -5,4 +5,5 @@ public final class GlobalConst {
     static final String TOTAL_DEATHS = "TotalDeaths";
     static final String TOTAL_CONFIRMED_CASES = "TotalConfirmed";
     static final String TOTAL_RECOVERED = "TotalRecovered";
+    static final String SUMMARY = "Summary";
 }
