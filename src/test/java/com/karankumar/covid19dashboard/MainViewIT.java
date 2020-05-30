@@ -1,4 +1,4 @@
-package com.karankumar.covid19stats;
+package com.karankumar.covid19dashboard;
 
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 import org.junit.Assert;

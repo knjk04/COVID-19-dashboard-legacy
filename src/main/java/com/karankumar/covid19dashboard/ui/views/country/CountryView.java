@@ -1,7 +1,7 @@
-package com.karankumar.covid19stats.ui.views.country;
+package com.karankumar.covid19dashboard.ui.views.country;
 
-import com.karankumar.covid19stats.backend.CountryName;
-import com.karankumar.covid19stats.ui.MainView;
+import com.karankumar.covid19dashboard.backend.CountryName;
+import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;

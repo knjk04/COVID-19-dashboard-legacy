@@ -1,7 +1,7 @@
-package com.karankumar.covid19stats.ui;
+package com.karankumar.covid19dashboard.ui;
 
-import com.karankumar.covid19stats.ui.views.country.CountryView;
-import com.karankumar.covid19stats.ui.views.global.GlobalView;
+import com.karankumar.covid19dashboard.ui.views.country.CountryView;
+import com.karankumar.covid19dashboard.ui.views.global.GlobalView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.applayout.AppLayout;

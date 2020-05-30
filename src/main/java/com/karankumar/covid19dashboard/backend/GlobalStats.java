@@ -1,4 +1,4 @@
-package com.karankumar.covid19stats.backend;
+package com.karankumar.covid19dashboard.backend;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
