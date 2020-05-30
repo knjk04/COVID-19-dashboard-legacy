@@ -1,5 +1,7 @@
 # COVID-19 Stats summary
 
+*For the most up-to-date version of the README, please refer to the version on the master branch.*
+
 COVID-19 Stats is a web app that displays COVID-19 statistics on a global level and, coming soon, on a per-country basis. This is made using Spring Boot and Vaadin.
 
 COVID-19 stats uses the [COVID-19 API](https://covid19api.com/) (data is from Johns Hopkins).
