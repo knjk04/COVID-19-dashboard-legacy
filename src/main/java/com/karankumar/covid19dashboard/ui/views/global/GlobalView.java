@@ -14,20 +14,6 @@ import com.vaadin.flow.router.Route;
 @PageTitle("COVID-19: Global statistics")
 public class GlobalView extends VerticalLayout {
     public GlobalView() {
-
-        com.vaadin.flow.component.html.H4 totalDeaths = new H4();
-        totalDeaths.setText("Total deaths");
-
-        com.vaadin.flow.component.html.H4 totalCases = new H4();
-        totalCases.setText("Total cases");
-
-        com.vaadin.flow.component.html.H4 totalRecovered = new H4();
-        totalRecovered.setText("Total recovered");
-
-        HorizontalLayout summary = new HorizontalLayout(totalDeaths, totalCases, totalRecovered);
-
-        add(summary);
-
         GlobalStats globalStats = new GlobalStats();
 
         System.out.println("GlobalView: Total deaths: " + globalStats.getTotalDeaths());

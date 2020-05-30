@@ -1,7 +1,6 @@
 package com.karankumar.covid19dashboard.backend;
 
 // This should be kept in alphabetical order
-
 // The country names should match https://api.covid19api.com/countries
 // The string representation should be the slug name
 public enum CountryName {
@@ -259,5 +258,10 @@ public enum CountryName {
 
     CountryName(String countryName) {
         this.countryName = countryName;
+    }
+
+    @Override
+    public String toString() {
+        return countryName;
     }
 }

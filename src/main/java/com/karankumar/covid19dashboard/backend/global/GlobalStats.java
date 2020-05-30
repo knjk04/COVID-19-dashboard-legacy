@@ -45,7 +45,7 @@ public class GlobalStats {
             Response response = client.newCall(request).execute();
             String data = response.body().string();
 
-            System.out.println(data);
+            System.out.println("Data:\n" + data);
 
             JSONObject jsonObject = new JSONObject(data);
             JSONObject global = jsonObject.getJSONObject(GlobalConst.GLOBAL);

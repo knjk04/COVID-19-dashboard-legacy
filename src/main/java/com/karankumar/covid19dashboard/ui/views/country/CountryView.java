@@ -11,7 +11,7 @@ import com.vaadin.flow.router.Route;
 @PageTitle("COVID-19: Country statistics")
 public class CountryView extends VerticalLayout {
     public CountryView() {
-        ComboBox country = new ComboBox("Country");
+        ComboBox<CountryName> country = new ComboBox<>("Country");
         country.setItems(CountryName.values());
         country.setRequired(true);
         country.setPlaceholder("Select a country");
