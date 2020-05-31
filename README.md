@@ -31,7 +31,7 @@ If you wish to contribute (thanks!), please first see the [contributing guide](h
 
 ## Acknowledgements
 
-Libraries used:
+Third-party libraries used:
 
 - [OkHttp3](https://square.github.io/okhttp/)
 
