@@ -6,6 +6,8 @@ COVID-19 dashboard is a web app that displays COVID-19 statistics on a global le
 
 The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hopkins](https://github.com/CSSEGISandData/COVID-19)).
 
+![Global dashboard](/media/global-dashboard.png)
+
 ## Setup
 
 ### Prerequisites:
