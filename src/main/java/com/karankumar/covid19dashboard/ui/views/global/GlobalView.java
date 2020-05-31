@@ -7,6 +7,7 @@ import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -31,24 +32,35 @@ public class GlobalView extends VerticalLayout {
 
         Board board = new Board();
 
+        Span deathCounter = new Span("test1");
+        deathCounter.addClassNames("counter", "deathCounter");
+        Span recoveredCounter = new Span("test2");
+        recoveredCounter.addClassNames("counter", "recoveredCounter");
+        Span casesCounter = new Span("test3");
+        casesCounter.addClassNames("counter", "casesCounter");
+
         Div totalDeathsDiv = new Div();
         if (totalDeaths != null) {
-            H4 deathsH4 = new H4("Total deaths: " + numberFormat.format(totalDeaths));
+            deathCounter.setText(numberFormat.format(totalDeaths));
+            H4 deathsH4 = new H4("Total deaths");
             totalDeathsDiv.add(deathsH4);
         }
 
         Div totalRecoveredDiv = new Div();
         if (totalRecovered != null) {
-            H4 totalRecoveredH4 = new H4("Total recovered: " + numberFormat.format(totalRecovered));
+            recoveredCounter.setText(numberFormat.format(totalRecovered));
+            H4 totalRecoveredH4 = new H4("Total recovered");
             totalRecoveredDiv.add(totalRecoveredH4);
         }
 
         Div totalCasesDiv = new Div();
         if (totalCases != null) {
-            H4 totalCasesH4 = new H4("Total confirmed cases: " + numberFormat.format(totalCases));
+            casesCounter.setText(numberFormat.format(totalCases));
+            H4 totalCasesH4 = new H4("Total confirmed cases");
             totalCasesDiv.add(totalCasesH4);
         }
 
+        board.addRow(deathCounter, recoveredCounter, casesCounter);
         board.addRow(totalDeathsDiv, totalRecoveredDiv, totalCasesDiv);
 
         add(board);

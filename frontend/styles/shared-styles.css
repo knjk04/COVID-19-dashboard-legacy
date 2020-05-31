@@ -10,3 +10,18 @@
   max-width: 250px;
 }
 
+.deathCounter {
+  color:red;
+}
+
+.recoveredCounter {
+  color: #55bf3b;
+}
+
+.casesCounter {
+  color:blue;
+}
+
+.counter {
+  font-size: 44px;
+}

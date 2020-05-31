@@ -3,6 +3,7 @@ package com.karankumar.covid19dashboard.ui.views.country;
 import com.karankumar.covid19dashboard.backend.CountryName;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -18,5 +19,7 @@ public class CountryView extends VerticalLayout {
         country.setMinWidth("20%");
 
         add(country);
+
+        add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
     }
 }
