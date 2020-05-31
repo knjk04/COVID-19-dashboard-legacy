@@ -16,11 +16,16 @@ The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hop
 - Node.js
 - npm
 
+### Running the app
+
+1. Run Covid19DashboardApplication.java
+2. Go to localhost:8080/global
+
+If you see a a JSON Exception, refresh the page until you it goes away. This is a [known issue](https://github.com/knjk04/COVID-19-dashboard/issues/5) to do with reaching the maximum number of API requests.
+
 ## Contributing
 
 If you wish to contribute (thanks!), please first see the [contributing guide](https://github.com/knjk04/COVID-19-dashboard/blob/master/CONTRIBUTING.md).
-
-Please also ensure that you meet the prerequisites (see above) to run the program.
 
 ## Acknowledgements
 
