@@ -15,7 +15,7 @@ public enum CountryName {
     ANTARCTICA("antarctica"),
     ANTIGUA("antigua-and-barbuda"),
     ARGENTINA("argentina"),
-    ARMENIA("Armenia"),
+    ARMENIA("armenia"),
     AUSTRALIA("australia"),
     AUSTRIA("austria"),
     ARUBA("aruba"),

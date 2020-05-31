@@ -2,7 +2,9 @@ package com.karankumar.covid19dashboard.ui.views.global;
 
 import com.karankumar.covid19dashboard.backend.api.ApiStats;
 import com.karankumar.covid19dashboard.ui.MainView;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.board.Board;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -50,5 +52,7 @@ public class GlobalView extends VerticalLayout {
         board.addRow(totalDeathsDiv, totalRecoveredDiv, totalCasesDiv);
 
         add(board);
+
+        add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
     }
 }
