@@ -1,11 +1,14 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
 import com.karankumar.covid19dashboard.backend.Country;
+import com.karankumar.covid19dashboard.backend.api.ApiConst;
 import com.karankumar.covid19dashboard.backend.api.ApiStats;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.board.Board;
+import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.charts.model.*;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
@@ -16,11 +19,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.TreeMap;
 
 @Route(value = "global", layout = MainView.class)
 @PageTitle("COVID-19: Global statistics")
@@ -28,6 +28,7 @@ public class GlobalView extends VerticalLayout {
     private final Span deathCounter;
     private final Span recoveredCounter;
     private final Span casesCounter;
+    private Chart mostCasesChart;
 
     private enum TotalType {
         DEATHS,
@@ -84,6 +85,9 @@ public class GlobalView extends VerticalLayout {
 
         add(new HtmlComponent("br"));
 
+        configureMostCasesChart(globalStats.getMostCases());
+        add(mostCasesChart);
+
         Text lastUpdated = new Text("Last updated on " + globalStats.getDate() + " at " + globalStats.getTime());
         add(lastUpdated);
 
@@ -113,5 +117,24 @@ public class GlobalView extends VerticalLayout {
                     break;
             }
         }
+    }
+
+    private void configureMostCasesChart(TreeMap<Integer, String> mostCases) {
+        mostCasesChart = new Chart(ChartType.PIE);
+        Configuration conf = mostCasesChart.getConfiguration();
+        conf.setTitle(ApiConst.MOST_CONFIRMED_CASES + " most confirmed cases");
+
+        conf.setTooltip(new Tooltip());
+
+        PlotOptionsPie plotOptions = new PlotOptionsPie();
+        plotOptions.setAllowPointSelect(true);
+        conf.setPlotOptions(plotOptions);
+
+        DataSeries series = new DataSeries();
+        for (Integer i : mostCases.keySet()) {
+            series.add(new DataSeriesItem(mostCases.get(i), i));
+        }
+
+        conf.setSeries(series);
     }
 }
