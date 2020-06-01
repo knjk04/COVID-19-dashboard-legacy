@@ -10,6 +10,7 @@ The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hop
 
 *Note: the screenshot above is for illustrative purposes only. The actual UI may look slightly different. 
 If any major changes are made, a new screenshot will be added.*
+*Note: the fetched data is cached for 24 hours.*
 
 ## Setup
 
@@ -34,7 +35,7 @@ If you wish to contribute (thanks!), please first see the [contributing guide](h
 
 ## Acknowledgements
 
-Libraries used:
+Third-party libraries used:
 
 - [OkHttp3](https://square.github.io/okhttp/)
 
