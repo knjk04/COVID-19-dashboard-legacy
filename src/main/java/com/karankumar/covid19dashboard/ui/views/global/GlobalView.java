@@ -2,7 +2,9 @@ package com.karankumar.covid19dashboard.ui.views.global;
 
 import com.karankumar.covid19dashboard.backend.api.ApiStats;
 import com.karankumar.covid19dashboard.ui.MainView;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.board.Board;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
@@ -12,7 +14,11 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 @Route(value = "global", layout = MainView.class)
 @PageTitle("COVID-19: Global statistics")
@@ -69,6 +75,13 @@ public class GlobalView extends VerticalLayout {
         board.addRow(totalDeathsDiv, totalRecoveredDiv, totalCasesDiv);
 
         add(board);
+
+        Grid grid = new Grid();
+
+        add(grid);
+
+        Text lastUpdated = new Text("Last updated on " + globalStats.getDate() + " at " + globalStats.getTime());
+        add(lastUpdated);
 
         add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
     }

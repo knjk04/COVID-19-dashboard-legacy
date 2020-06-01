@@ -8,6 +8,7 @@ import okhttp3.Response;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
 public class ApiStats {
@@ -116,4 +117,42 @@ public class ApiStats {
         }
         return totalCases;
     }
+
+    /**
+     * @return a String representing a date of the form dd-MM-yyyy
+     */
+    public String getDate() {
+        String date = "";
+        if (jsonObject != null) {
+            String dateAndTime = jsonObject.getString("Date");
+            String[] split = dateAndTime.split("T");
+            date = split[0];
+
+            String[] yearMonthDay = date.split("-");
+            String year = yearMonthDay[0];
+            String month = yearMonthDay[1];
+            String day = yearMonthDay[2];
+            String[] dayMonthYear = {day, month, year};
+
+            StringJoiner joiner = new StringJoiner("-");
+            for(String s : dayMonthYear) {
+                joiner.add(s);
+            }
+
+            date = joiner.toString();
+        }
+        return date;
+    }
+
+    public String getTime() {
+        String time = "";
+        if (jsonObject != null) {
+            String dateAndTime = jsonObject.getString("Date");
+            String[] split = dateAndTime.split("T");
+            time = split[1].substring(0, split[1].length()-1);
+        }
+        return time;
+    }
+
+
 }
