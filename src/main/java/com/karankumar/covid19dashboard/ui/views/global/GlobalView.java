@@ -3,6 +3,7 @@ package com.karankumar.covid19dashboard.ui.views.global;
 import com.karankumar.covid19dashboard.backend.Country;
 import com.karankumar.covid19dashboard.backend.api.ApiStats;
 import com.karankumar.covid19dashboard.ui.MainView;
+import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.grid.Grid;
@@ -80,6 +81,8 @@ public class GlobalView extends VerticalLayout {
         Grid<Country> grid = new Grid<>(Country.class);
         grid.setItems(globalStats.getAllCountriesSummary());
         add(grid);
+
+        add(new HtmlComponent("br"));
 
         Text lastUpdated = new Text("Last updated on " + globalStats.getDate() + " at " + globalStats.getTime());
         add(lastUpdated);

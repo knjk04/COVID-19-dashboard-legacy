@@ -130,7 +130,7 @@ public class ApiStats {
     public String getDate() {
         String date = "";
         if (jsonObject != null) {
-            String dateAndTime = jsonObject.getString("Date");
+            String dateAndTime = jsonObject.getString(ApiConst.DATE);
             String[] split = dateAndTime.split("T");
             date = split[0];
 
@@ -153,7 +153,7 @@ public class ApiStats {
     public String getTime() {
         String time = "";
         if (jsonObject != null) {
-            String dateAndTime = jsonObject.getString("Date");
+            String dateAndTime = jsonObject.getString(ApiConst.DATE);
             String[] split = dateAndTime.split("T");
             time = split[1].substring(0, split[1].length()-1);
         }
@@ -164,20 +164,14 @@ public class ApiStats {
         ArrayList<Country> countriesList = new ArrayList<>();
 
         if (jsonObject != null) {
-            JSONArray countries = jsonObject.getJSONArray("Countries");
+            JSONArray countries = jsonObject.getJSONArray(ApiConst.COUNTRIES);
             for (int i = 0; i < countries.length(); i++) {
                 JSONObject jsonCountry = countries.getJSONObject(i);
 
-                String countryName = jsonCountry.getString("Country");
-                int confirmedCases = jsonCountry.getInt("TotalConfirmed");
-                int totalDeaths = jsonCountry.getInt("TotalDeaths");
-                int totalRecovered = jsonCountry.getInt("TotalRecovered");
-
-                System.out.println("Country name: " + countryName);
-                System.out.println("Total cases: " + confirmedCases);
-                System.out.println("Total deaths: " + totalDeaths);
-                System.out.println("Total recovered: " + totalRecovered);
-
+                String countryName = jsonCountry.getString(ApiConst.COUNTRY);
+                int confirmedCases = jsonCountry.getInt(ApiConst.TOTAL_CONFIRMED_CASES);
+                int totalDeaths = jsonCountry.getInt(ApiConst.TOTAL_DEATHS);
+                int totalRecovered = jsonCountry.getInt(ApiConst.TOTAL_RECOVERED);
                 countriesList.add(new Country(countryName, totalDeaths, totalRecovered, confirmedCases));
             }
         }
