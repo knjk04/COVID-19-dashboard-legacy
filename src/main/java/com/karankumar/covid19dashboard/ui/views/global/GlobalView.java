@@ -1,5 +1,6 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
+import com.karankumar.covid19dashboard.backend.Country;
 import com.karankumar.covid19dashboard.backend.api.ApiStats;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.Text;
@@ -76,8 +77,8 @@ public class GlobalView extends VerticalLayout {
 
         add(board);
 
-        Grid grid = new Grid();
-
+        Grid<Country> grid = new Grid<>(Country.class);
+        grid.setItems(globalStats.getAllCountriesSummary());
         add(grid);
 
         Text lastUpdated = new Text("Last updated on " + globalStats.getDate() + " at " + globalStats.getTime());

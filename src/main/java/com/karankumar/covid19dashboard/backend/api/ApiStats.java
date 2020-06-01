@@ -2,12 +2,18 @@ package com.karankumar.covid19dashboard.backend.api;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.karankumar.covid19dashboard.backend.Country;
+import elemental.json.JsonObject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
@@ -154,5 +160,27 @@ public class ApiStats {
         return time;
     }
 
+    public ArrayList<Country> getAllCountriesSummary() {
+        ArrayList<Country> countriesList = new ArrayList<>();
 
+        if (jsonObject != null) {
+            JSONArray countries = jsonObject.getJSONArray("Countries");
+            for (int i = 0; i < countries.length(); i++) {
+                JSONObject jsonCountry = countries.getJSONObject(i);
+
+                String countryName = jsonCountry.getString("Country");
+                int confirmedCases = jsonCountry.getInt("TotalConfirmed");
+                int totalDeaths = jsonCountry.getInt("TotalDeaths");
+                int totalRecovered = jsonCountry.getInt("TotalRecovered");
+
+                System.out.println("Country name: " + countryName);
+                System.out.println("Total cases: " + confirmedCases);
+                System.out.println("Total deaths: " + totalDeaths);
+                System.out.println("Total recovered: " + totalRecovered);
+
+                countriesList.add(new Country(countryName, totalDeaths, totalRecovered, confirmedCases));
+            }
+        }
+        return countriesList;
+    }
 }
