@@ -3,7 +3,6 @@ package com.karankumar.covid19dashboard.backend.api;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.karankumar.covid19dashboard.backend.Country;
-import elemental.json.JsonObject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -11,9 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
@@ -169,10 +166,22 @@ public class ApiStats {
                 JSONObject jsonCountry = countries.getJSONObject(i);
 
                 String countryName = jsonCountry.getString(ApiConst.COUNTRY);
-                int confirmedCases = jsonCountry.getInt(ApiConst.TOTAL_CONFIRMED_CASES);
+                int totalConfirmedCases = jsonCountry.getInt(ApiConst.TOTAL_CONFIRMED_CASES);
                 int totalDeaths = jsonCountry.getInt(ApiConst.TOTAL_DEATHS);
                 int totalRecovered = jsonCountry.getInt(ApiConst.TOTAL_RECOVERED);
-                countriesList.add(new Country(countryName, totalDeaths, totalRecovered, confirmedCases));
+                int totalNewCases = jsonCountry.getInt(ApiConst.NEW_CONFIRMED_CASES);
+                int totalNewDeaths = jsonCountry.getInt(ApiConst.NEW_DEATHS);
+                int totalNewRecovered = jsonCountry.getInt(ApiConst.NEW_RECOVERED);
+                Country country = new Country(
+                        countryName,
+                        totalDeaths,
+                        totalRecovered,
+                        totalConfirmedCases,
+                        totalNewCases,
+                        totalNewDeaths,
+                        totalNewRecovered
+                );
+                countriesList.add(country);
             }
         }
         return countriesList;

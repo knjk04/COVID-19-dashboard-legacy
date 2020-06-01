@@ -1,6 +1,9 @@
 package com.karankumar.covid19dashboard.backend.api;
 
 public final class ApiConst {
+    public static final String NEW_CONFIRMED_CASES = "NewConfirmed";
+    public static final String NEW_DEATHS = "NewDeaths";
+    public static final String NEW_RECOVERED = "NewRecovered";
     static final String apiUrl = "https://api.covid19api.com/";
     static final String apiSummary = "/summary";
 
