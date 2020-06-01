@@ -10,18 +10,22 @@
   max-width: 250px;
 }
 
-.deathCounter {
+.deathCounterDigit {
   color:red;
 }
 
-.recoveredCounter {
+.recoveredCounterDigit {
   color: #55bf3b;
 }
 
-.casesCounter {
+.casesCounterDigit {
   color:blue;
 }
 
-.counter {
+.counterDigit {
   font-size: 44px;
+}
+
+.counterWrapper {
+  text-align:center;
 }

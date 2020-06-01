@@ -17,6 +17,7 @@ import java.text.NumberFormat;
 @Route(value = "global", layout = MainView.class)
 @PageTitle("COVID-19: Global statistics")
 public class GlobalView extends VerticalLayout {
+
     public GlobalView() {
         ApiStats globalStats = new ApiStats();
         Integer totalDeaths = globalStats.getTotalDeaths();
@@ -32,31 +33,42 @@ public class GlobalView extends VerticalLayout {
 
         Board board = new Board();
 
+        String counterDigit = "counterDigit";
+        String counterWrapper = "counterWrapper";
         Span deathCounter = new Span("test1");
-        deathCounter.addClassNames("counter", "deathCounter");
+        deathCounter.addClassNames(counterDigit, "deathCounterDigit", counterWrapper);
         Span recoveredCounter = new Span("test2");
-        recoveredCounter.addClassNames("counter", "recoveredCounter");
+        recoveredCounter.addClassNames(counterDigit, "recoveredCounterDigit", counterWrapper);
         Span casesCounter = new Span("test3");
-        casesCounter.addClassNames("counter", "casesCounter");
+        casesCounter.addClassNames(counterDigit, "casesCounterDigit", counterWrapper);
+
+        H4 deathsH4 = new H4("Total deaths");
+        H4 totalRecoveredH4 = new H4("Total recovered");
+        H4 totalCasesH4 = new H4("Total confirmed cases");
+        H4[] labels = {
+                deathsH4,
+                totalRecoveredH4,
+                totalCasesH4
+        };
+        for (H4 label : labels) {
+            label.addClassName(counterWrapper);
+        }
 
         Div totalDeathsDiv = new Div();
         if (totalDeaths != null) {
             deathCounter.setText(numberFormat.format(totalDeaths));
-            H4 deathsH4 = new H4("Total deaths");
             totalDeathsDiv.add(deathsH4);
         }
 
         Div totalRecoveredDiv = new Div();
         if (totalRecovered != null) {
             recoveredCounter.setText(numberFormat.format(totalRecovered));
-            H4 totalRecoveredH4 = new H4("Total recovered");
             totalRecoveredDiv.add(totalRecoveredH4);
         }
 
         Div totalCasesDiv = new Div();
         if (totalCases != null) {
             casesCounter.setText(numberFormat.format(totalCases));
-            H4 totalCasesH4 = new H4("Total confirmed cases");
             totalCasesDiv.add(totalCasesH4);
         }
 
