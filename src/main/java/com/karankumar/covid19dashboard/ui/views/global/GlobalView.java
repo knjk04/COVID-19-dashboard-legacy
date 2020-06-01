@@ -80,11 +80,10 @@ public class GlobalView extends VerticalLayout {
     }
 
     private void setCounter(Integer total, TotalType type) {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(true);
-        String formattedTotal = numberFormat.format(total);
-
         if (total != null) {
+            NumberFormat numberFormat = NumberFormat.getInstance();
+            numberFormat.setGroupingUsed(true);
+            String formattedTotal = numberFormat.format(total);
             switch(type) {
                 case DEATHS:
                     deathCounter.setText(formattedTotal);
