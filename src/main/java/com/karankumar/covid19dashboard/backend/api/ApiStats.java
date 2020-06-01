@@ -10,14 +10,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class ApiStats {
     private static final OkHttpClient client;
     private static Cache<String, JSONObject> cache;
     private JSONObject jsonObject;
+
+    private TreeMap<Integer, String> mostCases = new TreeMap<>();
+    private int maxMostDeaths = 5;
+    private SortedMap<Integer, String> mostDeaths = new TreeMap<>();
 
     static {
         cache = Caffeine.newBuilder()
@@ -182,8 +185,37 @@ public class ApiStats {
                         totalNewRecovered
                 );
                 countriesList.add(country);
+                populateMostCases(totalConfirmedCases, countryName);
             }
         }
+
+//        for (Integer i : mostCases.keySet()) {
+//            System.out.println(mostCases.get(i) + " has " + i + " cases");
+//        }
+
         return countriesList;
     }
+
+    // This should only be called from within getAllCountriesSummary
+    private void populateMostCases(int totalConfirmedCases, String countryName) {
+        if (mostCases.size() < ApiConst.MOST_CONFIRMED_CASES) {
+            mostCases.put(totalConfirmedCases, countryName);
+        } else if (mostCases.firstKey() < totalConfirmedCases) {
+            // swap with this new country that has more cases
+            mostCases.remove(mostCases.firstKey());
+            mostCases.put(totalConfirmedCases, countryName);
+        }
+    }
+
+    /**
+     * @return a TreeMap containing the countries with the most cases.
+     * The Integer key is the number of cases and the String value is the country name
+     */
+    public TreeMap<Integer, String> getMostCases() {
+        if (mostCases.size() == 0) {
+            System.out.println("ApiStats: Empty most cases TreeMap");
+        }
+        return mostCases;
+    }
+
 }
