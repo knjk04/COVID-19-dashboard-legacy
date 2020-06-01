@@ -2,7 +2,6 @@ package com.karankumar.covid19dashboard.ui.views.global;
 
 import com.karankumar.covid19dashboard.backend.api.ApiStats;
 import com.karankumar.covid19dashboard.ui.MainView;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
@@ -13,10 +12,20 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 @Route(value = "global", layout = MainView.class)
 @PageTitle("COVID-19: Global statistics")
 public class GlobalView extends VerticalLayout {
+    private final Span deathCounter;
+    private final Span recoveredCounter;
+    private final Span casesCounter;
+
+    private enum TotalType {
+        DEATHS,
+        RECOVERED,
+        CASES
+    }
 
     public GlobalView() {
         ApiStats globalStats = new ApiStats();
@@ -28,49 +37,33 @@ public class GlobalView extends VerticalLayout {
         System.out.println("GlobalView: Total recovered: " + totalRecovered);
         System.out.println("GlobalView: Total cases: " + totalCases);
 
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(true);
-
         Board board = new Board();
 
         String counterDigit = "counterDigit";
         String counterWrapper = "counterWrapper";
-        Span deathCounter = new Span("test1");
+        deathCounter = new Span("test1");
         deathCounter.addClassNames(counterDigit, "deathCounterDigit", counterWrapper);
-        Span recoveredCounter = new Span("test2");
+        recoveredCounter = new Span("test2");
         recoveredCounter.addClassNames(counterDigit, "recoveredCounterDigit", counterWrapper);
-        Span casesCounter = new Span("test3");
+        casesCounter = new Span("test3");
         casesCounter.addClassNames(counterDigit, "casesCounterDigit", counterWrapper);
 
         H4 deathsH4 = new H4("Total deaths");
         H4 totalRecoveredH4 = new H4("Total recovered");
         H4 totalCasesH4 = new H4("Total confirmed cases");
-        H4[] labels = {
-                deathsH4,
-                totalRecoveredH4,
-                totalCasesH4
-        };
-        for (H4 label : labels) {
-            label.addClassName(counterWrapper);
-        }
 
-        Div totalDeathsDiv = new Div();
-        if (totalDeaths != null) {
-            deathCounter.setText(numberFormat.format(totalDeaths));
-            totalDeathsDiv.add(deathsH4);
-        }
+        ArrayList<H4> labels = new ArrayList<>(4);
+        labels.add(deathsH4);
+        labels.add(totalRecoveredH4);
+        labels.add(totalCasesH4);
+        labels.forEach(h4 -> h4.addClassName(counterWrapper));
 
-        Div totalRecoveredDiv = new Div();
-        if (totalRecovered != null) {
-            recoveredCounter.setText(numberFormat.format(totalRecovered));
-            totalRecoveredDiv.add(totalRecoveredH4);
-        }
-
-        Div totalCasesDiv = new Div();
-        if (totalCases != null) {
-            casesCounter.setText(numberFormat.format(totalCases));
-            totalCasesDiv.add(totalCasesH4);
-        }
+        Div totalDeathsDiv = addDivLabel(deathsH4);
+        setCounter(totalDeaths, TotalType.DEATHS);
+        Div totalRecoveredDiv = addDivLabel(totalRecoveredH4);
+        setCounter(totalRecovered, TotalType.RECOVERED);
+        Div totalCasesDiv = addDivLabel(totalCasesH4);
+        setCounter(totalCases, TotalType.CASES);
 
         board.addRow(deathCounter, recoveredCounter, casesCounter);
         board.addRow(totalDeathsDiv, totalRecoveredDiv, totalCasesDiv);
@@ -78,5 +71,31 @@ public class GlobalView extends VerticalLayout {
         add(board);
 
         add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
+    }
+
+    private Div addDivLabel(H4 label) {
+        Div div = new Div();
+        div.add(label);
+        return div;
+    }
+
+    private void setCounter(Integer total, TotalType type) {
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setGroupingUsed(true);
+        String formattedTotal = numberFormat.format(total);
+
+        if (total != null) {
+            switch(type) {
+                case DEATHS:
+                    deathCounter.setText(formattedTotal);
+                    break;
+                case RECOVERED:
+                    recoveredCounter.setText(formattedTotal);
+                    break;
+                case CASES:
+                    casesCounter.setText(formattedTotal);
+                    break;
+            }
+        }
     }
 }
