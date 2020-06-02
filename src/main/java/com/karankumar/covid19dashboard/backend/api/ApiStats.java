@@ -19,8 +19,7 @@ public class ApiStats {
     private JSONObject jsonObject;
 
     private TreeMap<Integer, String> mostCases = new TreeMap<>();
-    private int maxMostDeaths = 5;
-    private SortedMap<Integer, String> mostDeaths = new TreeMap<>();
+    private TreeMap<Integer, String> mostDeaths = new TreeMap<>();
 
     static {
         cache = Caffeine.newBuilder()
@@ -186,6 +185,7 @@ public class ApiStats {
                 );
                 countriesList.add(country);
                 populateMostCases(totalConfirmedCases, countryName);
+                populateMostDeaths(totalDeaths, countryName);
             }
         }
 
@@ -207,6 +207,17 @@ public class ApiStats {
         }
     }
 
+    // This should only be called from within getAllCountriesSummary
+    private void populateMostDeaths(int totalDeaths, String countryName) {
+        if (mostDeaths.size() < ApiConst.MOST_CONFIRMED_CASES) {
+            mostDeaths.put(totalDeaths, countryName);
+        } else if (mostDeaths.firstKey() < totalDeaths) {
+            // swap with this new country that has more deaths
+            mostDeaths.remove(mostDeaths.firstKey());
+            mostDeaths.put(totalDeaths, countryName);
+        }
+    }
+
     /**
      * @return a TreeMap containing the countries with the most cases.
      * The Integer key is the number of cases and the String value is the country name
@@ -218,4 +229,14 @@ public class ApiStats {
         return mostCases;
     }
 
+    /**
+     * @return a TreeMap containing the countries with the most deaths.
+     * The Integer key is the number of deaths and the String value is the country name
+     */
+    public TreeMap<Integer, String> getMostDeaths() {
+        if (mostDeaths.size() == 0) {
+            System.out.println("ApiStats: Empty most deaths TreeMap");
+        }
+        return mostDeaths;
+    }
 }

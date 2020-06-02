@@ -14,6 +14,7 @@ import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -28,7 +29,8 @@ public class GlobalView extends VerticalLayout {
     private final Span deathCounter;
     private final Span recoveredCounter;
     private final Span casesCounter;
-    private Chart mostCasesChart;
+    private Chart mostCasesChart  = new Chart(ChartType.PIE);;
+    private Chart mostDeathsChart = new Chart(ChartType.PIE);
 
     private enum TotalType {
         DEATHS,
@@ -85,8 +87,11 @@ public class GlobalView extends VerticalLayout {
 
         add(new HtmlComponent("br"));
 
+        HorizontalLayout charts = new HorizontalLayout(mostCasesChart, mostDeathsChart);
         configureMostCasesChart(globalStats.getMostCases());
-        add(mostCasesChart);
+        configureMostDeathsChart(globalStats.getMostDeaths());
+        charts.setSizeFull();
+        add(charts);
 
         Text lastUpdated = new Text("Last updated on " + globalStats.getDate() + " at " + globalStats.getTime());
         add(lastUpdated);
@@ -120,9 +125,26 @@ public class GlobalView extends VerticalLayout {
     }
 
     private void configureMostCasesChart(TreeMap<Integer, String> mostCases) {
-        mostCasesChart = new Chart(ChartType.PIE);
         Configuration conf = mostCasesChart.getConfiguration();
-        conf.setTitle(ApiConst.MOST_CONFIRMED_CASES + " most confirmed cases");
+        conf.setTitle("Top " + ApiConst.MOST_CONFIRMED_CASES + " countries with the most confirmed cases");
+
+        conf.setTooltip(new Tooltip());
+
+        PlotOptionsPie plotOptions = new PlotOptionsPie();
+        plotOptions.setAllowPointSelect(true);
+        conf.setPlotOptions(plotOptions);
+
+        DataSeries series = new DataSeries();
+        for (Integer i : mostCases.keySet()) {
+            series.add(new DataSeriesItem(mostCases.get(i), i));
+        }
+
+        conf.setSeries(series);
+    }
+
+    private void configureMostDeathsChart(TreeMap<Integer, String> mostCases) {
+        Configuration conf = mostDeathsChart.getConfiguration();
+        conf.setTitle("Top " + ApiConst.MOST_CONFIRMED_CASES + " countries with the most confirmed deaths");
 
         conf.setTooltip(new Tooltip());
 
