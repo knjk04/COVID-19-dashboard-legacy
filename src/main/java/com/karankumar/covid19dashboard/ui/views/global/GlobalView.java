@@ -1,26 +1,24 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
 import com.karankumar.covid19dashboard.backend.Country;
-import com.karankumar.covid19dashboard.backend.api.ApiConst;
 import com.karankumar.covid19dashboard.backend.api.ApiStats;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.charts.Chart;
-import com.vaadin.flow.component.charts.model.*;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 @Route(value = "global", layout = MainView.class)
 @PageTitle("COVID-19: Global statistics")
@@ -28,7 +26,6 @@ public class GlobalView extends VerticalLayout {
     private final Span deathCounter;
     private final Span recoveredCounter;
     private final Span casesCounter;
-    private Chart mostCasesChart;
 
     private enum TotalType {
         DEATHS,
@@ -85,8 +82,13 @@ public class GlobalView extends VerticalLayout {
 
         add(new HtmlComponent("br"));
 
-        configureMostCasesChart(globalStats.getMostCases());
-        add(mostCasesChart);
+        MostChart mostChart = new MostChart();
+        Chart mostCasesChart = mostChart.createMostCasesChart(globalStats.getMostCases());
+        Chart mostDeathsChart = mostChart.createMostDeathsChart(globalStats.getMostDeaths());
+
+        HorizontalLayout charts = new HorizontalLayout(mostCasesChart, mostDeathsChart);
+        charts.setSizeFull();
+        add(charts);
 
         Text lastUpdated = new Text("Last updated on " + globalStats.getDate() + " at " + globalStats.getTime());
         add(lastUpdated);
@@ -105,7 +107,7 @@ public class GlobalView extends VerticalLayout {
             NumberFormat numberFormat = NumberFormat.getInstance();
             numberFormat.setGroupingUsed(true);
             String formattedTotal = numberFormat.format(total);
-            switch(type) {
+            switch (type) {
                 case DEATHS:
                     deathCounter.setText(formattedTotal);
                     break;
@@ -117,24 +119,5 @@ public class GlobalView extends VerticalLayout {
                     break;
             }
         }
-    }
-
-    private void configureMostCasesChart(TreeMap<Integer, String> mostCases) {
-        mostCasesChart = new Chart(ChartType.PIE);
-        Configuration conf = mostCasesChart.getConfiguration();
-        conf.setTitle(ApiConst.MOST_CONFIRMED_CASES + " most confirmed cases");
-
-        conf.setTooltip(new Tooltip());
-
-        PlotOptionsPie plotOptions = new PlotOptionsPie();
-        plotOptions.setAllowPointSelect(true);
-        conf.setPlotOptions(plotOptions);
-
-        DataSeries series = new DataSeries();
-        for (Integer i : mostCases.keySet()) {
-            series.add(new DataSeriesItem(mostCases.get(i), i));
-        }
-
-        conf.setSeries(series);
     }
 }
