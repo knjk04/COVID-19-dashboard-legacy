@@ -17,7 +17,9 @@ If any major changes are made, a new screenshot will be added.*
 ### Prerequisites:
 
 - JDK 11.0.5 or higher
-- [Vaadin](https://vaadin.com/) Pro (or higher) license (free with the [GitHub student pack](https://education.github.com/pack))
+- [Vaadin](https://vaadin.com/) Pro (or higher) license 
+    - Free with the [GitHub student pack](https://education.github.com/pack)
+    - [Free trial available](https://vaadin.com/pricing)
 - Vaadin 14 or higher
 - Node.js
 - npm
