@@ -188,11 +188,6 @@ public class ApiStats {
                 populateMostDeaths(totalDeaths, countryName);
             }
         }
-
-//        for (Integer i : mostCases.keySet()) {
-//            System.out.println(mostCases.get(i) + " has " + i + " cases");
-//        }
-
         return countriesList;
     }
 
@@ -209,7 +204,7 @@ public class ApiStats {
 
     // This should only be called from within getAllCountriesSummary
     private void populateMostDeaths(int totalDeaths, String countryName) {
-        if (mostDeaths.size() < ApiConst.MOST_CONFIRMED_CASES) {
+        if (mostDeaths.size() < ApiConst.MOST_DEATHS) {
             mostDeaths.put(totalDeaths, countryName);
         } else if (mostDeaths.firstKey() < totalDeaths) {
             // swap with this new country that has more deaths

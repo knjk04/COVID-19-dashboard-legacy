@@ -17,5 +17,6 @@ public final class ApiConst {
     static final String TOTAL_DEATHS = "TotalDeaths";
     static final String TOTAL_RECOVERED = "TotalRecovered";
 
+    public static final int MOST_DEATHS = 5;
     public static final int MOST_CONFIRMED_CASES = 5;
 }
