@@ -6,7 +6,7 @@ Thank you for taking an interest in contributing!
 
 ## Code of conduct
 
-By contributing to this project, you are expected to adhere to the [COVID-19 stats code of conduct](https://github.com/knjk04/covid-19-stats/blob/master/CODE_OF_CONDUCT.md).
+By contributing to this project, you are expected to adhere to the [COVID-19 dashboard code of conduct](https://github.com/knjk04/covid-19-stats/blob/master/CODE_OF_CONDUCT.md).
 
 ## Before making changes
 
