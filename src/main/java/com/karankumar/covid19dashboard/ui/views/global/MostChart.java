@@ -6,7 +6,7 @@ import com.vaadin.flow.component.charts.model.*;
 
 import java.util.TreeMap;
 
-public class MostChart {
+class MostChart {
     private Chart mostCasesChart = new Chart(ChartType.PIE);
     private Chart mostDeathsChart = new Chart(ChartType.PIE);
 
@@ -16,28 +16,18 @@ public class MostChart {
     }
 
     public Chart createMostCasesChart(TreeMap<Integer, String> mostCases) {
-        configureMostCasesChart(mostCases);
+        DataSeries series = setDataSeries(mostCases);
+        setChartConfig(series, MOST.CONFIRMED_CASES, "cases");
         return mostCasesChart;
     }
 
     public Chart createMostDeathsChart(TreeMap<Integer, String> mostDeaths) {
-        configureMostDeathsChart(mostDeaths);
+        DataSeries series = setDataSeries(mostDeaths);
+        setChartConfig(series, MOST.DEATHS, "deaths");
         return mostDeathsChart;
     }
 
-    private void configureMostCasesChart(TreeMap<Integer, String> mostCases) {
-        PlotOptionsPie plotOptions = setPlotOptionsPie();
-        DataSeries series = setDataSeries(mostCases);
-        setChartConfig(plotOptions, series, MOST.CONFIRMED_CASES, "cases");
-    }
-
-    private void configureMostDeathsChart(TreeMap<Integer, String> mostDeaths) {
-        PlotOptionsPie plotOptions = setPlotOptionsPie();
-        DataSeries series = setDataSeries(mostDeaths);
-        setChartConfig(plotOptions, series, MOST.DEATHS, "deaths");
-    }
-
-    private void setChartConfig(PlotOptionsPie plotOptions, DataSeries series, MOST most, String mostOf) {
+    private void setChartConfig(DataSeries series, MOST most, String mostOf) {
         Configuration conf;
         int number;
         if (most == MOST.DEATHS) {
@@ -50,7 +40,7 @@ public class MostChart {
 
         conf.setTitle("Top " + number + " countries with the most " + mostOf);
         conf.setTooltip(new Tooltip());
-        conf.setPlotOptions(plotOptions);
+        conf.setPlotOptions(setPlotOptionsPie());
         conf.setSeries(series);
     }
 
