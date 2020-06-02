@@ -2,7 +2,7 @@ package com.karankumar.covid19dashboard.backend.api;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.karankumar.covid19dashboard.backend.Country;
+import com.karankumar.covid19dashboard.backend.domain.Country;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class ApiStats {
+public class SummaryStats {
     private static final OkHttpClient client;
     private static Cache<String, JSONObject> cache;
     private JSONObject jsonObject;
@@ -31,7 +31,7 @@ public class ApiStats {
                 .build();
     }
 
-    public ApiStats() {
+    public SummaryStats() {
         if (getTotalCases() == null || getTotalDeaths() == null || getTotalRecovered() == null) {
             jsonObject = cache.getIfPresent(ApiConst.SUMMARY);
             fetchSummary();

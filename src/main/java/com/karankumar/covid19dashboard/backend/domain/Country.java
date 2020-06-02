@@ -1,4 +1,4 @@
-package com.karankumar.covid19dashboard.backend;
+package com.karankumar.covid19dashboard.backend.domain;
 
 public class Country {
     private String countryName;

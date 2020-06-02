@@ -1,7 +1,7 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
-import com.karankumar.covid19dashboard.backend.Country;
-import com.karankumar.covid19dashboard.backend.api.ApiStats;
+import com.karankumar.covid19dashboard.backend.domain.Country;
+import com.karankumar.covid19dashboard.backend.api.SummaryStats;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
@@ -34,7 +34,7 @@ public class GlobalView extends VerticalLayout {
     }
 
     public GlobalView() {
-        ApiStats globalStats = new ApiStats();
+        SummaryStats globalStats = new SummaryStats();
         Integer totalDeaths = globalStats.getTotalDeaths();
         Integer totalRecovered = globalStats.getTotalRecovered();
         Integer totalCases = globalStats.getTotalCases();

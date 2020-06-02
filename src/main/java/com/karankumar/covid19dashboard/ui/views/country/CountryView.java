@@ -1,6 +1,6 @@
 package com.karankumar.covid19dashboard.ui.views.country;
 
-import com.karankumar.covid19dashboard.backend.CountryName;
+import com.karankumar.covid19dashboard.backend.api.CountryName;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Anchor;
