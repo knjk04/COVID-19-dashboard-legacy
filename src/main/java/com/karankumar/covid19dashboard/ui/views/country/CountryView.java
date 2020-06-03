@@ -2,12 +2,15 @@ package com.karankumar.covid19dashboard.ui.views.country;
 
 import com.karankumar.covid19dashboard.backend.api.dayonelive.DayOneLiveStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
+import com.karankumar.covid19dashboard.backend.domain.CountryLive;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
+import java.util.ArrayList;
 
 @Route(value = "country", layout = MainView.class)
 @PageTitle("COVID-19: Country statistics")
@@ -34,6 +37,6 @@ public class CountryView extends VerticalLayout {
 
     private void createDayOneLiveGraph(String slug) {
         DayOneLiveStats dayOneLive = new DayOneLiveStats(slug);
-        dayOneLive.fetchDayOneLive();
+        ArrayList<CountryLive> liveCases = dayOneLive.getLiveCases();
     }
 }

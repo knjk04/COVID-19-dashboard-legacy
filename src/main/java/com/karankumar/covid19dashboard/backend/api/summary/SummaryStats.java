@@ -44,7 +44,7 @@ public class SummaryStats {
     private void fetchSummary() {
         Request request = new Request.Builder()
                 .url(ApiConst.apiUrl + ApiConst.apiSummary)
-                .method("GET", null)
+                .method(ApiConst.method, null)
                 .build();
         try {
             Response response = client.newCall(request).execute();
