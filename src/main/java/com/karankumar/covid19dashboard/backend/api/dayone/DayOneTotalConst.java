@@ -1,4 +1,4 @@
-package com.karankumar.covid19dashboard.backend.api.dayonelive;
+package com.karankumar.covid19dashboard.backend.api.dayone;
 
 public class DayOneTotalConst {
     static final String prefixUrl = "total/dayone/country/";

@@ -1,6 +1,6 @@
 package com.karankumar.covid19dashboard.ui.views.country;
 
-import com.karankumar.covid19dashboard.backend.api.dayonelive.DayOneTotalStats;
+import com.karankumar.covid19dashboard.backend.api.dayone.DayOneTotalStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
 import com.karankumar.covid19dashboard.backend.domain.CountryTotal;
 import com.karankumar.covid19dashboard.ui.MainView;

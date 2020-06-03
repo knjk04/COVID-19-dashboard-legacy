@@ -1,4 +1,4 @@
-package com.karankumar.covid19dashboard.backend.api.dayonelive;
+package com.karankumar.covid19dashboard.backend.api.dayone;
 
 import com.karankumar.covid19dashboard.backend.api.util.ApiConst;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;

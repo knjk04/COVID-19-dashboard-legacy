@@ -82,7 +82,7 @@ public class GlobalView extends VerticalLayout {
 
         add(new HtmlComponent("br"));
 
-        MostChart mostChart = new MostChart();
+        HighestNumberOfChart mostChart = new HighestNumberOfChart();
         Chart mostCasesChart = mostChart.createMostCasesChart(globalStats.getMostCases());
         Chart mostDeathsChart = mostChart.createMostDeathsChart(globalStats.getMostDeaths());
 
