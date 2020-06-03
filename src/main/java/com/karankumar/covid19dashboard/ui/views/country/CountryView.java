@@ -44,6 +44,10 @@ public class CountryView extends VerticalLayout {
         conf.setTitle("Number of confirmed cases since the first confirmed case");
         conf.setSubTitle(countryName.toString());
 
+        Tooltip tooltip = new Tooltip();
+        tooltip.setValueSuffix(" cases");
+        conf.setTooltip(tooltip);
+
         String[] dates = new String[liveCases.size()];
         Number[] cases = new Number[liveCases.size()];
 
