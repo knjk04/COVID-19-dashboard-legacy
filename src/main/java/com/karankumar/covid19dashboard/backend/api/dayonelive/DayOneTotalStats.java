@@ -1,7 +1,8 @@
 package com.karankumar.covid19dashboard.backend.api.dayonelive;
 
 import com.karankumar.covid19dashboard.backend.api.util.ApiConst;
-import com.karankumar.covid19dashboard.backend.domain.CountryLive;
+import com.karankumar.covid19dashboard.backend.api.util.CountryName;
+import com.karankumar.covid19dashboard.backend.domain.CountryTotal;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DayOneLiveStats {
+public class DayOneTotalStats {
     private static final OkHttpClient client;
     private final String slug;
     private static final Logger logger;
@@ -22,53 +23,48 @@ public class DayOneLiveStats {
         client = new OkHttpClient().newBuilder()
                 .build();
 
-        logger = Logger.getLogger(DayOneLiveStats.class.getName());
+        logger = Logger.getLogger(DayOneTotalStats.class.getName());
         logger.setLevel(Level.INFO);
     }
 
-    private ArrayList<CountryLive> countriesLiveStats;
+    private ArrayList<CountryTotal> countriesLiveStats;
 
-    /**
-     * @param slug a slug name (refer to the API) for a country
-     */
-    public DayOneLiveStats(String slug) {
-        this.slug = slug;
+    public DayOneTotalStats(CountryName countryName) {
+        this.slug = countryName.getSlug(countryName);
         fetchDayOneLive();
     }
 
     private void fetchDayOneLive() {
-        String dayOneUrl = DayOneLiveConst.prefixUrl + slug + DayOneLiveConst.confirmedLiveUrl;
+        String dayOneUrl = DayOneTotalConst.prefixUrl + slug + DayOneTotalConst.suffixUrl;
+        String url = ApiConst.apiUrl + dayOneUrl;
+        logger.log(Level.INFO, url);
+
         Request request = new Request.Builder()
-                .url(ApiConst.apiUrl + dayOneUrl)
+                .url(url)
                 .method(ApiConst.method, null)
                 .build();
         try {
             Response response = client.newCall(request).execute();
             String data = response.body().string();
 
-            logger.log(Level.INFO, "Day One Live data:\n" + data);
+            logger.log(Level.INFO, "Day One Total data:\n" + data);
 
             JSONArray jsonArray = new JSONArray(data);
 
             countriesLiveStats = new ArrayList<>();
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                int cases = jsonObject.getInt(DayOneLiveConst.CASES);
-                String date = jsonObject.getString(DayOneLiveConst.DATE);
-                CountryLive countryLiveStats = new CountryLive(cases, date);
+                int cases = jsonObject.getInt(DayOneTotalConst.CASES);
+                String date = jsonObject.getString(DayOneTotalConst.DATE);
+                CountryTotal countryLiveStats = new CountryTotal(cases, date);
                 countriesLiveStats.add(countryLiveStats);
             }
-
-//            for (CountryLive c : countriesLiveStats) {
-//                System.out.println("Country: " + c);
-//            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<CountryLive> getLiveCases() {
+    public ArrayList<CountryTotal> getLiveCases() {
         return countriesLiveStats;
     }
 }
