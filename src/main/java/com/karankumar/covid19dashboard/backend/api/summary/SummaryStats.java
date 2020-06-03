@@ -1,8 +1,10 @@
-package com.karankumar.covid19dashboard.backend.api;
+package com.karankumar.covid19dashboard.backend.api.summary;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.karankumar.covid19dashboard.backend.Country;
+import com.karankumar.covid19dashboard.backend.api.util.ApiConst;
+import com.karankumar.covid19dashboard.backend.domain.CountrySummary;
+import com.karankumar.covid19dashboard.backend.utils.Util;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -13,7 +15,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class ApiStats {
+public class SummaryStats {
     private static final OkHttpClient client;
     private static Cache<String, JSONObject> cache;
     private JSONObject jsonObject;
@@ -31,9 +33,9 @@ public class ApiStats {
                 .build();
     }
 
-    public ApiStats() {
+    public SummaryStats() {
         if (getTotalCases() == null || getTotalDeaths() == null || getTotalRecovered() == null) {
-            jsonObject = cache.getIfPresent(ApiConst.SUMMARY);
+            jsonObject = cache.getIfPresent(SummaryConst.SUMMARY);
             fetchSummary();
         } else {
             System.out.println("GlobalStats: none are null");
@@ -43,20 +45,20 @@ public class ApiStats {
     private void fetchSummary() {
         Request request = new Request.Builder()
                 .url(ApiConst.apiUrl + ApiConst.apiSummary)
-                .method("GET", null)
+                .method(ApiConst.method, null)
                 .build();
         try {
             Response response = client.newCall(request).execute();
             String data = response.body().string();
 
-            System.out.println("Data:\n" + data);
+            System.out.println("Summary data:\n" + data);
 
             JSONObject jsonObject = new JSONObject(data);
-            JSONObject global = jsonObject.getJSONObject(ApiConst.GLOBAL);
+            JSONObject global = jsonObject.getJSONObject(SummaryConst.GLOBAL);
 
             System.out.println(global);
 
-            cache.put(ApiConst.SUMMARY, jsonObject);
+            cache.put(SummaryConst.SUMMARY, jsonObject);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,8 +71,8 @@ public class ApiStats {
     public Integer getTotalDeaths() {
         Integer totalDeaths = null;
         if (jsonObject != null) {
-            JSONObject global = jsonObject.getJSONObject(ApiConst.GLOBAL);
-            totalDeaths = global.getInt(ApiConst.TOTAL_DEATHS);
+            JSONObject global = jsonObject.getJSONObject(SummaryConst.GLOBAL);
+            totalDeaths = global.getInt(SummaryConst.TOTAL_DEATHS);
         } else {
             System.out.println("getTotalDeaths(): jsonObject is null");
         }
@@ -89,8 +91,8 @@ public class ApiStats {
     public Integer getTotalRecovered() {
         Integer totalRecovered = null;
         if (jsonObject != null) {
-            JSONObject global = jsonObject.getJSONObject(ApiConst.GLOBAL);
-            totalRecovered = global.getInt(ApiConst.TOTAL_RECOVERED);
+            JSONObject global = jsonObject.getJSONObject(SummaryConst.GLOBAL);
+            totalRecovered = global.getInt(SummaryConst.TOTAL_RECOVERED);
         } else {
             System.out.println("getTotalRecovered(): json object is null");
         }
@@ -109,8 +111,8 @@ public class ApiStats {
     public Integer getTotalCases() {
         Integer totalCases = null;
         if (jsonObject != null) {
-            JSONObject global = jsonObject.getJSONObject(ApiConst.GLOBAL);
-            totalCases = global.getInt(ApiConst.TOTAL_CONFIRMED_CASES);
+            JSONObject global = jsonObject.getJSONObject(SummaryConst.GLOBAL);
+            totalCases = global.getInt(SummaryConst.TOTAL_CONFIRMED_CASES);
         } else {
             System.out.println("getTotalCases(): json object is null");
         }
@@ -129,22 +131,8 @@ public class ApiStats {
     public String getDate() {
         String date = "";
         if (jsonObject != null) {
-            String dateAndTime = jsonObject.getString(ApiConst.DATE);
-            String[] split = dateAndTime.split("T");
-            date = split[0];
-
-            String[] yearMonthDay = date.split("-");
-            String year = yearMonthDay[0];
-            String month = yearMonthDay[1];
-            String day = yearMonthDay[2];
-            String[] dayMonthYear = {day, month, year};
-
-            StringJoiner joiner = new StringJoiner("-");
-            for(String s : dayMonthYear) {
-                joiner.add(s);
-            }
-
-            date = joiner.toString();
+            String dateAndTime = jsonObject.getString(SummaryConst.DATE);
+            date = Util.formatDate(dateAndTime);
         }
         return date;
     }
@@ -152,29 +140,29 @@ public class ApiStats {
     public String getTime() {
         String time = "";
         if (jsonObject != null) {
-            String dateAndTime = jsonObject.getString(ApiConst.DATE);
+            String dateAndTime = jsonObject.getString(SummaryConst.DATE);
             String[] split = dateAndTime.split("T");
             time = split[1].substring(0, split[1].length()-1);
         }
         return time;
     }
 
-    public ArrayList<Country> getAllCountriesSummary() {
-        ArrayList<Country> countriesList = new ArrayList<>();
+    public ArrayList<CountrySummary> getAllCountriesSummary() {
+        ArrayList<CountrySummary> countriesList = new ArrayList<>();
 
         if (jsonObject != null) {
-            JSONArray countries = jsonObject.getJSONArray(ApiConst.COUNTRIES);
+            JSONArray countries = jsonObject.getJSONArray(SummaryConst.COUNTRIES);
             for (int i = 0; i < countries.length(); i++) {
                 JSONObject jsonCountry = countries.getJSONObject(i);
 
-                String countryName = jsonCountry.getString(ApiConst.COUNTRY);
-                int totalConfirmedCases = jsonCountry.getInt(ApiConst.TOTAL_CONFIRMED_CASES);
-                int totalDeaths = jsonCountry.getInt(ApiConst.TOTAL_DEATHS);
-                int totalRecovered = jsonCountry.getInt(ApiConst.TOTAL_RECOVERED);
-                int totalNewCases = jsonCountry.getInt(ApiConst.NEW_CONFIRMED_CASES);
-                int totalNewDeaths = jsonCountry.getInt(ApiConst.NEW_DEATHS);
-                int totalNewRecovered = jsonCountry.getInt(ApiConst.NEW_RECOVERED);
-                Country country = new Country(
+                String countryName = jsonCountry.getString(SummaryConst.COUNTRY);
+                int totalConfirmedCases = jsonCountry.getInt(SummaryConst.TOTAL_CONFIRMED_CASES);
+                int totalDeaths = jsonCountry.getInt(SummaryConst.TOTAL_DEATHS);
+                int totalRecovered = jsonCountry.getInt(SummaryConst.TOTAL_RECOVERED);
+                int totalNewCases = jsonCountry.getInt(SummaryConst.NEW_CONFIRMED_CASES);
+                int totalNewDeaths = jsonCountry.getInt(SummaryConst.NEW_DEATHS);
+                int totalNewRecovered = jsonCountry.getInt(SummaryConst.NEW_RECOVERED);
+                CountrySummary country = new CountrySummary(
                         countryName,
                         totalDeaths,
                         totalRecovered,

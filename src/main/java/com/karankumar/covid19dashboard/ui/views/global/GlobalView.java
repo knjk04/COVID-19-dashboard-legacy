@@ -1,7 +1,7 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
-import com.karankumar.covid19dashboard.backend.Country;
-import com.karankumar.covid19dashboard.backend.api.ApiStats;
+import com.karankumar.covid19dashboard.backend.domain.CountrySummary;
+import com.karankumar.covid19dashboard.backend.api.summary.SummaryStats;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
@@ -34,7 +34,7 @@ public class GlobalView extends VerticalLayout {
     }
 
     public GlobalView() {
-        ApiStats globalStats = new ApiStats();
+        SummaryStats globalStats = new SummaryStats();
         Integer totalDeaths = globalStats.getTotalDeaths();
         Integer totalRecovered = globalStats.getTotalRecovered();
         Integer totalCases = globalStats.getTotalCases();
@@ -76,13 +76,13 @@ public class GlobalView extends VerticalLayout {
 
         add(board);
 
-        Grid<Country> grid = new Grid<>(Country.class);
+        Grid<CountrySummary> grid = new Grid<>(CountrySummary.class);
         grid.setItems(globalStats.getAllCountriesSummary());
         add(grid);
 
         add(new HtmlComponent("br"));
 
-        MostChart mostChart = new MostChart();
+        HighestNumberOfChart mostChart = new HighestNumberOfChart();
         Chart mostCasesChart = mostChart.createMostCasesChart(globalStats.getMostCases());
         Chart mostDeathsChart = mostChart.createMostDeathsChart(globalStats.getMostDeaths());
 

@@ -1,36 +1,36 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
-import com.karankumar.covid19dashboard.backend.api.ApiConst;
+import com.karankumar.covid19dashboard.backend.api.util.ApiConst;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.*;
 
 import java.util.TreeMap;
 
-class MostChart {
+class HighestNumberOfChart {
     private Chart mostCasesChart = new Chart(ChartType.PIE);
     private Chart mostDeathsChart = new Chart(ChartType.PIE);
 
-    private enum MOST {
+    private enum NUMBER_OF {
         DEATHS,
         CONFIRMED_CASES,
     }
 
     public Chart createMostCasesChart(TreeMap<Integer, String> mostCases) {
         DataSeries series = setDataSeries(mostCases);
-        setChartConfig(series, MOST.CONFIRMED_CASES, "cases");
+        setChartConfig(series, NUMBER_OF.CONFIRMED_CASES, "cases");
         return mostCasesChart;
     }
 
     public Chart createMostDeathsChart(TreeMap<Integer, String> mostDeaths) {
         DataSeries series = setDataSeries(mostDeaths);
-        setChartConfig(series, MOST.DEATHS, "deaths");
+        setChartConfig(series, NUMBER_OF.DEATHS, "deaths");
         return mostDeathsChart;
     }
 
-    private void setChartConfig(DataSeries series, MOST most, String mostOf) {
+    private void setChartConfig(DataSeries series, NUMBER_OF most, String mostOf) {
         Configuration conf;
         int number;
-        if (most == MOST.DEATHS) {
+        if (most == NUMBER_OF.DEATHS) {
             number = ApiConst.MOST_DEATHS;
             conf = mostDeathsChart.getConfiguration();
         } else {
