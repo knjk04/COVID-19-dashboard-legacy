@@ -43,10 +43,7 @@ public class CountryView extends VerticalLayout {
         Configuration conf = chart.getConfiguration();
         conf.setTitle("Number of confirmed cases since the first confirmed case");
         conf.setSubTitle(countryName.toString());
-
-        Tooltip tooltip = new Tooltip();
-        tooltip.setValueSuffix(" cases");
-        conf.setTooltip(tooltip);
+        conf.setTooltip(new Tooltip());
 
         String[] dates = new String[liveCases.size()];
         Number[] cases = new Number[liveCases.size()];
@@ -63,7 +60,7 @@ public class CountryView extends VerticalLayout {
         YAxis yAxis = conf.getyAxis();
         yAxis.setTitle("Number of confirmed cases");
 
-        conf.addSeries(new ListSeries(Arrays.asList(cases)));
+        conf.addSeries(new ListSeries("Cases", Arrays.asList(cases)));
 
         add(chart);
     }
