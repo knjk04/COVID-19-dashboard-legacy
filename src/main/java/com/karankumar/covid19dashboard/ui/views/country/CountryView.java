@@ -20,9 +20,20 @@ public class CountryView extends VerticalLayout {
         country.setMinWidth("20%");
         add(country);
 
-        DayOneLiveStats dayOneLive = new DayOneLiveStats();
-        dayOneLive.fetchDayOneLive();
+        country.addValueChangeListener(event -> {
+            if (event.isFromClient()) {
+                CountryName countryName = event.getValue();
+                String slug = countryName.getSlug(countryName);
+//                System.out.println("Country name: " + countryName.getSlug(countryName));
+                createDayOneLiveGraph(slug);
+            }
+        });
 
         add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
+    }
+
+    private void createDayOneLiveGraph(String slug) {
+        DayOneLiveStats dayOneLive = new DayOneLiveStats(slug);
+        dayOneLive.fetchDayOneLive();
     }
 }
