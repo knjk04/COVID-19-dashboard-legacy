@@ -8,16 +8,22 @@ import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.*;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Route(value = "country", layout = MainView.class)
 @PageTitle("COVID-19: Country statistics")
 public class CountryView extends VerticalLayout {
+    private Chart chart = new Chart(ChartType.AREA);
+    private static final Logger logger = Logger.getLogger(DayOneTotalStats.class.getName());
+
     public CountryView() {
         ComboBox<CountryName> country = new ComboBox<>("Country");
         country.setItems(CountryName.values());
@@ -39,10 +45,18 @@ public class CountryView extends VerticalLayout {
         DayOneTotalStats dayOneLive = new DayOneTotalStats(countryName);
         ArrayList<CountryTotal> liveCases = dayOneLive.getLiveCases();
 
-        Chart chart = new Chart(ChartType.AREA);
+        if (liveCases.isEmpty()) {
+            logger.log(Level.FINE, "Data was empty");
+            Notification notification = new Notification("Error, please try again", 5000);
+            notification.open();
+            return;
+        }
+
         Configuration conf = chart.getConfiguration();
         conf.setTitle("Number of confirmed cases since the first confirmed case");
-        conf.setSubTitle(countryName.toString());
+        Tooltip tooltip = new Tooltip();
+        tooltip.setValueSuffix(" cases");
+        conf.setTooltip(tooltip);
 
         String[] dates = new String[liveCases.size()];
         Number[] cases = new Number[liveCases.size()];
@@ -59,7 +73,7 @@ public class CountryView extends VerticalLayout {
         YAxis yAxis = conf.getyAxis();
         yAxis.setTitle("Number of confirmed cases");
 
-        conf.addSeries(new ListSeries(Arrays.asList(cases)));
+        conf.addSeries(new ListSeries(countryName.toString(), Arrays.asList(cases)));
 
         add(chart);
     }

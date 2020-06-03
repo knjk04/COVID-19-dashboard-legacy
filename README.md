@@ -8,10 +8,11 @@ The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hop
 
 ![Global dashboard](/media/global-dashboard.png)
 
-*Note 1: the screenshot above is for illustrative purposes only. The actual UI may look slightly different. 
-If any major changes are made, a new screenshot will be added.*
+![Country dashboard](/media/cases.png)
 
-*Note 2: the fetched data is cached for 24 hours.*
+*Note: the screenshots above are for illustrative purposes only. The actual UI may look slightly different. 
+If any major changes are made, new screenshots will be uploaded.*
+*Note: the fetched data is cached for 24 hours.*
 
 ## Setup
 

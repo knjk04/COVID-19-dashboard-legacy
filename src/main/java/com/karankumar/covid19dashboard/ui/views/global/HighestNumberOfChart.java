@@ -27,10 +27,10 @@ class HighestNumberOfChart {
         return mostDeathsChart;
     }
 
-    private void setChartConfig(DataSeries series, NUMBER_OF most, String mostOf) {
+    private void setChartConfig(DataSeries series, NUMBER_OF numberOf, String mostOf) {
         Configuration conf;
         int number;
-        if (most == NUMBER_OF.DEATHS) {
+        if (numberOf == NUMBER_OF.DEATHS) {
             number = ApiConst.MOST_DEATHS;
             conf = mostDeathsChart.getConfiguration();
         } else {
