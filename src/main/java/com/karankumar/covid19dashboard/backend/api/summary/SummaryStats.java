@@ -50,7 +50,7 @@ public class SummaryStats {
             Response response = client.newCall(request).execute();
             String data = response.body().string();
 
-            System.out.println("Data:\n" + data);
+            System.out.println("Summary data:\n" + data);
 
             JSONObject jsonObject = new JSONObject(data);
             JSONObject global = jsonObject.getJSONObject(SummaryConst.GLOBAL);

@@ -1,5 +1,6 @@
 package com.karankumar.covid19dashboard.ui.views.country;
 
+import com.karankumar.covid19dashboard.backend.api.dayonelive.DayOneLiveStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -17,8 +18,10 @@ public class CountryView extends VerticalLayout {
         country.setRequired(true);
         country.setPlaceholder("Select a country");
         country.setMinWidth("20%");
-
         add(country);
+
+        DayOneLiveStats dayOneLive = new DayOneLiveStats();
+        dayOneLive.fetchDayOneLive();
 
         add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
     }
