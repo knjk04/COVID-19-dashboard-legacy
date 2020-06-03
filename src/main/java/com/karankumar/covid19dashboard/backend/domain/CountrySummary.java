@@ -1,6 +1,6 @@
 package com.karankumar.covid19dashboard.backend.domain;
 
-public class Country {
+public class CountrySummary {
     private String countryName;
     private int totalDeaths;
     private int totalRecovered;
@@ -9,8 +9,8 @@ public class Country {
     private int totalNewDeaths;
     private int totalNewRecovered;
 
-    public Country(String countryName, int totalDeaths, int totalRecovered, int totalConfirmedCases, int totalNewCases,
-                   int totalNewDeaths, int totalNewRecovered) {
+    public CountrySummary(String countryName, int totalDeaths, int totalRecovered, int totalConfirmedCases, int totalNewCases,
+                          int totalNewDeaths, int totalNewRecovered) {
         this.countryName = countryName;
         this.totalDeaths = totalDeaths;
         this.totalRecovered = totalRecovered;

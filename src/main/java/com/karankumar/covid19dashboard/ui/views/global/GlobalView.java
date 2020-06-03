@@ -1,7 +1,7 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
-import com.karankumar.covid19dashboard.backend.domain.Country;
-import com.karankumar.covid19dashboard.backend.api.SummaryStats;
+import com.karankumar.covid19dashboard.backend.domain.CountrySummary;
+import com.karankumar.covid19dashboard.backend.api.summary.SummaryStats;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
@@ -76,7 +76,7 @@ public class GlobalView extends VerticalLayout {
 
         add(board);
 
-        Grid<Country> grid = new Grid<>(Country.class);
+        Grid<CountrySummary> grid = new Grid<>(CountrySummary.class);
         grid.setItems(globalStats.getAllCountriesSummary());
         add(grid);
 

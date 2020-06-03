@@ -1,4 +1,4 @@
-package com.karankumar.covid19dashboard.backend.api;
+package com.karankumar.covid19dashboard.backend.api.util;
 
 // This should be kept in alphabetical order
 // The country names and slug names should match https://api.covid19api.com/countries

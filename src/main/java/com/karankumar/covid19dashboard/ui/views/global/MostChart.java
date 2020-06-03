@@ -1,6 +1,6 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
-import com.karankumar.covid19dashboard.backend.api.ApiConst;
+import com.karankumar.covid19dashboard.backend.api.util.ApiConst;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.*;
 
