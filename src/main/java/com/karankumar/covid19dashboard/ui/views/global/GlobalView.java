@@ -7,6 +7,7 @@ import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
@@ -14,13 +15,14 @@ import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Route(value = "global", layout = MainView.class)
 @PageTitle("COVID-19: Global statistics")
@@ -28,8 +30,6 @@ public class GlobalView extends VerticalLayout {
     private final Span deathCounter;
     private final Span recoveredCounter;
     private final Span casesCounter;
-
-    private TextField filterGrid = new TextField("Filter by country");
 
     private enum TotalType {
         DEATHS,
@@ -51,11 +51,11 @@ public class GlobalView extends VerticalLayout {
 
         String counterDigit = "counterDigit";
         String counterWrapper = "counterWrapper";
-        deathCounter = new Span("test1");
+        deathCounter = new Span("placeholder1");
         deathCounter.addClassNames(counterDigit, "deathCounterDigit", counterWrapper);
-        recoveredCounter = new Span("test2");
+        recoveredCounter = new Span("placeholder2");
         recoveredCounter.addClassNames(counterDigit, "recoveredCounterDigit", counterWrapper);
-        casesCounter = new Span("test3");
+        casesCounter = new Span("placeholder3");
         casesCounter.addClassNames(counterDigit, "casesCounterDigit", counterWrapper);
 
         H4 deathsH4 = new H4("Total deaths");
@@ -81,11 +81,18 @@ public class GlobalView extends VerticalLayout {
         add(board);
 
         ListDataProvider<CountrySummary> dataProvider = new ListDataProvider<>(globalStats.getAllCountriesSummary());
-        filterGrid.setPlaceholder("Enter a country name");
-        filterGrid.addValueChangeListener(event -> filterByCountry(dataProvider));
-        filterGrid.setClearButtonVisible(true);
-        filterGrid.setMinWidth("12%");
-        add(filterGrid);
+
+        ComboBox<String> countryFilter = new ComboBox<>("Filter by country");
+        countryFilter.setPlaceholder("Select a country");
+        countryFilter.setClearButtonVisible(true);
+        countryFilter.setMinWidth("12%");
+        List<String> countryName = dataProvider.getItems()
+                .stream()
+                .map(CountrySummary::getCountryName)
+                .collect(Collectors.toList());
+        countryFilter.setItems(countryName);
+        countryFilter.addValueChangeListener(event -> filterByCountry(countryFilter.getValue(), dataProvider));
+        add(countryFilter);
 
         Grid<CountrySummary> grid = new Grid<>(CountrySummary.class);
         grid.setDataProvider(dataProvider);
@@ -109,14 +116,13 @@ public class GlobalView extends VerticalLayout {
 
     /**
      * Case-insensitive filter
+     *
      * @param dataProvider the grid's {@code DataProvider}
      */
-    private void filterByCountry(ListDataProvider<CountrySummary> dataProvider) {
+    private void filterByCountry(String query, ListDataProvider<CountrySummary> dataProvider) {
         dataProvider.clearFilters();
-        if (filterGrid.getValue() != null && !filterGrid.getValue().isEmpty()) {
-            String query = filterGrid.getValue();
-            dataProvider.addFilter(countrySummary ->
-                    query.toLowerCase().equals(countrySummary.getCountryName().toLowerCase()));
+        if (query != null && !query.isEmpty()) {
+            dataProvider.addFilter(countrySummary -> query.equals(countrySummary.getCountryName()));
         }
     }
 
