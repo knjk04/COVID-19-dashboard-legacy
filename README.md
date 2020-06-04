@@ -11,11 +11,17 @@ and on a per-country basis.
 
 The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hopkins](https://github.com/CSSEGISandData/COVID-19)).
 
+## Global overview
+
 ![Global dashboard](/media/global_dashboard.png)
+
+## Change in cases over time for a specific country
 
 ![Country dashboard](/media/cases_one_country.png)
 
 You can see how the number of confirmed cases has changed over time since the first confirmed case, as in the screenshot above.
+
+## Country comparison
 
 ![Country dashboard](/media/cases_comparison.png)
 
