@@ -84,10 +84,10 @@ public class GlobalView extends VerticalLayout {
         filterGrid.setPlaceholder("Enter a country name");
         filterGrid.addValueChangeListener(event -> filterByCountry(dataProvider));
         filterGrid.setClearButtonVisible(true);
+        filterGrid.setMinWidth("12%");
         add(filterGrid);
 
         Grid<CountrySummary> grid = new Grid<>(CountrySummary.class);
-        grid.setItems(globalStats.getAllCountriesSummary());
         grid.setDataProvider(dataProvider);
         add(grid);
 
