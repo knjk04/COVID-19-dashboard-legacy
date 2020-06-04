@@ -1,7 +1,7 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
-import com.karankumar.covid19dashboard.backend.domain.CountrySummary;
 import com.karankumar.covid19dashboard.backend.api.summary.SummaryStats;
+import com.karankumar.covid19dashboard.backend.domain.CountrySummary;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
@@ -14,6 +14,8 @@ import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -26,6 +28,8 @@ public class GlobalView extends VerticalLayout {
     private final Span deathCounter;
     private final Span recoveredCounter;
     private final Span casesCounter;
+
+    private TextField filterGrid = new TextField("Filter by country");
 
     private enum TotalType {
         DEATHS,
@@ -76,8 +80,15 @@ public class GlobalView extends VerticalLayout {
 
         add(board);
 
+        ListDataProvider<CountrySummary> dataProvider = new ListDataProvider<>(globalStats.getAllCountriesSummary());
+        filterGrid.setPlaceholder("Enter a country name");
+        filterGrid.addValueChangeListener(event -> filterByCountry(dataProvider));
+        filterGrid.setClearButtonVisible(true);
+        add(filterGrid);
+
         Grid<CountrySummary> grid = new Grid<>(CountrySummary.class);
         grid.setItems(globalStats.getAllCountriesSummary());
+        grid.setDataProvider(dataProvider);
         add(grid);
 
         add(new HtmlComponent("br"));
@@ -94,6 +105,19 @@ public class GlobalView extends VerticalLayout {
         add(lastUpdated);
 
         add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
+    }
+
+    /**
+     * Case-insensitive filter
+     * @param dataProvider the grid's {@code DataProvider}
+     */
+    private void filterByCountry(ListDataProvider<CountrySummary> dataProvider) {
+        dataProvider.clearFilters();
+        if (filterGrid.getValue() != null && !filterGrid.getValue().isEmpty()) {
+            String query = filterGrid.getValue();
+            dataProvider.addFilter(countrySummary ->
+                    query.toLowerCase().equals(countrySummary.getCountryName().toLowerCase()));
+        }
     }
 
     private Div addDivLabel(H4 label) {
