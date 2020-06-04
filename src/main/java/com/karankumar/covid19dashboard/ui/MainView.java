@@ -19,13 +19,10 @@ public class MainView extends AppLayout {
 
     public MainView() {
         Tabs tabs = new Tabs();
-
         Tab globalTab = createTab(VaadinIcon.GLOBE, GlobalView.class, "Global");
         Tab countryTab = createTab(VaadinIcon.LOCATION_ARROW_CIRCLE, CountryView.class, "Country");
-
         tabs.add(globalTab, countryTab);
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
-
         addToNavbar(true, tabs);
     }
 
