@@ -1,8 +1,9 @@
 package com.karankumar.covid19dashboard.ui.views.country;
 
+import com.karankumar.covid19dashboard.backend.api.dayone.CaseType;
 import com.karankumar.covid19dashboard.backend.api.dayone.DayOneTotalStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
-import com.karankumar.covid19dashboard.backend.domain.CountryTotal;
+import com.karankumar.covid19dashboard.backend.domain.dayone.CountryCasesTotal;
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.charts.Chart;
@@ -32,7 +33,7 @@ public class CountryView extends VerticalLayout {
     private static final Logger logger = Logger.getLogger(DayOneTotalStats.class.getName());
 
     public CountryView() {
-        ComboBox<CountryName> country = new ComboBox<>("Country");
+        ComboBox<CountryName> country = new ComboBox<>("Country2");
         country.setItems(CountryName.values());
         country.setRequired(true);
         country.setPlaceholder("Select a country");
@@ -62,10 +63,10 @@ public class CountryView extends VerticalLayout {
     }
 
     private void createCasesSinceDayOneGraph(CountryName countryName) {
-        DayOneTotalStats dayOneLive = new DayOneTotalStats(countryName);
-        ArrayList<CountryTotal> liveCases = dayOneLive.getLiveCases();
+        DayOneTotalStats dayOneTotal = new DayOneTotalStats(countryName, CaseType.CONFIMRED);
+        ArrayList<CountryCasesTotal> countryTotal = dayOneTotal.getTotalCases();
 
-        if (liveCases.isEmpty()) {
+        if (countryTotal.isEmpty()) {
             logger.log(Level.FINE, "Data was empty");
             Notification notification = new Notification(
                     "Cannot retrieve the data for this country, please try a different country", 5000);
@@ -79,11 +80,11 @@ public class CountryView extends VerticalLayout {
         tooltip.setValueSuffix(" cases");
         conf.setTooltip(tooltip);
 
-        String[] dates = new String[liveCases.size()];
-        Number[] cases = new Number[liveCases.size()];
+        String[] dates = new String[countryTotal.size()];
+        Number[] cases = new Number[countryTotal.size()];
 
-        for (int i = 0; i < liveCases.size(); i++) {
-            CountryTotal countryLive = liveCases.get(i);
+        for (int i = 0; i < countryTotal.size(); i++) {
+            CountryCasesTotal countryLive = countryTotal.get(i);
             dates[i] = countryLive.getDate();
             cases[i] = countryLive.getNumberOfCases();
         }
@@ -97,5 +98,42 @@ public class CountryView extends VerticalLayout {
         conf.addSeries(new ListSeries(countryName.toString(), Arrays.asList(cases)));
 
         add(chart);
+    }
+
+    private void createDeathsSinceDayOneGraph(CountryName countryName) {
+//        DayOneTotalStats dayOneTotal = new DayOneTotalStats(countryName);
+//        ArrayList<CountryDeathsTotal> countriesTotal = dayOneTotal.getDayTotal();
+//        if (countriesTotal.isEmpty()) {
+//            logger.log(Level.FINE, "Data was empty");
+//            Notification notification = new Notification(
+//                    "Cannot retrieve the data for this country, please try a different country", 5000);
+//            notification.open();
+//            return;
+//        }
+//
+//        Configuration conf = chart.getConfiguration();
+//        conf.setTitle("Number of deaths since the first COVID-19 death");
+//        Tooltip tooltip = new Tooltip();
+//        tooltip.setValueSuffix(" deaths");
+//        conf.setTooltip(tooltip);
+//
+//        String[] dates = new String[countriesTotal.size()];
+//        Number[] deaths = new Number[countriesTotal.size()];
+//
+//        for (int i = 0; i < countriesTotal.size(); i++) {
+//            CountryDeathsTotal countryTotal = countriesTotal.get(i);
+//            dates[i] = countryTotal.getDate();
+//            deaths[i] = countryTotal.getNumberOfDeaths();
+//        }
+//
+//        XAxis xAxis = conf.getxAxis();
+//        xAxis.setCategories(dates);
+//
+//        YAxis yAxis = conf.getyAxis();
+//        yAxis.setTitle("Number of confirmed cases");
+//
+//        conf.addSeries(new ListSeries(countryName.toString(), Arrays.asList(deaths)));
+//
+//        add(chart);
     }
 }
