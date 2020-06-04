@@ -25,7 +25,8 @@ You can see how the number of confirmed cases has changed over time since the fi
 
 ![Country dashboard](/media/cases_comparison.png)
 
-Alternatively, you can compare one country's rate of confirmed cases with another.
+Alternatively, you can compare one country's rate of confirmed cases with others (the screenshot above shows a comparison with
+one other country, but you can compare a country with multiple other countries).
 
 *Note: the screenshots above are for illustrative purposes only. The actual UI may look slightly different. 
 If any major changes are made, new screenshots will be uploaded.*
