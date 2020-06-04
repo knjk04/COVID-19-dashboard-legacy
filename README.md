@@ -26,7 +26,7 @@ If any major changes are made, new screenshots will be uploaded.*
 
 ## Setup
 
-### Prerequisites:
+## Prerequisites:
 
 - JDK 11.0.5 or higher
 - [Vaadin](https://vaadin.com/) Pro (or higher) license 
@@ -36,7 +36,7 @@ If any major changes are made, new screenshots will be uploaded.*
 - Node.js
 - npm
 
-### Running the app
+# Running the app
 
 1. Run `Covid19DashboardApplication.java`
 2. Go to `localhost:8080/global`
@@ -45,11 +45,11 @@ If any major changes are made, new screenshots will be uploaded.*
 
 If you see a a JSON Exception, keep on refreshing the page until you it goes away (it should eventually). This is a [known issue](https://github.com/knjk04/COVID-19-dashboard/issues/5) to do with reaching the maximum number of API requests.
 
-## Contributing
+# Contributing
 
 If you wish to contribute (thanks!), please first see the [contributing guide](https://github.com/knjk04/COVID-19-dashboard/blob/master/CONTRIBUTING.md).
 
-## Acknowledgements
+# Acknowledgements
 
 Third-party libraries used:
 
