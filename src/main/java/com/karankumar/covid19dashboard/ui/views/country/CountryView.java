@@ -41,6 +41,7 @@ public class CountryView extends VerticalLayout {
         Button clearButton = new Button("Reset", event -> removeExistingChart());
         HorizontalLayout horizontalLayout = new HorizontalLayout(country, clearButton);
         horizontalLayout.setAlignItems(Alignment.END);
+        horizontalLayout.setMinWidth("60%");
         add(horizontalLayout);
 
         country.addValueChangeListener(event -> {
