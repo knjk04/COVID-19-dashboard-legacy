@@ -2,17 +2,27 @@
 
 *For the most up-to-date version of the README, please refer to the version on the master branch.*
 
-COVID-19 dashboard is a web app that displays COVID-19 statistics on a global level and, coming soon, on a per-country basis. This is made using Spring Boot and Vaadin.
+COVID-19 dashboard is a web app (made with Spring Boot and Vaadin) that displays COVID-19 statistics on a global level 
+and on a per-country basis. 
+
+*Note: the fetched data is cached for 24 hours.*
+
+# Features
 
 The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hopkins](https://github.com/CSSEGISandData/COVID-19)).
 
-![Global dashboard](/media/global-dashboard.png)
+![Global dashboard](/media/global_dashboard.png)
 
-![Country dashboard](/media/cases.png)
+![Country dashboard](/media/cases_one_country.png)
+
+You can see how the number of confirmed cases has changed over time since the first confirmed case, as in the screenshot above.
+
+![Country dashboard](/media/cases_comparison.png)
+
+Alternatively, you can compare one country's rate of confirmed cases with another.
 
 *Note: the screenshots above are for illustrative purposes only. The actual UI may look slightly different. 
 If any major changes are made, new screenshots will be uploaded.*
-*Note: the fetched data is cached for 24 hours.*
 
 ## Setup
 
