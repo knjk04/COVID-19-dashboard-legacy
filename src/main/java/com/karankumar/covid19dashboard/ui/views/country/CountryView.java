@@ -52,7 +52,8 @@ public class CountryView extends VerticalLayout {
 
         if (liveCases.isEmpty()) {
             logger.log(Level.FINE, "Data was empty");
-            Notification notification = new Notification("Error, please try again", 5000);
+            Notification notification = new Notification(
+                    "Cannot retrieve the data for this country, please try a different country", 5000);
             notification.open();
             return;
         }
