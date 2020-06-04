@@ -4,6 +4,7 @@ import com.karankumar.covid19dashboard.backend.api.dayone.DayOneTotalStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
 import com.karankumar.covid19dashboard.backend.domain.CountryTotal;
 import com.karankumar.covid19dashboard.ui.MainView;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.ChartType;
 import com.vaadin.flow.component.charts.model.Configuration;
@@ -14,6 +15,7 @@ import com.vaadin.flow.component.charts.model.YAxis;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -35,7 +37,11 @@ public class CountryView extends VerticalLayout {
         country.setRequired(true);
         country.setPlaceholder("Select a country");
         country.setMinWidth("20%");
-        add(country);
+
+        Button clearButton = new Button("Reset", event -> removeExistingChart());
+        HorizontalLayout horizontalLayout = new HorizontalLayout(country, clearButton);
+        horizontalLayout.setAlignItems(Alignment.END);
+        add(horizontalLayout);
 
         country.addValueChangeListener(event -> {
             if (event != null && event.isFromClient()) {
@@ -46,13 +52,22 @@ public class CountryView extends VerticalLayout {
         add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
     }
 
+    // if the chart is already shown, remove it
+    private void removeExistingChart() {
+        if (chart.isVisible()) {
+            remove(chart);
+            chart = new Chart(ChartType.AREA);
+        }
+    }
+
     private void createCasesSinceDayOneGraph(CountryName countryName) {
         DayOneTotalStats dayOneLive = new DayOneTotalStats(countryName);
         ArrayList<CountryTotal> liveCases = dayOneLive.getLiveCases();
 
         if (liveCases.isEmpty()) {
             logger.log(Level.FINE, "Data was empty");
-            Notification notification = new Notification("Error, please try again", 5000);
+            Notification notification = new Notification(
+                    "Cannot retrieve the data for this country, please try a different country", 5000);
             notification.open();
             return;
         }
