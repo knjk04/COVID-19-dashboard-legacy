@@ -9,8 +9,6 @@ and on a per-country basis.
 
 # Features
 
-The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hopkins](https://github.com/CSSEGISandData/COVID-19)).
-
 ## Global overview
 
 ![Global dashboard](/media/global_dashboard.png)
@@ -64,6 +62,8 @@ If you see a a JSON Exception, keep on refreshing the page until you it goes awa
 If you wish to contribute (thanks!), please first see the [contributing guide](https://github.com/knjk04/COVID-19-dashboard/blob/master/CONTRIBUTING.md).
 
 # Acknowledgements
+
+The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hopkins](https://github.com/CSSEGISandData/COVID-19)).
 
 Third-party libraries used:
 

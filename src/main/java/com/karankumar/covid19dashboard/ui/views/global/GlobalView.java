@@ -19,6 +19,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Route(value = "global", layout = MainView.class)
+@RouteAlias(value = "", layout = MainView.class)
 @PageTitle("COVID-19: Global statistics")
 public class GlobalView extends VerticalLayout {
     private final Span deathCounter;

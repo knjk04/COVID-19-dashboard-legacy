@@ -16,15 +16,13 @@ public class CountryView extends VerticalLayout {
         accordion.setWidthFull();
 
         VerticalLayout casesAndDeathsView = new CasesAndDeathsView();
-        accordion.add("Cases and deaths for one country", casesAndDeathsView);
+        accordion.add("Total confirmed cases and deaths for one country", casesAndDeathsView);
 
-        // TODO: change VerticalLayout to a vertical layout containing the combobox and graph
         VerticalLayout caseComparison = new CaseComparisonView();
-        accordion.add("Compare the number of cases between countries", caseComparison);
+        accordion.add("Compare total confirmed cases", caseComparison);
 
-        // TODO: change VerticalLayout to a vertical layout containing the combobox and graph
         VerticalLayout deathComparison = new DeathComparisonView();
-        accordion.add("Compare the number of deaths between two countries", deathComparison);
+        accordion.add("Compare total COVID-19 deaths", deathComparison);
 
         add(accordion);
         add(new DashboardFooter());
