@@ -22,27 +22,30 @@ class HighestNumberOfChart {
 
     public Chart createMostCasesChart(TreeMap<Integer, String> mostCases, Integer totalCases) {
         DataSeries series = setDataSeries(mostCases, totalCases);
-        setChartConfig(series, NUMBER_OF.CONFIRMED_CASES, "cases");
+        setChartConfig(series, NUMBER_OF.CONFIRMED_CASES);
         return mostCasesChart;
     }
 
     public Chart createMostDeathsChart(TreeMap<Integer, String> mostDeaths, Integer totalDeaths) {
         DataSeries series = setDataSeries(mostDeaths, totalDeaths);
-        setChartConfig(series, NUMBER_OF.DEATHS, "deaths");
+        setChartConfig(series, NUMBER_OF.DEATHS);
         return mostDeathsChart;
     }
 
-    private void setChartConfig(DataSeries series, NUMBER_OF numberOf, String mostOf) {
+    private void setChartConfig(DataSeries series, NUMBER_OF numberOf) {
         Configuration conf;
         Tooltip tooltip =  new Tooltip();
+        String caseType;
         if (numberOf == NUMBER_OF.DEATHS) {
             conf = mostDeathsChart.getConfiguration();
             tooltip.setValueSuffix(ViewsConst.DEATHS_TOOLTIP_SUFFIX);
+            caseType = "confirmed cases";
         } else {
             conf = mostCasesChart.getConfiguration();
             tooltip.setValueSuffix(ViewsConst.CASES_TOOLTIP_SUFFIX);
+            caseType = "deaths";
         }
-        conf.setTitle("Countries with the most " + mostOf);
+        conf.setTitle("Countries with the most " + caseType);
         conf.setTooltip(tooltip);
         conf.setPlotOptions(setPlotOptionsPie());
         conf.setSeries(series);
