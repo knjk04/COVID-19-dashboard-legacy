@@ -111,7 +111,6 @@ public class GlobalView extends VerticalLayout {
         Text lastUpdated = new Text("Last updated on " + globalStats.getDate() + " at " + globalStats.getTime());
         add(lastUpdated);
 
-//        add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
         add(new DashboardFooter());
     }
 
