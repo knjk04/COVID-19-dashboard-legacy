@@ -20,14 +20,14 @@ class HighestNumberOfChart {
         CONFIRMED_CASES,
     }
 
-    public Chart createMostCasesChart(TreeMap<Integer, String> mostCases) {
-        DataSeries series = setDataSeries(mostCases);
+    public Chart createMostCasesChart(TreeMap<Integer, String> mostCases, Integer totalCases) {
+        DataSeries series = setDataSeries(mostCases, totalCases);
         setChartConfig(series, NUMBER_OF.CONFIRMED_CASES, "cases");
         return mostCasesChart;
     }
 
-    public Chart createMostDeathsChart(TreeMap<Integer, String> mostDeaths) {
-        DataSeries series = setDataSeries(mostDeaths);
+    public Chart createMostDeathsChart(TreeMap<Integer, String> mostDeaths, Integer totalDeaths) {
+        DataSeries series = setDataSeries(mostDeaths, totalDeaths);
         setChartConfig(series, NUMBER_OF.DEATHS, "deaths");
         return mostDeathsChart;
     }
@@ -51,13 +51,17 @@ class HighestNumberOfChart {
 
     /**
      * @param mostOfStat a TreeMap that represents the top countries with the highest number of a particular statistic
+     * @param globalTotal the total number of cases/deaths worldwide
      * @return a DataSeries that contains all of the keys and values in the TreeMap
      */
-    private DataSeries setDataSeries(TreeMap<Integer, String> mostOfStat) {
+    private DataSeries setDataSeries(TreeMap<Integer, String> mostOfStat, Integer globalTotal) {
         DataSeries series = new DataSeries();
+        int totalInTopCountries = 0;
         for (Integer i : mostOfStat.keySet()) {
             series.add(new DataSeriesItem(mostOfStat.get(i), i));
+            totalInTopCountries += i;
         }
+        series.add(new DataSeriesItem("Other", (globalTotal - totalInTopCountries)));
         return series;
     }
 

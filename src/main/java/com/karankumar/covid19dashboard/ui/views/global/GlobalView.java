@@ -108,8 +108,8 @@ public class GlobalView extends VerticalLayout {
         add(new HtmlComponent("br"));
 
         HighestNumberOfChart mostChart = new HighestNumberOfChart();
-        Chart mostCasesChart = mostChart.createMostCasesChart(globalStats.getMostCases());
-        Chart mostDeathsChart = mostChart.createMostDeathsChart(globalStats.getMostDeaths());
+        Chart mostCasesChart = mostChart.createMostCasesChart(globalStats.getMostCases(), totalCases);
+        Chart mostDeathsChart = mostChart.createMostDeathsChart(globalStats.getMostDeaths(), totalDeaths);
 
         HorizontalLayout charts = new HorizontalLayout(mostCasesChart, mostDeathsChart);
         charts.setSizeFull();
