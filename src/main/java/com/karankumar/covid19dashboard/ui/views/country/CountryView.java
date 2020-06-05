@@ -12,13 +12,21 @@ import com.vaadin.flow.router.Route;
 public class CountryView extends VerticalLayout {
 
     public CountryView() {
-        Accordion deathsAndCasesAccordion = new Accordion();
-        deathsAndCasesAccordion.setWidthFull();
+        Accordion accordion = new Accordion();
+        accordion.setWidthFull();
+
         VerticalLayout casesAndDeathsView = new CasesAndDeathsView();
+        accordion.add("Cases and deaths for one country", casesAndDeathsView);
 
-        deathsAndCasesAccordion.add("Cases and deaths for one country", casesAndDeathsView);
-        add(deathsAndCasesAccordion);
+        // TODO: change VerticalLayout to a vertical layout containing the combobox and graph
+        VerticalLayout caseComparison = new VerticalLayout();
+        accordion.add("Compare the number of cases between two countries", caseComparison);
 
+        // TODO: change VerticalLayout to a vertical layout containing the combobox and graph
+        VerticalLayout deathComparison = new VerticalLayout();
+        accordion.add("Compare the number of deaths between two countries", deathComparison);
+
+        add(accordion);
         add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
     }
 }
