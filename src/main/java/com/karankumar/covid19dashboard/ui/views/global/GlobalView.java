@@ -13,6 +13,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -22,6 +23,8 @@ import com.vaadin.flow.router.Route;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Route(value = "global", layout = MainView.class)
@@ -30,6 +33,8 @@ public class GlobalView extends VerticalLayout {
     private final Span deathCounter;
     private final Span recoveredCounter;
     private final Span casesCounter;
+
+    private static final Logger logger = Logger.getLogger(GlobalView.class.getName());
 
     private enum TotalType {
         DEATHS,
@@ -43,19 +48,21 @@ public class GlobalView extends VerticalLayout {
         Integer totalRecovered = globalStats.getTotalRecovered();
         Integer totalCases = globalStats.getTotalCases();
 
-        System.out.println("GlobalView: Total deaths: " + totalDeaths);
-        System.out.println("GlobalView: Total recovered: " + totalRecovered);
-        System.out.println("GlobalView: Total cases: " + totalCases);
+        logger.log(Level.INFO, "GlobalView: Total deaths: " + totalDeaths);
+        logger.log(Level.INFO, "GlobalView: Total recovered: " + totalRecovered);
+        logger.log(Level.INFO, "GlobalView: Total cases: " + totalCases);
+
+        notifyIfNoStatsShown(totalDeaths, totalRecovered, totalCases);
 
         Board board = new Board();
 
         String counterDigit = "counterDigit";
         String counterWrapper = "counterWrapper";
-        deathCounter = new Span("placeholder1");
+        deathCounter = new Span();
         deathCounter.addClassNames(counterDigit, "deathCounterDigit", counterWrapper);
-        recoveredCounter = new Span("placeholder2");
+        recoveredCounter = new Span();
         recoveredCounter.addClassNames(counterDigit, "recoveredCounterDigit", counterWrapper);
-        casesCounter = new Span("placeholder3");
+        casesCounter = new Span();
         casesCounter.addClassNames(counterDigit, "casesCounterDigit", counterWrapper);
 
         H4 deathsH4 = new H4("Total deaths");
@@ -108,15 +115,30 @@ public class GlobalView extends VerticalLayout {
         charts.setSizeFull();
         add(charts);
 
-        Text lastUpdated = new Text("Last updated on " + globalStats.getDate() + " at " + globalStats.getTime());
-        add(lastUpdated);
+        String lastUpdatedOn = "Last updated on ";
+        if (globalStats.getDate() != null && !globalStats.getDate().isEmpty()) {
+            lastUpdatedOn += globalStats.getDate();
+            if (globalStats.getTime() != null && !globalStats.getTime().isEmpty()) {
+                lastUpdatedOn += " at " + globalStats.getTime();
+                add(new Text(lastUpdatedOn));
+            }
+        }
 
         add(new DashboardFooter());
     }
 
+    private void notifyIfNoStatsShown(Integer totalDeaths, Integer totalRecovered, Integer totalCases) {
+        if (totalDeaths == null && totalRecovered == null && totalCases == null) {
+            Notification notification = new Notification(
+                    "Please refresh the page or switch to the country tab and then back to this tab",
+                    5000
+            );
+            notification.open();
+        }
+    }
+
     /**
      * Case-insensitive filter
-     *
      * @param dataProvider the grid's {@code DataProvider}
      */
     private void filterByCountry(String query, ListDataProvider<CountrySummary> dataProvider) {
