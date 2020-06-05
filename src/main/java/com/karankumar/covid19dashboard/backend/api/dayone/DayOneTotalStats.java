@@ -83,7 +83,6 @@ public class DayOneTotalStats <T extends CountryTotal> {
                 dayOneUrl += DayOneTotalConst.suffixDeathsUrl;
                 break;
             case RECOVERED:
-                // TODO: implement
                 break;
             default:
                 logger.log(Level.FINEST, "A new case type has been added but is not handled");
@@ -99,11 +98,13 @@ public class DayOneTotalStats <T extends CountryTotal> {
 
             if (caseType == CaseType.CONFIMRED) {
                 int cases = jsonObject.getInt(DayOneTotalConst.CASES);
-                CountryCasesTotal countryCases = new CountryCasesTotal(cases, date);
+                String country = jsonObject.getString("Country");
+                CountryCasesTotal countryCases = new CountryCasesTotal(cases, date, country);
                 caseTotals.add((T) countryCases);
             } else {
                 int deaths = jsonObject.getInt(DayOneTotalConst.CASES);
-                CountryDeathsTotal countryDeaths = new CountryDeathsTotal(deaths, date);
+                String country = jsonObject.getString("Country");
+                CountryDeathsTotal countryDeaths = new CountryDeathsTotal(deaths, date, country);
                 caseTotals.add((T) countryDeaths);
             }
         }

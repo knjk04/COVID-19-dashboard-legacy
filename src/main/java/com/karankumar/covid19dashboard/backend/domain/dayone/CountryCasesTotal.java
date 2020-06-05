@@ -3,8 +3,8 @@ package com.karankumar.covid19dashboard.backend.domain.dayone;
 public class CountryCasesTotal extends CountryTotal {
     private int numberOfCases;
 
-    public CountryCasesTotal(int cases, String date) {
-        super(date);
+    public CountryCasesTotal(int cases, String date, String countryName) {
+        super(countryName, date);
         this.numberOfCases = cases;
     }
 
@@ -15,7 +15,8 @@ public class CountryCasesTotal extends CountryTotal {
     @Override
     public String toString() {
         return "CountryCasesTotal{" +
-                "cases=" + numberOfCases +
+                "country=" + super.getCountryName() +
+                ", cases=" + numberOfCases +
                 ", date='" + getDate() + '\'' +
                 '}';
     }

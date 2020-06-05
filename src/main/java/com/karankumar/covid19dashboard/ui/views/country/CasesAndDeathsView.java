@@ -34,12 +34,15 @@ public class CasesAndDeathsView <T extends CountryTotal>  extends VerticalLayout
     private String[] deathDates;
 
     public CasesAndDeathsView() {
+        add(configureCountryNameComboBox());
+    }
+
+    private ComboBox<CountryName> configureCountryNameComboBox() {
         ComboBox<CountryName> country = new ComboBox<>("Country");
         country.setItems(CountryName.values());
         country.setRequired(true);
         country.setPlaceholder("Select a country");
         country.setMinWidth("20%");
-        add(country);
 
         country.addValueChangeListener(event -> {
             if (event != null && event.isFromClient()) {
@@ -47,6 +50,7 @@ public class CasesAndDeathsView <T extends CountryTotal>  extends VerticalLayout
                 createCasesAndDeathsGraph(event.getValue());
             }
         });
+        return country;
     }
 
     // if the chart is already shown, remove it

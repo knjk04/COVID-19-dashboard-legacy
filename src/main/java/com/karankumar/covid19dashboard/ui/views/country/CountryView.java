@@ -19,11 +19,11 @@ public class CountryView extends VerticalLayout {
         accordion.add("Cases and deaths for one country", casesAndDeathsView);
 
         // TODO: change VerticalLayout to a vertical layout containing the combobox and graph
-        VerticalLayout caseComparison = new VerticalLayout();
+        VerticalLayout caseComparison = new CaseComparisonView();
         accordion.add("Compare the number of cases between two countries", caseComparison);
 
         // TODO: change VerticalLayout to a vertical layout containing the combobox and graph
-        VerticalLayout deathComparison = new VerticalLayout();
+        VerticalLayout deathComparison = new DeathComparisonView();
         accordion.add("Compare the number of deaths between two countries", deathComparison);
 
         add(accordion);
