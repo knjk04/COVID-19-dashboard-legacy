@@ -3,13 +3,13 @@ package com.karankumar.covid19dashboard.ui.views.global;
 import com.karankumar.covid19dashboard.backend.api.summary.SummaryStats;
 import com.karankumar.covid19dashboard.backend.domain.CountrySummary;
 import com.karankumar.covid19dashboard.ui.MainView;
+import com.karankumar.covid19dashboard.ui.component.DashboardFooter;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Span;
@@ -111,7 +111,8 @@ public class GlobalView extends VerticalLayout {
         Text lastUpdated = new Text("Last updated on " + globalStats.getDate() + " at " + globalStats.getTime());
         add(lastUpdated);
 
-        add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
+//        add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
+        add(new DashboardFooter());
     }
 
     /**

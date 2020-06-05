@@ -1,8 +1,8 @@
 package com.karankumar.covid19dashboard.ui.views.country;
 
 import com.karankumar.covid19dashboard.ui.MainView;
+import com.karankumar.covid19dashboard.ui.component.DashboardFooter;
 import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -27,6 +27,6 @@ public class CountryView extends VerticalLayout {
         accordion.add("Compare the number of deaths between two countries", deathComparison);
 
         add(accordion);
-        add(new Anchor("https://covid19api.com/", "Source: COVID-19 API"));
+        add(new DashboardFooter());
     }
 }
