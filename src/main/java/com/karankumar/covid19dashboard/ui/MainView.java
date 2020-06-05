@@ -7,6 +7,8 @@ import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.TabVariant;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -19,11 +21,19 @@ public class MainView extends AppLayout {
 
     public MainView() {
         Tabs tabs = new Tabs();
+
         Tab globalTab = createTab(VaadinIcon.GLOBE, GlobalView.class, "Global");
         Tab countryTab = createTab(VaadinIcon.LOCATION_ARROW_CIRCLE, CountryView.class, "Country");
         tabs.add(globalTab, countryTab);
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
-        addToNavbar(true, tabs);
+
+        FlexLayout centreTabs = new FlexLayout();
+        centreTabs.setSizeFull();
+        centreTabs.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
+        centreTabs.setAlignItems(FlexComponent.Alignment.CENTER);
+        centreTabs.add(tabs);
+
+        addToNavbar(true, centreTabs);
     }
 
     private static Tab createTab(VaadinIcon icon, Class<? extends Component> viewClass, String title) {
