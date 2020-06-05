@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//public class DayOneTotalStats {
 public class DayOneTotalStats <T extends CountryTotal> {
     private static final OkHttpClient client;
     private static final Logger logger;
@@ -24,6 +23,7 @@ public class DayOneTotalStats <T extends CountryTotal> {
     private final String slug;
     private final CaseType caseType;
     private ArrayList<CountryCasesTotal> caseTotals;
+    private ArrayList<CountryDeathsTotal> deathTotals;
 
     static {
         client = new OkHttpClient().newBuilder()
@@ -44,7 +44,7 @@ public class DayOneTotalStats <T extends CountryTotal> {
                     this.caseTotals = (ArrayList<CountryCasesTotal>) fetchDayOneTotal(dayOneTotal, CaseType.CONFIMRED);
                     break;
                 case DEATHS:
-                    fetchDayOneTotal(dayOneTotal, CaseType.DEATHS);
+                    this.deathTotals = (ArrayList<CountryDeathsTotal>) fetchDayOneTotal(dayOneTotal, CaseType.DEATHS);
                     break;
             }
         } else {
@@ -91,20 +91,6 @@ public class DayOneTotalStats <T extends CountryTotal> {
         return dayOneUrl;
     }
 
-//    private ArrayList<CountryCasesTotal> fetchDayOneTotal(JSONArray jsonArray) {
-//        ArrayList<CountryCasesTotal> caseTotals = new ArrayList<>();
-//        for (int i = 0; i < jsonArray.length(); i++) {
-//            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//            String date = jsonObject.getString(DayOneTotalConst.DATE);
-//
-//            int cases = jsonObject.getInt(DayOneTotalConst.CASES);
-//            CountryCasesTotal countryLiveStats = new CountryCasesTotal(cases, date);
-//
-//            caseTotals.add(countryLiveStats);
-//        }
-//        return caseTotals;
-//    }
-
     private ArrayList<T> fetchDayOneTotal(JSONArray jsonArray, CaseType caseType) {
         ArrayList<T> caseTotals = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -126,5 +112,9 @@ public class DayOneTotalStats <T extends CountryTotal> {
 
     public ArrayList<CountryCasesTotal> getTotalCases() {
         return caseTotals;
+    }
+
+    public ArrayList<CountryDeathsTotal> getTotalDeaths() {
+        return deathTotals;
     }
 }
