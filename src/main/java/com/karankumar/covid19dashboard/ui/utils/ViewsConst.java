@@ -4,6 +4,6 @@ public final class ViewsConst {
     private ViewsConst() {
     }
 
-    public static final String CASES_TOOLTIP_SUFFIX = " deaths";
+    public static final String CASES_TOOLTIP_SUFFIX = " cases";
     public static final String DEATHS_TOOLTIP_SUFFIX = " deaths";
 }
