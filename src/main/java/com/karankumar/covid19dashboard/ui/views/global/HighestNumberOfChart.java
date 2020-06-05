@@ -1,5 +1,6 @@
 package com.karankumar.covid19dashboard.ui.views.global;
 
+import com.karankumar.covid19dashboard.ui.utils.ViewsConst;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.ChartType;
 import com.vaadin.flow.component.charts.model.Configuration;
@@ -33,13 +34,16 @@ class HighestNumberOfChart {
 
     private void setChartConfig(DataSeries series, NUMBER_OF numberOf, String mostOf) {
         Configuration conf;
+        Tooltip tooltip =  new Tooltip();
         if (numberOf == NUMBER_OF.DEATHS) {
             conf = mostDeathsChart.getConfiguration();
+            tooltip.setValueSuffix(ViewsConst.DEATHS_TOOLTIP_SUFFIX);
         } else {
             conf = mostCasesChart.getConfiguration();
+            tooltip.setValueSuffix(ViewsConst.CASES_TOOLTIP_SUFFIX);
         }
         conf.setTitle("Countries with the most " + mostOf);
-        conf.setTooltip(new Tooltip());
+        conf.setTooltip(tooltip);
         conf.setPlotOptions(setPlotOptionsPie());
         conf.setSeries(series);
     }
