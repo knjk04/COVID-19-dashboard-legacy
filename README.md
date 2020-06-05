@@ -29,14 +29,14 @@ have changed over time (also since the first confirmed case).
 Compare one country's rate of confirmed cases with others (the screenshot above shows a comparison with
 one other country, but you can compare a country with multiple other countries).
 
-*Note: the screenshots above are for illustrative purposes only. The actual UI may look slightly different. 
-If any major changes are made, new screenshots will be uploaded.*
-
 ## Death comparison between countries
 
 ![Death comparison](/media/deaths_comparison.png)
 
 Or compare different countries' COVID-19 death rates.
+
+*Note: the screenshots above are for illustrative purposes only. The actual UI may look slightly different. 
+If any major changes are made, new screenshots will be uploaded.*
 
 ## Setup
 
