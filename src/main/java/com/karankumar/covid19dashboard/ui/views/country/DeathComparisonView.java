@@ -14,18 +14,14 @@ import com.vaadin.flow.component.charts.model.Tooltip;
 import com.vaadin.flow.component.charts.model.XAxis;
 import com.vaadin.flow.component.charts.model.YAxis;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.karankumar.covid19dashboard.ui.utils.ViewsConst.EMPTY_ERROR_MESSAGE;
-
-public class DeathComparisonView<T extends CountryTotal> extends VerticalLayout {
+public class DeathComparisonView<T extends CountryTotal> extends BaseCaseView<T> {
     private ArrayList<CountryDeathsTotal> totalDeaths;
     private Chart deathChart = new Chart(ChartType.AREA);
     private static final Logger logger = Logger.getLogger(CountryView.class.getName());
@@ -34,7 +30,6 @@ public class DeathComparisonView<T extends CountryTotal> extends VerticalLayout 
 
     public DeathComparisonView() {
         ComboBox<CountryName> selectCountry = configureCountryNameComboBox();
-        selectCountry.setMinWidth("20%");
         Button clear = new Button("Reset", e -> removeExistingChart());
 
         HorizontalLayout horizontalLayout = new HorizontalLayout(selectCountry, clear);
@@ -44,26 +39,20 @@ public class DeathComparisonView<T extends CountryTotal> extends VerticalLayout 
         add(horizontalLayout);
     }
 
-    private ComboBox<CountryName> configureCountryNameComboBox() {
-        ComboBox<CountryName> country = new ComboBox<>("Country");
-        country.setItems(CountryName.values());
-        country.setRequired(true);
-        country.setPlaceholder("Select a country");
-        country.setMinWidth("20%");
-
+    @Override
+    protected void setCountryValueChangeListener(ComboBox<CountryName> country) {
         country.addValueChangeListener(event -> {
             if (event != null && event.isFromClient()) {
                 createDeathsGraph(event.getValue());
             }
         });
-        return country;
     }
 
     private void createDeathsGraph(CountryName countryName) {
         DayOneTotalStats totalDeathsSinceDayOne = new DayOneTotalStats(countryName, CaseType.DEATHS);
         totalDeaths = totalDeathsSinceDayOne.getTotalDeaths();
 
-        if (isTotalEmpty((ArrayList<T>) totalDeaths) || isTotalEmpty((ArrayList<T>) totalDeaths)) {
+        if (isTotalEmpty((ArrayList<T>) totalDeaths)) {
             logger.log(Level.FINE, "Data was empty");
             return;
         }
@@ -76,22 +65,27 @@ public class DeathComparisonView<T extends CountryTotal> extends VerticalLayout 
         add(deathChart);
     }
 
-    private void removeExistingChart() {
+    protected void removeExistingChart() {
         if (deathChart.isVisible()) {
             remove(deathChart);
             deathChart = new Chart(ChartType.AREA);
         }
     }
 
-    private boolean isTotalEmpty(ArrayList<T> deathTotal) {
-        if (deathTotal.isEmpty()) {
-            Notification notification = new Notification(
-                    EMPTY_ERROR_MESSAGE, 5000);
-            notification.open();
-            return true;
-        }
-        return false;
+    @Override
+    protected void createGraph(CountryName value) {
+
     }
+
+//    private boolean isTotalEmpty(ArrayList<T> deathTotal) {
+//        if (deathTotal.isEmpty()) {
+//            Notification notification = new Notification(
+//                    EMPTY_ERROR_MESSAGE, 5000);
+//            notification.open();
+//            return true;
+//        }
+//        return false;
+//    }
 
     private void setDeaths() {
         deathDates = new String[totalDeaths.size()];
@@ -104,7 +98,7 @@ public class DeathComparisonView<T extends CountryTotal> extends VerticalLayout 
         }
     }
 
-    private void setChartConfig(String chartTitle, String yAxisName, String seriesName, Number[] total) {
+    protected void setChartConfig(String chartTitle, String yAxisName, String seriesName, Number[] total) {
         Configuration conf = deathChart.getConfiguration();
         conf.setTitle(chartTitle);
         Tooltip tooltip = new Tooltip();
