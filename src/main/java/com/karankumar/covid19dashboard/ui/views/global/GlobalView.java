@@ -132,7 +132,7 @@ public class GlobalView extends VerticalLayout {
     private void notifyIfNoStatsShown(Integer totalDeaths, Integer totalRecovered, Integer totalCases) {
         if (totalDeaths == null && totalRecovered == null && totalCases == null) {
             Notification notification = new Notification(
-                    "Please refresh the page or switch to the country tab and then back to this tab",
+                    "Please refresh the page",
                     5000
             );
             notification.open();
