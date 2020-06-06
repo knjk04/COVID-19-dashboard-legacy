@@ -65,19 +65,21 @@ public abstract class BaseCaseView<T extends CountryTotal> extends VerticalLayou
     }
 
     /**
-     * This should be called before {@code setChartConfig}
+     * This should be called before it is used as the xAxis category. See {@code setChartConfig}
      * @param caseDates The labelled date for each case total (death or confirmed case)
      */
-    protected void setCaseDates(String[] caseDates) {
+    private void setCaseDates(String[] caseDates) {
         this.caseDates = caseDates;
     }
 
-    protected void setChartConfig(String chartTitle, String yAxisName, String seriesName, Number[] total) {
+    protected void setChartConfig(String chartTitle, String yAxisName, String seriesName, Number[] total,
+                                  String[] caseDates) {
         Configuration conf = casesChart.getConfiguration();
         conf.setTitle(chartTitle);
         Tooltip tooltip = new Tooltip();
         conf.setTooltip(tooltip);
 
+        setCaseDates(caseDates);
         XAxis xAxis = conf.getxAxis();
         xAxis.setCategories(caseDates);
 

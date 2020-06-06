@@ -18,6 +18,7 @@ public class DeathComparisonView<T extends CountryTotal> extends BaseCaseView<T>
     private ArrayList<CountryDeathsTotal> totalDeaths;
     private static final Logger logger = Logger.getLogger(CountryView.class.getName());
     private Number[] deaths;
+    private String[] deathDates;
 
     public DeathComparisonView() {
         ComboBox<CountryName> selectCountry = configureCountryNameComboBox();
@@ -49,18 +50,17 @@ public class DeathComparisonView<T extends CountryTotal> extends BaseCaseView<T>
             return;
         }
 
-        setDeaths();
-
+        setDeaths(); // this must be called before calling setChartConfig()
         String chartTitle = "Number of deaths since the first death";
         String yAxisName = "Number of deaths";
-        setChartConfig(chartTitle, yAxisName, countryName.toString(), deaths);
+        setChartConfig(chartTitle, yAxisName, countryName.toString(), deaths, deathDates);
 
         Chart deathChart = getCasesChart();
         add(deathChart);
     }
 
     private void setDeaths() {
-        String[] deathDates = new String[totalDeaths.size()];
+        deathDates = new String[totalDeaths.size()];
         deaths = new Number[totalDeaths.size()];
 
         for (int i = 0; i < totalDeaths.size(); i++) {
@@ -68,6 +68,5 @@ public class DeathComparisonView<T extends CountryTotal> extends BaseCaseView<T>
             deathDates[i] = countryLive.getDate();
             deaths[i] = countryLive.getNumberOfDeaths();
         }
-        setCaseDates(deathDates);
     }
 }

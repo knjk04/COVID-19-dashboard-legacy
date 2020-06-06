@@ -19,6 +19,8 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
     private ArrayList<CountryCasesTotal> confirmedTotal;
     private ArrayList<CountryDeathsTotal> deathTotal;
     private Number[] deaths;
+    private String[] deathDates;
+    private String[] confirmedCaseDates;
 
     public CasesAndDeathsView() {
         add(configureCountryNameComboBox());
@@ -36,20 +38,21 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
             return;
         }
 
+        // the following lines must be called before calling setChartConfig()
         setCases();
         setDeaths();
 
         String chartTitle = "Number of deaths confirmed cases since the first death and confirmed case";
         String yAxisName = "Number of deaths & confirmed cases since day 1";
-        setChartConfig(chartTitle, yAxisName, "Confirmed cases", confirmedCases);
-        setChartConfig(chartTitle, yAxisName, "Deaths", deaths);
+        setChartConfig(chartTitle, yAxisName, "Confirmed cases", confirmedCases, confirmedCaseDates);
+        setChartConfig(chartTitle, yAxisName, "Deaths", deaths, deathDates);
 
         Chart casesAndDeathsChart = getCasesChart();
         add(casesAndDeathsChart);
     }
 
     private void setCases() {
-        String[] confirmedCaseDates = new String[confirmedTotal.size()];
+        confirmedCaseDates = new String[confirmedTotal.size()];
         confirmedCases = new Number[confirmedTotal.size()];
 
         for (int i = 0; i < confirmedTotal.size(); i++) {
@@ -57,11 +60,10 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
             confirmedCaseDates[i] = countryLive.getDate();
             confirmedCases[i] = countryLive.getNumberOfCases();
         }
-        setCaseDates(confirmedCaseDates);
     }
 
     private void setDeaths() {
-        String[] deathDates = new String[deathTotal.size()];
+        deathDates = new String[deathTotal.size()];
         deaths = new Number[confirmedTotal.size()];
 
         for (int i = 0; i < deathTotal.size(); i++) {
@@ -69,6 +71,5 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
             deathDates[i] = countryLive.getDate();
             deaths[i] = countryLive.getNumberOfDeaths();
         }
-        setCaseDates(deathDates);
     }
 }
