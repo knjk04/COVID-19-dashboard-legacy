@@ -26,7 +26,7 @@ public abstract class BaseCaseView<T extends CountryTotal> extends VerticalLayou
         ComboBox<CountryName> country = new ComboBox<>("Country");
         country.setItems(CountryName.values());
         country.setRequired(true);
-        country.setPlaceholder("Select a country11");
+        country.setPlaceholder("Select a country");
         country.setMinWidth("20%");
         setCountryValueChangeListener(country);
 
