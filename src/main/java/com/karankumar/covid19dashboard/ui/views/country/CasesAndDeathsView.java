@@ -50,7 +50,6 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
 
     private void setCases() {
         String[] confirmedCaseDates = new String[confirmedTotal.size()];
-        setCaseDates(confirmedCaseDates);
         confirmedCases = new Number[confirmedTotal.size()];
 
         for (int i = 0; i < confirmedTotal.size(); i++) {
@@ -58,11 +57,11 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
             confirmedCaseDates[i] = countryLive.getDate();
             confirmedCases[i] = countryLive.getNumberOfCases();
         }
+        setCaseDates(confirmedCaseDates);
     }
 
     private void setDeaths() {
         String[] deathDates = new String[deathTotal.size()];
-        setCaseDates(deathDates);
         deaths = new Number[confirmedTotal.size()];
 
         for (int i = 0; i < deathTotal.size(); i++) {
@@ -70,5 +69,6 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
             deathDates[i] = countryLive.getDate();
             deaths[i] = countryLive.getNumberOfDeaths();
         }
+        setCaseDates(deathDates);
     }
 }

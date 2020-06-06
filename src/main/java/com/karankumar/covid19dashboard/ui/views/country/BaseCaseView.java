@@ -52,7 +52,7 @@ public abstract class BaseCaseView<T extends CountryTotal> extends VerticalLayou
         }
     }
 
-    protected abstract void createGraph(CountryName value);
+    protected abstract void createGraph(CountryName countryName);
 
     protected boolean isTotalEmpty(ArrayList<T> casesTotal) {
         if (casesTotal.isEmpty()) {
