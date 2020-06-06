@@ -2,6 +2,8 @@ package com.karankumar.covid19dashboard.ui.views.country;
 
 import com.karankumar.covid19dashboard.ui.MainView;
 import com.karankumar.covid19dashboard.ui.component.DashboardFooter;
+import com.karankumar.covid19dashboard.ui.views.country.comparison.ConfirmedCaseComparisonView;
+import com.karankumar.covid19dashboard.ui.views.country.comparison.DeathComparisonView;
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -18,7 +20,7 @@ public class CountryView extends VerticalLayout {
         VerticalLayout casesAndDeathsView = new CasesAndDeathsView();
         accordion.add("Total confirmed cases and deaths for one country", casesAndDeathsView);
 
-        VerticalLayout caseComparison = new CaseComparisonView();
+        VerticalLayout caseComparison = new ConfirmedCaseComparisonView();
         accordion.add("Compare total confirmed cases", caseComparison);
 
         VerticalLayout deathComparison = new DeathComparisonView();

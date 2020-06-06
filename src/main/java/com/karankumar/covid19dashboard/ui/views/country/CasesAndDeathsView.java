@@ -29,7 +29,7 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
     @Override
     protected void createGraph(CountryName countryName) {
         DayOneTotalStats dayOneTotalCases = new DayOneTotalStats(countryName, CaseType.CONFIMRED);
-        confirmedTotal = dayOneTotalCases.getTotalCases();
+        confirmedTotal = dayOneTotalCases.getTotalConfirmedCases();
         DayOneTotalStats dayOneTotalDeaths = new DayOneTotalStats(countryName, CaseType.DEATHS);
         deathTotal = dayOneTotalDeaths.getTotalDeaths();
 

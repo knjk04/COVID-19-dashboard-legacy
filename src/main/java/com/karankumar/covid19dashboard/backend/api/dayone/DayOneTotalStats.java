@@ -111,7 +111,7 @@ public class DayOneTotalStats <T extends CountryTotal> {
         return caseTotals;
     }
 
-    public ArrayList<CountryCasesTotal> getTotalCases() {
+    public ArrayList<CountryCasesTotal> getTotalConfirmedCases() {
         return caseTotals;
     }
 

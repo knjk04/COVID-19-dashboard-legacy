@@ -1,49 +1,32 @@
-package com.karankumar.covid19dashboard.ui.views.country;
+package com.karankumar.covid19dashboard.ui.views.country.comparison;
 
 import com.karankumar.covid19dashboard.backend.api.dayone.CaseType;
 import com.karankumar.covid19dashboard.backend.api.dayone.DayOneTotalStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
 import com.karankumar.covid19dashboard.backend.domain.dayone.CountryCasesTotal;
 import com.karankumar.covid19dashboard.backend.domain.dayone.CountryTotal;
-import com.vaadin.flow.component.button.Button;
+import com.karankumar.covid19dashboard.ui.views.country.CountryView;
 import com.vaadin.flow.component.charts.Chart;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CaseComparisonView<T extends CountryTotal> extends BaseCaseView<T> {
+public class ConfirmedCaseComparisonView<T extends CountryTotal> extends ComparisonView<T> {
     private ArrayList<CountryCasesTotal> casesTotal;
     private static final Logger logger = Logger.getLogger(CountryView.class.getName());
     private String[] caseDates;
     private Number[] cases;
 
-    public CaseComparisonView() {
-        ComboBox<CountryName> selectCountry = configureCountryNameComboBox();
-        Button clear = new Button("Reset", e -> removeExistingChart());
-
-        HorizontalLayout horizontalLayout = new HorizontalLayout(selectCountry, clear);
-        horizontalLayout.setAlignItems(Alignment.END);
-        horizontalLayout.setSizeFull();
-
-        add(horizontalLayout);
-    }
-
-    @Override
-    protected void setCountryValueChangeListener(ComboBox<CountryName> country) {
-        country.addValueChangeListener(event -> {
-            if (event != null && event.isFromClient()) {
-                createGraph(event.getValue());
-            }
-        });
+    public ConfirmedCaseComparisonView() {
+        super(CaseType.CONFIMRED);
+        add(createResetAndCountryComboBox());
     }
 
     @Override
     protected void createGraph(CountryName countryName) {
         DayOneTotalStats dayOneTotalCases = new DayOneTotalStats(countryName, CaseType.CONFIMRED);
-        casesTotal = dayOneTotalCases.getTotalCases();
+        casesTotal = dayOneTotalCases.getTotalConfirmedCases();
 
         if (isTotalEmpty((ArrayList<T>) casesTotal)) {
             logger.log(Level.FINE, "Data was empty");
@@ -60,7 +43,7 @@ public class CaseComparisonView<T extends CountryTotal> extends BaseCaseView<T> 
         add(confirmedCasesChart);
     }
 
-    private void setCases() {
+    protected void setCases() {
         caseDates = new String[casesTotal.size()];
         cases = new Number[casesTotal.size()];
 
