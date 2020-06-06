@@ -3,7 +3,6 @@ package com.karankumar.covid19dashboard.ui.views.country.comparison;
 import com.karankumar.covid19dashboard.backend.api.dayone.CaseType;
 import com.karankumar.covid19dashboard.backend.api.dayone.DayOneTotalStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
-import com.karankumar.covid19dashboard.backend.domain.dayone.CountryDeathsTotal;
 import com.karankumar.covid19dashboard.backend.domain.dayone.CountryTotal;
 import com.karankumar.covid19dashboard.ui.views.country.BaseCaseView;
 import com.vaadin.flow.component.button.Button;
@@ -82,9 +81,14 @@ public class ComparisonView<T extends CountryTotal> extends BaseCaseView<T> {
         cases = new Number[totalCases.size()];
 
         for (int i = 0; i < totalCases.size(); i++) {
-            CountryDeathsTotal countryLive = (CountryDeathsTotal) totalCases.get(i);
+            CountryTotal countryLive = null;
+            if (caseType == CaseType.DEATHS) {
+                countryLive = totalCases.get(i);
+            } else if (caseType == CaseType.CONFIMRED) {
+                countryLive = totalCases.get(i);
+            }
+            cases[i] = countryLive.getNumberOfCases();
             caseDates[i] = countryLive.getDate();
-            cases[i] = countryLive.getNumberOfDeaths();
         }
     }
 

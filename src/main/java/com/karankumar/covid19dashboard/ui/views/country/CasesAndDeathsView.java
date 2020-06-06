@@ -69,7 +69,7 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
         for (int i = 0; i < deathTotal.size(); i++) {
             CountryDeathsTotal countryLive = deathTotal.get(i);
             deathDates[i] = countryLive.getDate();
-            deaths[i] = countryLive.getNumberOfDeaths();
+            deaths[i] = countryLive.getNumberOfCases();
         }
     }
 }

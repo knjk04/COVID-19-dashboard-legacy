@@ -7,10 +7,12 @@ public class CountryTotal {
     private String countryName;
 
     private final String date;
+    private final Integer numberOfCases;
 
-    public CountryTotal(String countryName, String date) {
+    public CountryTotal(String countryName, String date, Integer numberOfCases) {
         this.countryName = countryName;
         this.date = Util.formatDate(date);
+        this.numberOfCases = numberOfCases;
     }
 
     public String getDate() {
@@ -19,5 +21,9 @@ public class CountryTotal {
 
     public String getCountryName() {
         return countryName;
+    }
+
+    public Integer getNumberOfCases() {
+        return numberOfCases;
     }
 }
