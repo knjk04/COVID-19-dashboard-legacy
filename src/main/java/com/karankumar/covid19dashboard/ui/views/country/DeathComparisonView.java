@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.karankumar.covid19dashboard.ui.utils.ViewsConst.EMPTY_ERROR_MESSAGE;
+
 public class DeathComparisonView<T extends CountryTotal> extends VerticalLayout {
     private ArrayList<CountryDeathsTotal> totalDeaths;
     private Chart deathChart = new Chart(ChartType.AREA);
@@ -62,6 +64,7 @@ public class DeathComparisonView<T extends CountryTotal> extends VerticalLayout 
         totalDeaths = totalDeathsSinceDayOne.getTotalDeaths();
 
         if (isTotalEmpty((ArrayList<T>) totalDeaths) || isTotalEmpty((ArrayList<T>) totalDeaths)) {
+            logger.log(Level.FINE, "Data was empty");
             return;
         }
 
@@ -82,9 +85,8 @@ public class DeathComparisonView<T extends CountryTotal> extends VerticalLayout 
 
     private boolean isTotalEmpty(ArrayList<T> deathTotal) {
         if (deathTotal.isEmpty()) {
-            logger.log(Level.FINE, "Data was empty");
             Notification notification = new Notification(
-                    "Cannot retrieve the data for this country, please try a different country", 5000);
+                    EMPTY_ERROR_MESSAGE, 5000);
             notification.open();
             return true;
         }

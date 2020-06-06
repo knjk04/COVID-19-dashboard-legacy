@@ -1,5 +1,6 @@
 package com.karankumar.covid19dashboard.ui;
 
+import com.karankumar.covid19dashboard.ui.utils.ViewsConst;
 import com.karankumar.covid19dashboard.ui.views.country.CountryView;
 import com.karankumar.covid19dashboard.ui.views.global.GlobalView;
 import com.vaadin.flow.component.Component;
@@ -20,8 +21,8 @@ public class MainView extends AppLayout {
     public MainView() {
         Tabs tabs = new Tabs();
 
-        Tab globalTab = createTab(VaadinIcon.GLOBE, GlobalView.class, "Global");
-        Tab countryTab = createTab(VaadinIcon.LOCATION_ARROW_CIRCLE, CountryView.class, "Country");
+        Tab globalTab = createTab(VaadinIcon.GLOBE, GlobalView.class, ViewsConst.GLOBAL);
+        Tab countryTab = createTab(VaadinIcon.LOCATION_ARROW_CIRCLE, CountryView.class, ViewsConst.COUNTRY);
         tabs.add(globalTab, countryTab);
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
 
