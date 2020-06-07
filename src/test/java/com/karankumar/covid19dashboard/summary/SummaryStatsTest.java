@@ -31,4 +31,19 @@ public class SummaryStatsTest {
     public void timeCorrectlyFormatted() {
         Assert.assertEquals(summaryStats.getTime(), "12:26:39");
     }
+
+    @Test
+    public void checkTotalRecovered() {
+        Assert.assertEquals(summaryStats.getTotalRecovered(), Integer.valueOf(3000504));
+    }
+
+    @Test
+    public void checkTotalConfirmedCases() {
+        Assert.assertEquals(summaryStats.getTotalConfirmedCases(), Integer.valueOf(6829314));
+    }
+
+    @Test
+    public void checkTotalDeaths() {
+        Assert.assertEquals(summaryStats.getTotalDeaths(), Integer.valueOf(402636));
+    }
 }

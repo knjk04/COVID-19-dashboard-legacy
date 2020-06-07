@@ -35,7 +35,7 @@ public class SummaryStats {
     }
 
     public SummaryStats() {
-        if (getTotalCases() == null || getTotalDeaths() == null || getTotalRecovered() == null) {
+        if (getTotalConfirmedCases() == null || getTotalDeaths() == null || getTotalRecovered() == null) {
             jsonObject = cache.getIfPresent(SummaryConst.SUMMARY);
             fetchSummary();
         } else {
@@ -109,7 +109,7 @@ public class SummaryStats {
     /**
      @return The total number of confirmed cases. This may be null
      */
-    public Integer getTotalCases() {
+    public Integer getTotalConfirmedCases() {
         Integer totalCases = null;
         if (jsonObject != null) {
             JSONObject global = jsonObject.getJSONObject(SummaryConst.GLOBAL);
