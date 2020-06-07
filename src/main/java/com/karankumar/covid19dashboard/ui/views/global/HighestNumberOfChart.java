@@ -39,11 +39,11 @@ class HighestNumberOfChart {
         if (numberOf == NUMBER_OF.DEATHS) {
             conf = mostDeathsChart.getConfiguration();
             tooltip.setValueSuffix(ViewsConst.DEATHS_TOOLTIP_SUFFIX);
-            caseType = "confirmed cases";
+            caseType = "deaths";
         } else {
             conf = mostCasesChart.getConfiguration();
             tooltip.setValueSuffix(ViewsConst.CASES_TOOLTIP_SUFFIX);
-            caseType = "deaths";
+            caseType = "confirmed cases";
         }
         conf.setTitle("Countries with the most " + caseType);
         conf.setTooltip(tooltip);
