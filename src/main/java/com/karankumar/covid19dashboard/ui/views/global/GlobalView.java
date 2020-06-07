@@ -48,7 +48,7 @@ public class GlobalView extends VerticalLayout {
         SummaryStats globalStats = new SummaryStats();
         Integer totalDeaths = globalStats.getTotalDeaths();
         Integer totalRecovered = globalStats.getTotalRecovered();
-        Integer totalCases = globalStats.getTotalCases();
+        Integer totalCases = globalStats.getTotalConfirmedCases();
 
         logger.log(Level.INFO, "GlobalView: Total deaths: " + totalDeaths);
         logger.log(Level.INFO, "GlobalView: Total recovered: " + totalRecovered);
