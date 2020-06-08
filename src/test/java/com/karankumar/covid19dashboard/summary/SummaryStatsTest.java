@@ -8,19 +8,19 @@ import com.karankumar.covid19dashboard.backend.api.util.CountryName;
 import com.karankumar.covid19dashboard.testutils.TestUtil;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.json.JSONObject;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.util.TreeMap;
 
 public class SummaryStatsTest {
-    private JSONObject jsonObject;
-    private SummaryStats summaryStats;
+    private static JSONObject jsonObject;
+    private static SummaryStats summaryStats;
 
-    @Before
-    public void setupData() {
+    @BeforeAll
+    public static void setupData() {
         jsonObject = TestUtil.readJSON(TestUtil.GLOBAL_SUMMARY_FILE_PATH);
         summaryStats = new SummaryStats();
         try {
@@ -37,25 +37,25 @@ public class SummaryStatsTest {
     @Test
     public void timeCorrectlyFormatted() {
         String timeGroundTruth = "12:26:39";
-        Assert.assertEquals(summaryStats.getTime(), timeGroundTruth);
+        Assertions.assertEquals(summaryStats.getTime(), timeGroundTruth);
     }
 
     @Test
     public void checkTotalRecovered() {
         Integer totalRecoveredGroundTruth = 3000504;
-        Assert.assertEquals(summaryStats.getTotalRecovered(), totalRecoveredGroundTruth);
+        Assertions.assertEquals(summaryStats.getTotalRecovered(), totalRecoveredGroundTruth);
     }
 
     @Test
     public void checkTotalConfirmedCases() {
         Integer totalConfirmedCasesGroundTruth = 6829314;
-        Assert.assertEquals(summaryStats.getTotalConfirmedCases(), totalConfirmedCasesGroundTruth);
+        Assertions.assertEquals(summaryStats.getTotalConfirmedCases(), totalConfirmedCasesGroundTruth);
     }
 
     @Test
     public void checkTotalDeaths() {
         Integer totalDeathsGroundTruth = 402636;
-        Assert.assertEquals(summaryStats.getTotalDeaths(), totalDeathsGroundTruth);
+        Assertions.assertEquals(summaryStats.getTotalDeaths(), totalDeathsGroundTruth);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class SummaryStatsTest {
 
             Cache<String, JSONObject> retrievedCache = (Cache<String, JSONObject>) FieldUtils.readStaticField(field);
 
-            Assert.assertEquals(
+            Assertions.assertEquals(
                     retrievedCache.getIfPresent(SummaryConst.SUMMARY), testCache.getIfPresent(SummaryConst.SUMMARY));
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
@@ -87,6 +87,6 @@ public class SummaryStatsTest {
         mostCasesGroundTruth.put(284734, CountryName.UNITED_KINGDOM.toString());
         mostCasesGroundTruth.put(240978, CountryName.SPAIN.toString());
 
-        Assert.assertEquals(summaryStats.getMostCases(), mostCasesGroundTruth);
+        Assertions.assertEquals(summaryStats.getMostCases(), mostCasesGroundTruth);
     }
 }
