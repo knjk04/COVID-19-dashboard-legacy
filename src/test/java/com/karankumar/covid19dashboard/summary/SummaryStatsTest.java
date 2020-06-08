@@ -9,6 +9,7 @@ import com.karankumar.covid19dashboard.testutils.TestUtil;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +30,8 @@ public class SummaryStatsTest {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        // only run the tests if the json object is not null
+        Assumptions.assumeTrue(jsonObject != null);
     }
 
     /**
