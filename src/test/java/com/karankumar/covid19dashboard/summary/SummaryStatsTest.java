@@ -89,4 +89,15 @@ public class SummaryStatsTest {
 
         Assertions.assertEquals(summaryStats.getMostCases(), mostCasesGroundTruth);
     }
+
+    @Test
+    public void mostDeathsCorrectlySet() {
+        TreeMap<Integer, String> mostDeathsGroundTruth = new TreeMap<>();
+        mostDeathsGroundTruth.put(109132, CountryName.UNITED_STATES_OF_AMERICA.toString());
+        mostDeathsGroundTruth.put(40344, CountryName.UNITED_KINGDOM.toString());
+        mostDeathsGroundTruth.put(34021, CountryName.BRAZIL.toString());
+        mostDeathsGroundTruth.put(33774, CountryName.ITALY.toString());
+        mostDeathsGroundTruth.put(29114, CountryName.FRANCE.toString());
+        Assertions.assertEquals(summaryStats.getMostDeaths(), mostDeathsGroundTruth);
+    }
 }
