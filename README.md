@@ -1,5 +1,7 @@
 # Summary
 
+[![Build Status](https://travis-ci.com/knjk04/COVID-19-dashboard.svg?branch=master)](https://travis-ci.com/knjk04/COVID-19-dashboard)
+
 *For the most up-to-date version of the README, please refer to the version on the master branch.*
 
 COVID-19 dashboard is a web app (made with Spring Boot and Vaadin) that displays COVID-19 statistics on a global level 
