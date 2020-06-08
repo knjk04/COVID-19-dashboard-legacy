@@ -23,27 +23,30 @@ public class SummaryStatsTest {
         }
     }
 
-
     /**
      * Check if the time is correctly displayed as HH:MM:SS
      */
     @Test
     public void timeCorrectlyFormatted() {
-        Assert.assertEquals(summaryStats.getTime(), "12:26:39");
+        String timeGroundTruth = "12:26:39";
+        Assert.assertEquals(summaryStats.getTime(), timeGroundTruth);
     }
 
     @Test
     public void checkTotalRecovered() {
-        Assert.assertEquals(summaryStats.getTotalRecovered(), Integer.valueOf(3000504));
+        Integer totalRecoveredGroundTruth = 3000504;
+        Assert.assertEquals(summaryStats.getTotalRecovered(), totalRecoveredGroundTruth);
     }
 
     @Test
     public void checkTotalConfirmedCases() {
-        Assert.assertEquals(summaryStats.getTotalConfirmedCases(), Integer.valueOf(6829314));
+        Integer totalConfirmedCasesGroundTruth = 6829314;
+        Assert.assertEquals(summaryStats.getTotalConfirmedCases(), totalConfirmedCasesGroundTruth);
     }
 
     @Test
     public void checkTotalDeaths() {
-        Assert.assertEquals(summaryStats.getTotalDeaths(), Integer.valueOf(402636));
+        Integer totalDeathsGroundTruth = 402636;
+        Assert.assertEquals(summaryStats.getTotalDeaths(), totalDeathsGroundTruth);
     }
 }
