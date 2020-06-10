@@ -65,7 +65,7 @@ If you wish to contribute (thanks!), please first see the [contributing guide](h
 
 # Acknowledgements
 
-The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hopkins](https://github.com/CSSEGISandData/COVID-19)).
+All COVID-19 data is from the [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hopkins](https://github.com/CSSEGISandData/COVID-19)).
 
 Third-party libraries used:
 
