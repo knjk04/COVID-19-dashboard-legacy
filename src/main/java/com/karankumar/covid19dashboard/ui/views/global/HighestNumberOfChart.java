@@ -48,7 +48,9 @@ class HighestNumberOfChart {
         conf.setTitle("Countries with the most " + caseType);
         conf.setTooltip(tooltip);
         conf.setPlotOptions(setPlotOptionsPie());
-        conf.setSeries(series);
+        if (series != null) {
+            conf.setSeries(series);
+        }
     }
 
     /**
@@ -57,6 +59,9 @@ class HighestNumberOfChart {
      * @return a DataSeries that contains all of the keys and values in the TreeMap
      */
     private DataSeries setDataSeries(TreeMap<Integer, String> mostOfStat, Integer globalTotal) {
+        if (mostOfStat == null || globalTotal == null) {
+            return null;
+        }
         DataSeries series = new DataSeries();
         int totalInTopCountries = 0;
         for (Integer i : mostOfStat.keySet()) {
