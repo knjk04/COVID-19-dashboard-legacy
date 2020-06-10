@@ -75,6 +75,8 @@ Third-party libraries used:
 
 - [Caffeine](https://github.com/ben-manes/caffeine)
 
+- [Apache Commons Lang 3](https://commons.apache.org/proper/commons-lang/)
+
 # Disclaimer
 
 *Note: this disclaimer is also present on the dashboard*
