@@ -75,3 +75,9 @@ Third-party libraries used:
 
 - [Caffeine](https://github.com/ben-manes/caffeine)
 
+# Disclaimer
+
+*Note: this disclaimer is also present on the dashboard*
+
+1. Please note that these figures, and all other information on this dashboard, are for demonstration purposes only. As ever, we strongly advise you corroborate any information from this dashboard with other data sources.
+2. When comparing statistics between countries, please take into consideration any other relevant factors that could explain the differences between countries.
