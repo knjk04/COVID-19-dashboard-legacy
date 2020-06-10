@@ -13,7 +13,7 @@ public class UtilTest {
 
     @Before
     public void setupData() {
-        jsonObject = TestUtil.readJSON(TestUtil.GLOBAL_SUMMARY_FILE_PATH);
+        jsonObject = TestUtil.readJson(TestUtil.GLOBAL_SUMMARY_FILE_PATH);
     }
 
     // The date should be formatted as dd/MM/yyyy

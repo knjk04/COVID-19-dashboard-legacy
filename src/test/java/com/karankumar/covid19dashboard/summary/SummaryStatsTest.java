@@ -22,7 +22,7 @@ public class SummaryStatsTest {
 
     @BeforeAll
     public static void setupData() {
-        jsonObject = TestUtil.readJSON(TestUtil.GLOBAL_SUMMARY_FILE_PATH);
+        jsonObject = TestUtil.readJson(TestUtil.GLOBAL_SUMMARY_FILE_PATH);
         summaryStats = new SummaryStats();
         try {
             FieldUtils.writeField(summaryStats, "jsonObject", jsonObject, true);
