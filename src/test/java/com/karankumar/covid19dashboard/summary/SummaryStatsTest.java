@@ -45,19 +45,19 @@ public class SummaryStatsTest {
 
     @Test
     public void checkTotalRecovered() {
-        Integer totalRecoveredGroundTruth = 3000504;
+        Integer totalRecoveredGroundTruth = 3_000_504;
         Assertions.assertEquals(summaryStats.getTotalRecovered(), totalRecoveredGroundTruth);
     }
 
     @Test
     public void checkTotalConfirmedCases() {
-        Integer totalConfirmedCasesGroundTruth = 6829314;
+        Integer totalConfirmedCasesGroundTruth = 6_829_314;
         Assertions.assertEquals(summaryStats.getTotalConfirmedCases(), totalConfirmedCasesGroundTruth);
     }
 
     @Test
     public void checkTotalDeaths() {
-        Integer totalDeathsGroundTruth = 402636;
+        Integer totalDeathsGroundTruth = 402_636;
         Assertions.assertEquals(summaryStats.getTotalDeaths(), totalDeathsGroundTruth);
     }
 
@@ -84,11 +84,11 @@ public class SummaryStatsTest {
     @Test
     public void mostCasesCorrectlySet() {
         TreeMap<Integer, String> mostCasesGroundTruth = new TreeMap<>();
-        mostCasesGroundTruth.put(1897380, CountryName.UNITED_STATES_OF_AMERICA.toString());
-        mostCasesGroundTruth.put(614941, CountryName.BRAZIL.toString());
-        mostCasesGroundTruth.put(449256, CountryName.RUSSIAN_FEDERATION.toString());
-        mostCasesGroundTruth.put(284734, CountryName.UNITED_KINGDOM.toString());
-        mostCasesGroundTruth.put(240978, CountryName.SPAIN.toString());
+        mostCasesGroundTruth.put(1_897_380, CountryName.UNITED_STATES_OF_AMERICA.toString());
+        mostCasesGroundTruth.put(614_941, CountryName.BRAZIL.toString());
+        mostCasesGroundTruth.put(449_256, CountryName.RUSSIAN_FEDERATION.toString());
+        mostCasesGroundTruth.put(284_734, CountryName.UNITED_KINGDOM.toString());
+        mostCasesGroundTruth.put(240_978, CountryName.SPAIN.toString());
 
         Assertions.assertEquals(summaryStats.getMostCases(), mostCasesGroundTruth);
     }
@@ -96,11 +96,11 @@ public class SummaryStatsTest {
     @Test
     public void mostDeathsCorrectlySet() {
         TreeMap<Integer, String> mostDeathsGroundTruth = new TreeMap<>();
-        mostDeathsGroundTruth.put(109132, CountryName.UNITED_STATES_OF_AMERICA.toString());
-        mostDeathsGroundTruth.put(40344, CountryName.UNITED_KINGDOM.toString());
-        mostDeathsGroundTruth.put(34021, CountryName.BRAZIL.toString());
-        mostDeathsGroundTruth.put(33774, CountryName.ITALY.toString());
-        mostDeathsGroundTruth.put(29114, CountryName.FRANCE.toString());
+        mostDeathsGroundTruth.put(109_132, CountryName.UNITED_STATES_OF_AMERICA.toString());
+        mostDeathsGroundTruth.put(40_344, CountryName.UNITED_KINGDOM.toString());
+        mostDeathsGroundTruth.put(34_021, CountryName.BRAZIL.toString());
+        mostDeathsGroundTruth.put(33_774, CountryName.ITALY.toString());
+        mostDeathsGroundTruth.put(29_114, CountryName.FRANCE.toString());
         Assertions.assertEquals(summaryStats.getMostDeaths(), mostDeathsGroundTruth);
     }
 }
