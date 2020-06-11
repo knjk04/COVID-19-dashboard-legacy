@@ -1,7 +1,6 @@
-package com.karankumar.covid19dashboard.utils;
+package com.karankumar.covid19dashboard.backend.utils;
 
 import com.karankumar.covid19dashboard.backend.api.summary.SummaryConst;
-import com.karankumar.covid19dashboard.backend.utils.Util;
 import com.karankumar.covid19dashboard.testutils.TestUtil;
 import org.json.JSONObject;
 import org.junit.Assert;

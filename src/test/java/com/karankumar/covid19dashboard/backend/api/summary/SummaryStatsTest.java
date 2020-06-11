@@ -1,9 +1,7 @@
-package com.karankumar.covid19dashboard.summary;
+package com.karankumar.covid19dashboard.backend.api.summary;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.karankumar.covid19dashboard.backend.api.summary.SummaryConst;
-import com.karankumar.covid19dashboard.backend.api.summary.SummaryStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
 import com.karankumar.covid19dashboard.testutils.TestUtil;
 import org.apache.commons.lang3.reflect.FieldUtils;

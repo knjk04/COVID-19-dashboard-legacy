@@ -1,7 +1,5 @@
-package com.karankumar.covid19dashboard.dayone;
+package com.karankumar.covid19dashboard.backend.api.dayone;
 
-import com.karankumar.covid19dashboard.backend.api.dayone.CaseType;
-import com.karankumar.covid19dashboard.backend.api.dayone.DayOneTotalStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
 import com.karankumar.covid19dashboard.backend.domain.dayone.CountryCasesTotal;
 import com.karankumar.covid19dashboard.backend.domain.dayone.CountryDeathsTotal;
