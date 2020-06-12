@@ -52,10 +52,9 @@ If any major changes are made, new screenshots will be uploaded.*
 
 # Running the app
 
-1. Run `Covid19DashboardApplication.java`
-2. Go to `localhost:8080/global`
-3. Switch to the country tab
-4. Swtich back to the global tab
+1. Import the project as a Maven project into your favourite IDE
+2. Run `Covid19DashboardApplication.java`
+2. Go to `localhost:8080`
 
 If you see a a JSON Exception, keep on refreshing the page until you it goes away (it should eventually). This is a [known issue](https://github.com/knjk04/COVID-19-dashboard/issues/5) to do with reaching the maximum number of API requests.
 
