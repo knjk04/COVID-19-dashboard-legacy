@@ -1,7 +1,5 @@
-package com.karankumar.covid19dashboard.dayone;
+package com.karankumar.covid19dashboard.backend.api.dayone;
 
-import com.karankumar.covid19dashboard.backend.api.dayone.CaseType;
-import com.karankumar.covid19dashboard.backend.api.dayone.DayOneTotalStats;
 import com.karankumar.covid19dashboard.backend.api.util.CountryName;
 import com.karankumar.covid19dashboard.backend.domain.dayone.CountryCasesTotal;
 import com.karankumar.covid19dashboard.backend.domain.dayone.CountryDeathsTotal;
@@ -27,21 +25,23 @@ public class DayOneTotalStatsTest {
         JSONArray confirmedCasesJson = TestUtil.readJsonArray(TestUtil.COUNTRY_CONFIRMED_FILE_PATH);
         countryConfirmedStats = new DayOneTotalStats(CountryName.UNITED_KINGDOM, CaseType.CONFIMRED);
 
-        JSONArray deathsJson = TestUtil.readJsonArray(TestUtil.COUNTRY_CONFIRMED_FILE_PATH);
+        JSONArray deathsJson = TestUtil.readJsonArray(TestUtil.COUNTRY_DEATHS_FILE_PATH);
         countryDeathStats = new DayOneTotalStats(CountryName.UNITED_KINGDOM, CaseType.DEATHS);
 
         try {
-            Method fetchDayOneTotalConfirmed = countryConfirmedStats.getClass().getDeclaredMethod("fetchDayOneTotal");
+            Method fetchDayOneTotalConfirmed = countryConfirmedStats.getClass()
+                    .getDeclaredMethod("fetchDayOneTotal", JSONArray.class, CaseType.class);
             fetchDayOneTotalConfirmed.setAccessible(true);
-            ArrayList<CountryCasesTotal> caseTotal =
-                    (ArrayList<CountryCasesTotal>) fetchDayOneTotalConfirmed.invoke(confirmedCasesJson, CaseType.CONFIMRED);
+            ArrayList<CountryCasesTotal> caseTotal = (ArrayList<CountryCasesTotal>) fetchDayOneTotalConfirmed
+                    .invoke(countryConfirmedStats, confirmedCasesJson, CaseType.CONFIMRED);
             FieldUtils.writeField(countryConfirmedStats, "caseTotals", caseTotal, true);
 
-            Method fetchDayOneTotalDeaths = countryDeathStats.getClass().getDeclaredMethod("fetchDayOneTotal");
-            fetchDayOneTotalConfirmed.setAccessible(true);
-            ArrayList<CountryDeathsTotal> deathsTotal =
-                    (ArrayList<CountryDeathsTotal>) fetchDayOneTotalDeaths.invoke(deathsJson, CaseType.DEATHS);
-            FieldUtils.writeField(countryDeathStats, "deathsTotal", deathsTotal, true);
+            Method fetchDayOneTotalDeaths = countryDeathStats.getClass()
+                    .getDeclaredMethod("fetchDayOneTotal", JSONArray.class, CaseType.class);
+            fetchDayOneTotalDeaths.setAccessible(true);
+            ArrayList<CountryDeathsTotal> deathTotal = (ArrayList<CountryDeathsTotal>) fetchDayOneTotalDeaths
+                    .invoke(countryDeathStats, deathsJson, CaseType.DEATHS);
+            FieldUtils.writeField(countryDeathStats, "deathTotals", deathTotal, true);
         } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
