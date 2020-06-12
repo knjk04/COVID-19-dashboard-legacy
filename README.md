@@ -52,10 +52,9 @@ If any major changes are made, new screenshots will be uploaded.*
 
 # Running the app
 
-1. Run `Covid19DashboardApplication.java`
-2. Go to `localhost:8080/global`
-3. Switch to the country tab
-4. Swtich back to the global tab
+1. Import the project as a Maven project into your favourite IDE
+2. Run `Covid19DashboardApplication.java`
+2. Go to `localhost:8080`
 
 If you see a a JSON Exception, keep on refreshing the page until you it goes away (it should eventually). This is a [known issue](https://github.com/knjk04/COVID-19-dashboard/issues/5) to do with reaching the maximum number of API requests.
 
@@ -65,7 +64,7 @@ If you wish to contribute (thanks!), please first see the [contributing guide](h
 
 # Acknowledgements
 
-The [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hopkins](https://github.com/CSSEGISandData/COVID-19)).
+All COVID-19 data is from the [COVID-19 API](https://covid19api.com/) (the data is sourced from [Johns Hopkins](https://github.com/CSSEGISandData/COVID-19)).
 
 Third-party libraries used:
 
@@ -75,3 +74,11 @@ Third-party libraries used:
 
 - [Caffeine](https://github.com/ben-manes/caffeine)
 
+- [Apache Commons Lang 3](https://commons.apache.org/proper/commons-lang/)
+
+# Disclaimer
+
+*Note: this disclaimer is also present on the dashboard*
+
+1. Please note that these figures, and all other information on this dashboard, are for demonstration purposes only. As ever, we strongly advise you corroborate any information from this dashboard with other data sources.
+2. When comparing statistics between countries, please take into consideration any other relevant factors that could explain the differences between countries.
