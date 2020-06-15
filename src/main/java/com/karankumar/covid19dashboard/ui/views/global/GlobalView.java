@@ -6,6 +6,7 @@ import com.karankumar.covid19dashboard.ui.MainView;
 import com.karankumar.covid19dashboard.ui.component.DashboardFooter;
 import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -13,7 +14,6 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -36,7 +36,7 @@ public class GlobalView extends VerticalLayout {
     private final Span recoveredCounter;
     private final Span casesCounter;
 
-    private static final Logger logger = Logger.getLogger(GlobalView.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(GlobalView.class.getName());
 
     private enum TotalType {
         DEATHS,
@@ -50,11 +50,11 @@ public class GlobalView extends VerticalLayout {
         Integer totalRecovered = globalStats.getTotalRecovered();
         Integer totalCases = globalStats.getTotalConfirmedCases();
 
-        logger.log(Level.INFO, "GlobalView: Total deaths: " + totalDeaths);
-        logger.log(Level.INFO, "GlobalView: Total recovered: " + totalRecovered);
-        logger.log(Level.INFO, "GlobalView: Total cases: " + totalCases);
+        LOGGER.log(Level.INFO, "GlobalView: Total deaths: " + totalDeaths);
+        LOGGER.log(Level.INFO, "GlobalView: Total recovered: " + totalRecovered);
+        LOGGER.log(Level.INFO, "GlobalView: Total cases: " + totalCases);
 
-        notifyIfNoStatsShown(totalDeaths, totalRecovered, totalCases);
+        refreshIfNoStatsShown(totalDeaths, totalRecovered, totalCases);
 
         Board board = new Board();
 
@@ -129,13 +129,10 @@ public class GlobalView extends VerticalLayout {
         add(new DashboardFooter());
     }
 
-    private void notifyIfNoStatsShown(Integer totalDeaths, Integer totalRecovered, Integer totalCases) {
+    private void refreshIfNoStatsShown(Integer totalDeaths, Integer totalRecovered, Integer totalCases) {
         if (totalDeaths == null && totalRecovered == null && totalCases == null) {
-            Notification notification = new Notification(
-                    "Please refresh the page",
-                    5000
-            );
-            notification.open();
+            LOGGER.log(Level.INFO, "Refreshing the page...");
+            UI.getCurrent().getPage().reload();
         }
     }
 
