@@ -4,11 +4,17 @@ import com.vaadin.flow.component.HtmlComponent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Footer;
+import com.vaadin.flow.component.html.Hr;
 
 public class DashboardFooter extends Footer {
     public DashboardFooter() {
         super(
+                new Hr(),
                 new Anchor("https://covid19api.com/", "Source: COVID-19 API"),
+                new HtmlComponent("br"),
+                new HtmlComponent("br"),
+                new Text("For the best experience, please view this website on a desktop or a laptop. " +
+                        "This web app is not yet optimised for mobile."),
                 new HtmlComponent("br"),
                 new HtmlComponent("br"),
                 new Text("Disclaimers:"),
