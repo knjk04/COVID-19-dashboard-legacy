@@ -23,7 +23,7 @@ public class MainView extends AppLayout {
         Tabs tabs = new Tabs();
 
         Tab globalTab = createTab(VaadinIcon.GLOBE, GlobalView.class, ViewsConst.GLOBAL);
-        Tab countryTab = createTab(VaadinIcon.LOCATION_ARROW_CIRCLE, CountryView.class, ViewsConst.COUNTRY);
+        Tab countryTab = createTab(VaadinIcon.FLAG_O, CountryView.class, ViewsConst.COUNTRY);
         Tab feedbackTab = createTab(VaadinIcon.QUESTION_CIRCLE_O, Feedback.class, ViewsConst.FEEDBACK);
         tabs.add(globalTab, countryTab, feedbackTab);
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
