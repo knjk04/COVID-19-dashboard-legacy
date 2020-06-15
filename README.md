@@ -7,7 +7,7 @@
 COVID-19 dashboard is a web app (made with Spring Boot and Vaadin) that displays COVID-19 statistics on a global level 
 and on a per-country basis. 
 
-[See it running live](https://covid19dashboardstats.herokuapp.com/).
+[See it running live](https://covid19.karankumar.com/). As this app is not mobile-ready yet, for the best experience, please view it on either a desktop or laptop.
 
 *Note: the fetched data is cached for 24 hours.*
 
