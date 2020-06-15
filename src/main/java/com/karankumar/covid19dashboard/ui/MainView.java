@@ -3,6 +3,7 @@ package com.karankumar.covid19dashboard.ui;
 import com.karankumar.covid19dashboard.ui.utils.ViewsConst;
 import com.karankumar.covid19dashboard.ui.views.country.CountryView;
 import com.karankumar.covid19dashboard.ui.views.global.GlobalView;
+import com.karankumar.covid19dashboard.ui.views.help.Feedback;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -23,7 +24,8 @@ public class MainView extends AppLayout {
 
         Tab globalTab = createTab(VaadinIcon.GLOBE, GlobalView.class, ViewsConst.GLOBAL);
         Tab countryTab = createTab(VaadinIcon.LOCATION_ARROW_CIRCLE, CountryView.class, ViewsConst.COUNTRY);
-        tabs.add(globalTab, countryTab);
+        Tab feedbackTab = createTab(VaadinIcon.QUESTION_CIRCLE_O, Feedback.class, ViewsConst.FEEDBACK);
+        tabs.add(globalTab, countryTab, feedbackTab);
         tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
 
         FlexLayout centreTabs = new FlexLayout();
