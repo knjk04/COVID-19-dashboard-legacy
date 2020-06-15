@@ -13,9 +13,17 @@ and on a per-country basis.
 
 # Features
 
+*Note: the screenshots above are for illustrative purposes only. The actual UI may look slightly different. 
+If any major changes are made, new screenshots will be uploaded.*
+
 ## Global overview
 
 ![Global dashboard](/media/global_dashboard.png)
+
+The global page has:
+- Live counters for the total number of deaths, total number of people recovered and total number of confirmed cases worldwide
+- A table with information for different metrics for each country that there is data for
+- Pie charts to visualise which countries have had the most COVID-19 deaths and confirmed cases
 
 ## Change in cases over time for a specific country
 
@@ -36,9 +44,6 @@ one other country, but you can compare a country with multiple other countries).
 ![Death comparison](/media/deaths_comparison.png)
 
 Or compare different countries' COVID-19 death rates.
-
-*Note: the screenshots above are for illustrative purposes only. The actual UI may look slightly different. 
-If any major changes are made, new screenshots will be uploaded.*
 
 ## Setup
 
