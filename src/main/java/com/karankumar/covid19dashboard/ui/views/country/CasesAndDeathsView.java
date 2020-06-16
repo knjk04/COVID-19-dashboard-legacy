@@ -33,7 +33,8 @@ public class CasesAndDeathsView <T extends CountryTotal> extends BaseCaseView<T>
         DayOneTotalStats dayOneTotalDeaths = new DayOneTotalStats(countryName, CaseType.DEATHS);
         deathTotal = dayOneTotalDeaths.getTotalDeaths();
 
-        if (isTotalEmpty((ArrayList<T>) confirmedTotal) || isTotalEmpty((ArrayList<T>) deathTotal)) {
+        if (isTotalEmpty((ArrayList<T>) confirmedTotal, countryName) ||
+                isTotalEmpty((ArrayList<T>) deathTotal, countryName)) {
             logger.log(Level.FINE, "Data was empty");
             return;
         }

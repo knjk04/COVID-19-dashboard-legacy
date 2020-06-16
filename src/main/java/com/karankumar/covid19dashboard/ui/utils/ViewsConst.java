@@ -11,6 +11,4 @@ public final class ViewsConst {
     public static final String GLOBAL = "Global";
     public static final String COUNTRY = "Country";
     public static final String FEEDBACK = "Feedback";
-
-    public static final String EMPTY_ERROR_MESSAGE = "Cannot retrieve the data for this country, please try a different country";
 }

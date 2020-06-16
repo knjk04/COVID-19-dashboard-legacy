@@ -16,8 +16,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.karankumar.covid19dashboard.ui.utils.ViewsConst.EMPTY_ERROR_MESSAGE;
-
 public abstract class BaseCaseView<T extends CountryTotal> extends VerticalLayout {
     private Chart casesChart = new Chart(ChartType.AREA);
     private String[] caseDates;
@@ -54,10 +52,11 @@ public abstract class BaseCaseView<T extends CountryTotal> extends VerticalLayou
 
     protected abstract void createGraph(CountryName countryName);
 
-    protected boolean isTotalEmpty(ArrayList<T> casesTotal) {
+    protected boolean isTotalEmpty(ArrayList<T> casesTotal, CountryName countryName) {
         if (casesTotal.isEmpty()) {
-            Notification notification = new Notification(
-                    EMPTY_ERROR_MESSAGE, 5000);
+            String emptyErrorMessage =
+                    String.format("Cannot find data for %s, please try a different country", countryName.toString());
+            Notification notification = new Notification(emptyErrorMessage, 5000);
             notification.open();
             return true;
         }

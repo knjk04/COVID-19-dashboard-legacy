@@ -42,7 +42,7 @@ public class ComparisonView<T extends CountryTotal> extends BaseCaseView<T> {
             chartTitle = "Number of confirmed cases since the first case";
         }
 
-        if (isTotalEmpty((ArrayList<T>) totalCases)) {
+        if (isTotalEmpty((ArrayList<T>) totalCases, countryName)) {
             logger.log(Level.FINE, "Data was empty");
             return;
         }
