@@ -101,7 +101,8 @@
       "@vaadin/vaadin-radio-button": "1.2.6",
       "@vaadin/vaadin-lumo-styles": "1.5.0",
       "@vaadin/vaadin-material-styles": "1.2.3",
-      "@vaadin/vaadin-rich-text-editor": "1.1.1"
+      "@vaadin/vaadin-rich-text-editor": "1.1.1",
+      "highcharts": "8.0.0"
     },
     "devDependencies": {
       "webpack-babel-multi-target-plugin": "2.3.3",

@@ -105,6 +105,8 @@ public class GlobalView extends VerticalLayout {
 
         Grid<CountrySummary> grid = new Grid<>(CountrySummary.class);
         grid.setDataProvider(dataProvider);
+        grid.setColumns("countryName", "totalConfirmedCases", "totalDeaths", "totalRecovered",
+                "totalNewCases", "totalNewDeaths", "totalNewRecovered");
         add(grid);
 
         add(new HtmlComponent("br"));
