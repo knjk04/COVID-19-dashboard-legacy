@@ -24,6 +24,7 @@ import com.vaadin.flow.router.RouteAlias;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -137,36 +138,42 @@ public class GlobalView extends VerticalLayout {
                 CountrySummary::getTotalConfirmedCases,
                 NumberFormat.getIntegerInstance())
         ).setHeader("Total confirmed cases")
+                .setComparator(Comparator.comparingInt(CountrySummary::getTotalConfirmedCases))
                 .setSortable(true);
 
         grid.addColumn(new NumberRenderer<>(
                 CountrySummary::getTotalDeaths,
                 NumberFormat.getIntegerInstance())
-        ).setHeader("Total deaths2")
+        ).setHeader("Total deaths")
+                .setComparator(Comparator.comparingInt(CountrySummary::getTotalDeaths))
                 .setSortable(true);
 
         grid.addColumn(new NumberRenderer<>(
                 CountrySummary::getTotalRecovered,
                 NumberFormat.getIntegerInstance())
         ).setHeader("Total recovered")
+                .setComparator(Comparator.comparingInt(CountrySummary::getTotalRecovered))
                 .setSortable(true);
 
         grid.addColumn(new NumberRenderer<>(
                 CountrySummary::getTotalNewCases,
                 NumberFormat.getIntegerInstance())
         ).setHeader("Total new cases")
+                .setComparator(Comparator.comparingInt(CountrySummary::getTotalNewCases))
                 .setSortable(true);
 
         grid.addColumn(new NumberRenderer<>(
                 CountrySummary::getTotalNewDeaths,
                 NumberFormat.getIntegerInstance())
         ).setHeader("Total new deaths")
+                .setComparator(Comparator.comparingInt(CountrySummary::getTotalNewDeaths))
                 .setSortable(true);
 
         grid.addColumn(new NumberRenderer<>(
                 CountrySummary::getTotalNewRecovered,
                 NumberFormat.getIntegerInstance())
         ).setHeader("Total new recovered")
+                .setComparator(Comparator.comparingInt(CountrySummary::getTotalNewRecovered))
                 .setSortable(true);
 
         return grid;
