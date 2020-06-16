@@ -104,48 +104,7 @@ public class GlobalView extends VerticalLayout {
         countryFilter.addValueChangeListener(event -> filterByCountry(countryFilter.getValue(), dataProvider));
         add(countryFilter);
 
-        Grid<CountrySummary> grid = new Grid<>(CountrySummary.class);
-        grid.setDataProvider(dataProvider);
-        grid.setColumns("countryName");
-
-        grid.addColumn(new NumberRenderer<>(
-                CountrySummary::getTotalConfirmedCases,
-                NumberFormat.getIntegerInstance())
-        ).setHeader("Total confirmed cases")
-                .setSortable(true);
-
-        grid.addColumn(new NumberRenderer<>(
-                CountrySummary::getTotalDeaths,
-                NumberFormat.getIntegerInstance())
-        ).setHeader("Total deaths")
-                .setSortable(true);
-
-        grid.addColumn(new NumberRenderer<>(
-                CountrySummary::getTotalRecovered,
-                NumberFormat.getIntegerInstance())
-        ).setHeader("Total recovered")
-                .setSortable(true);
-
-        grid.addColumn(new NumberRenderer<>(
-                CountrySummary::getTotalNewCases,
-                NumberFormat.getIntegerInstance())
-        ).setHeader("Total new cases")
-                .setSortable(true);
-
-        grid.addColumn(new NumberRenderer<>(
-                CountrySummary::getTotalNewDeaths,
-                NumberFormat.getIntegerInstance())
-        ).setHeader("Total new deaths")
-                .setSortable(true);
-
-
-        grid.addColumn(new NumberRenderer<>(
-                CountrySummary::getTotalNewRecovered,
-                NumberFormat.getIntegerInstance())
-        ).setHeader("Total new recovered")
-                .setSortable(true);
-
-        add(grid);
+        add(createGrid(dataProvider));
 
         add(new HtmlComponent("br"));
 
@@ -167,6 +126,50 @@ public class GlobalView extends VerticalLayout {
         }
 
         add(new DashboardFooter());
+    }
+
+    private Grid<CountrySummary> createGrid(ListDataProvider<CountrySummary> dataProvider) {
+        Grid<CountrySummary> grid = new Grid<>(CountrySummary.class);
+        grid.setDataProvider(dataProvider);
+        grid.setColumns("countryName");
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalConfirmedCases,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total confirmed cases")
+                .setSortable(true);
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalDeaths,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total deaths2")
+                .setSortable(true);
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalRecovered,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total recovered")
+                .setSortable(true);
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalNewCases,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total new cases")
+                .setSortable(true);
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalNewDeaths,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total new deaths")
+                .setSortable(true);
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalNewRecovered,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total new recovered")
+                .setSortable(true);
+
+        return grid;
     }
 
     private void refreshIfNoStatsShown(Integer totalDeaths, Integer totalRecovered, Integer totalCases) {
