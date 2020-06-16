@@ -17,6 +17,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
+import com.vaadin.flow.data.renderer.NumberRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
@@ -105,8 +106,45 @@ public class GlobalView extends VerticalLayout {
 
         Grid<CountrySummary> grid = new Grid<>(CountrySummary.class);
         grid.setDataProvider(dataProvider);
-        grid.setColumns("countryName", "totalConfirmedCases", "totalDeaths", "totalRecovered",
-                "totalNewCases", "totalNewDeaths", "totalNewRecovered");
+        grid.setColumns("countryName");
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalConfirmedCases,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total confirmed cases")
+                .setSortable(true);
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalDeaths,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total deaths")
+                .setSortable(true);
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalRecovered,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total recovered")
+                .setSortable(true);
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalNewCases,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total new cases")
+                .setSortable(true);
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalNewDeaths,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total new deaths")
+                .setSortable(true);
+
+
+        grid.addColumn(new NumberRenderer<>(
+                CountrySummary::getTotalNewRecovered,
+                NumberFormat.getIntegerInstance())
+        ).setHeader("Total new recovered")
+                .setSortable(true);
+
         add(grid);
 
         add(new HtmlComponent("br"));
@@ -140,6 +178,7 @@ public class GlobalView extends VerticalLayout {
 
     /**
      * Case-insensitive filter
+     *
      * @param dataProvider the grid's {@code DataProvider}
      */
     private void filterByCountry(String query, ListDataProvider<CountrySummary> dataProvider) {
