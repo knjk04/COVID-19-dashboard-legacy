@@ -63,8 +63,6 @@ Or compare different countries' COVID-19 death rates.
 2. Run `Covid19DashboardApplication.java`
 2. Go to `localhost:8080`
 
-If you see a a JSON Exception, keep on refreshing the page until you it goes away (it should eventually). This is a [known issue](https://github.com/knjk04/COVID-19-dashboard/issues/5) to do with reaching the maximum number of API requests.
-
 # Contributing
 
 If you wish to contribute (thanks!), please first see the [contributing guide](https://github.com/knjk04/COVID-19-dashboard/blob/master/CONTRIBUTING.md).
