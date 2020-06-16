@@ -45,7 +45,7 @@ one other country, but you can compare a country with multiple other countries).
 
 Or compare different countries' COVID-19 death rates.
 
-## Setup
+# Setup
 
 ## Prerequisites:
 
@@ -57,7 +57,7 @@ Or compare different countries' COVID-19 death rates.
 - Node.js
 - npm
 
-# Running the app
+## Running the app
 
 1. Import the project as a Maven project into your favourite IDE
 2. Run `Covid19DashboardApplication.java`
