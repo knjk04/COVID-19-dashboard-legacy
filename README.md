@@ -1,6 +1,7 @@
 # Summary
 
 [![Build Status](https://travis-ci.com/knjk04/COVID-19-dashboard.svg?branch=master)](https://travis-ci.com/knjk04/COVID-19-dashboard)
+[![GitHub Student Gallery](https://img.shields.io/static/v1?label=Featured%20in&message=GitHub%20Student%20Gallery&color=00a8ff&logo=github&labelColor=192a56)](https://education.github.com/pack/gallery#c19Dash)
 
 *For the most up-to-date version of the README, please refer to the version on the master branch.*
 
