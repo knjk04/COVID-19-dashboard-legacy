@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SummaryStats {
     private static final OkHttpClient client;
@@ -23,6 +25,8 @@ public class SummaryStats {
 
     private TreeMap<Integer, String> mostCases = new TreeMap<>();
     private TreeMap<Integer, String> mostDeaths = new TreeMap<>();
+
+    private static final Logger LOGGER = Logger.getLogger(SummaryStats.class.getName());
 
     static {
         cache = Caffeine.newBuilder()
@@ -39,7 +43,7 @@ public class SummaryStats {
             jsonObject = cache.getIfPresent(SummaryConst.SUMMARY);
             fetchSummary();
         } else {
-            System.out.println("GlobalStats: none are null");
+            LOGGER.log(Level.SEVERE, "None are null");
         }
     }
 
@@ -48,11 +52,13 @@ public class SummaryStats {
                 .url(ApiConst.apiUrl + ApiConst.apiSummary)
                 .method(ApiConst.method, null)
                 .build();
+
+        LOGGER.log(Level.INFO, "URL: " + ApiConst.apiUrl + ApiConst.apiSummary);
         try {
             Response response = client.newCall(request).execute();
             String data = response.body().string();
 
-            System.out.println("Summary data:\n" + data);
+            LOGGER.log(Level.INFO, "Summary data: " + data + "\n");
 
             JSONObject jsonObject = new JSONObject(data);
             JSONObject global = jsonObject.getJSONObject(SummaryConst.GLOBAL);
@@ -75,13 +81,13 @@ public class SummaryStats {
             JSONObject global = jsonObject.getJSONObject(SummaryConst.GLOBAL);
             totalDeaths = global.getInt(SummaryConst.TOTAL_DEATHS);
         } else {
-            System.out.println("getTotalDeaths(): jsonObject is null");
+            LOGGER.log(Level.INFO, "getTotalDeaths(): jsonObject is null");
         }
 
         if (totalDeaths == null) {
-            System.out.println("No total deaths present");
+            LOGGER.log(Level.INFO, "No total deaths present");
         } else {
-            System.out.println("Total deaths present");
+            LOGGER.log(Level.INFO, "Total deaths present");
         }
         return totalDeaths;
     }
@@ -95,13 +101,11 @@ public class SummaryStats {
             JSONObject global = jsonObject.getJSONObject(SummaryConst.GLOBAL);
             totalRecovered = global.getInt(SummaryConst.TOTAL_RECOVERED);
         } else {
-            System.out.println("getTotalRecovered(): json object is null");
+            LOGGER.log(Level.SEVERE, "getTotalRecovered(): json object is null");
         }
 
         if (totalRecovered == null) {
-            System.out.println("No total recovered present");
-        } else {
-            System.out.println("Total recovered present");
+            LOGGER.log(Level.SEVERE, "No total recovered present");
         }
         return totalRecovered;
     }
@@ -119,9 +123,7 @@ public class SummaryStats {
         }
 
         if (totalCases == null) {
-            System.out.println("No total cases present");
-        } else {
-            System.out.println("Total cases present");
+            LOGGER.log(Level.SEVERE, "No total cases present");
         }
         return totalCases;
     }
@@ -208,7 +210,7 @@ public class SummaryStats {
      */
     public TreeMap<Integer, String> getMostCases() {
         if (mostCases.size() == 0) {
-            System.out.println("ApiStats: Empty most cases TreeMap");
+            LOGGER.log(Level.WARNING, "ApiStats: Empty most cases TreeMap");
         }
         return mostCases;
     }
@@ -219,7 +221,7 @@ public class SummaryStats {
      */
     public TreeMap<Integer, String> getMostDeaths() {
         if (mostDeaths.size() == 0) {
-            System.out.println("ApiStats: Empty most deaths TreeMap");
+            LOGGER.log(Level.WARNING, "ApiStats: Empty most deaths TreeMap");
         }
         return mostDeaths;
     }
