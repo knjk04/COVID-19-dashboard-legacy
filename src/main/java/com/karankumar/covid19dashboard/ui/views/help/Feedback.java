@@ -23,7 +23,7 @@ public class Feedback extends HorizontalLayout {
         Span span2 = new Span(option1, github);
 
         Text option2 = new Text("2. Send a message via the ");
-        Anchor contactForm = new Anchor("https://karankumar.com/contact.html", "contact form");
+        Anchor contactForm = new Anchor("https://karan648584.typeform.com/to/nJWxDDeL", "contact form");
         Text option2a = new Text(" with the subject line 'COVID-19 dashboard'");
         Span span3 = new Span(option2, contactForm, option2a);
 
