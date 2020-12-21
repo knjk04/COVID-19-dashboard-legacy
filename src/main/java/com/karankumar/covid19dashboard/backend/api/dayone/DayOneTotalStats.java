@@ -74,13 +74,13 @@ public class DayOneTotalStats <T extends CountryTotal> {
     }
 
     private String getUrl() {
-        String dayOneUrl = ApiConst.apiUrl + DayOneTotalConst.prefixUrl + slug;
+        String dayOneUrl = ApiConst.apiUrl + DayOneTotalConst.PREFIX_URL + slug;
         switch (caseType) {
             case CONFIMRED:
-                dayOneUrl += DayOneTotalConst.suffixConfirmedUrl;
+                dayOneUrl += DayOneTotalConst.SUFFIX_CONFIRMED_URL;
                 break;
             case DEATHS:
-                dayOneUrl += DayOneTotalConst.suffixDeathsUrl;
+                dayOneUrl += DayOneTotalConst.SUFFIX_DEATHS_URL;
                 break;
             case RECOVERED:
                 break;
