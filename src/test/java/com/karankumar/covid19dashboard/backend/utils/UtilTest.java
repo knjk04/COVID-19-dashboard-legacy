@@ -19,6 +19,6 @@ public class UtilTest {
     @Test
     public void dateCorrectlyFormatted() {
         String date = jsonObject.getString(SummaryConst.DATE);
-        Assert.assertEquals("06-06-2020", Util.formatDate(date));
+        Assert.assertEquals("06-06-2020", DateUtil.formatDate(date));
     }
 }

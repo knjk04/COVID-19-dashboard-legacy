@@ -2,7 +2,9 @@ package com.karankumar.covid19dashboard.backend.utils;
 
 import java.util.StringJoiner;
 
-public final class Util {
+public final class DateUtil {
+
+    private DateUtil() { }
 
     /**
      * Converts a date of the form yyyy-MM-ddTHH:MM:SSZ
@@ -10,10 +12,8 @@ public final class Util {
      * @return a date of the form dd-MM-yyyy
      */
     public static String formatDate(String dateAndTime) {
-        String date;
-
         String[] split = dateAndTime.split("T");
-        date = split[0];
+        String date = split[0];
 
         String[] yearMonthDay = date.split("-");
         String year = yearMonthDay[0];
@@ -22,11 +22,10 @@ public final class Util {
         String[] dayMonthYear = {day, month, year};
 
         StringJoiner joiner = new StringJoiner("-");
-        for(String s : dayMonthYear) {
+        for (String s : dayMonthYear) {
             joiner.add(s);
         }
 
-        date = joiner.toString();
-        return date;
+        return joiner.toString();
     }
 }

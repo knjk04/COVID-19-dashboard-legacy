@@ -4,7 +4,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.karankumar.covid19dashboard.backend.api.util.ApiConst;
 import com.karankumar.covid19dashboard.backend.domain.CountrySummary;
-import com.karankumar.covid19dashboard.backend.utils.Util;
+import com.karankumar.covid19dashboard.backend.utils.DateUtil;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -135,7 +135,7 @@ public class SummaryStats {
         String date = "";
         if (jsonObject != null) {
             String dateAndTime = jsonObject.getString(SummaryConst.DATE);
-            date = Util.formatDate(dateAndTime);
+            date = DateUtil.formatDate(dateAndTime);
         }
         return date;
     }
