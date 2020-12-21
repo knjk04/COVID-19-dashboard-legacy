@@ -61,7 +61,6 @@ Prerequisites:
 - [Vaadin](https://vaadin.com/) Pro (or higher) license 
     - Free with the [GitHub student pack](https://education.github.com/pack)
     - [Free trial available](https://vaadin.com/pricing)
-- Vaadin 14 or higher
 - Node.js
 - npm
 
