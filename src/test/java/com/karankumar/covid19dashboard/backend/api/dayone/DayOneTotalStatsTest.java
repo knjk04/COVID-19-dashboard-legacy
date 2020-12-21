@@ -7,8 +7,6 @@ import com.karankumar.covid19dashboard.backend.domain.dayone.CountryTotal;
 import com.karankumar.covid19dashboard.testutils.TestUtil;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.json.JSONArray;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -16,12 +14,18 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-public class DayOneTotalStatsTest {
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assumptions.assumeThat;
+
+class DayOneTotalStatsTest {
     private static DayOneTotalStats<CountryCasesTotal> countryConfirmedStats;
     private static DayOneTotalStats<CountryDeathsTotal> countryDeathStats;
 
+    private static final String DAY_ONE_URL =
+            "https://api.covid19api.com/total/dayone/country/united-kingdom/status/";
+
     @BeforeAll
-    public static void setupData() {
+    public static void setUp() {
         JSONArray confirmedCasesJson = TestUtil.readJsonArray(TestUtil.COUNTRY_CONFIRMED_FILE_PATH);
         countryConfirmedStats = new DayOneTotalStats(CountryName.UNITED_KINGDOM, CaseType.CONFIMRED);
 
@@ -46,48 +50,59 @@ public class DayOneTotalStatsTest {
             e.printStackTrace();
         }
 
-        Assumptions.assumeTrue(confirmedCasesJson != null && deathsJson != null);
+        assumeThat(confirmedCasesJson).isNotNull();
+        assumeThat(deathsJson).isNotNull();
     }
 
     @Test
-    public void confirmedUrlIsCorrect() {
-        String urlGroundTruth = "https://api.covid19api.com/total/dayone/country/united-kingdom/status/confirmed";
-        try {
-            Method method = countryConfirmedStats.getClass().getDeclaredMethod("getUrl");
-            method.setAccessible(true);
-            String url = (String) method.invoke(countryConfirmedStats);
-            Assertions.assertEquals(urlGroundTruth, url);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+    void confirmedUrlIsCorrect() {
+        // given
+        String urlGroundTruth = DAY_ONE_URL + "confirmed";
+
+        // when
+        String actual = countryConfirmedStats.getUrl();
+
+        // then
+        assertThat(actual).isEqualTo(urlGroundTruth);
     }
 
     @Test
-    public void deathsUrlIsCorrect() {
-        String urlGroundTruth = "https://api.covid19api.com/total/dayone/country/united-kingdom/status/deaths";
-        try {
-            Method method = countryDeathStats.getClass().getDeclaredMethod("getUrl");
-            method.setAccessible(true);
-            String url = (String) method.invoke(countryDeathStats);
-            Assertions.assertEquals(urlGroundTruth, url);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+    void deathsUrlIsCorrect() {
+        // given
+        String urlGroundTruth = DAY_ONE_URL + "deaths";
+
+        // when
+        String actual = countryDeathStats.getUrl();
+
+        // then
+        assertThat(actual).isEqualTo(urlGroundTruth);
     }
 
     @Test
-    public void totalConfirmedCasesIsCorrect() {
+    void totalConfirmedCasesIsCorrect() {
+        // given
         Integer totalConfirmedCasesGroundTruth = 289_140;
+
+        // when
         ArrayList<CountryCasesTotal> confirmedCases = countryConfirmedStats.getTotalConfirmedCases();
         CountryTotal last = confirmedCases.get(confirmedCases.size() - 1);
-        Assertions.assertEquals(totalConfirmedCasesGroundTruth, last.getNumberOfCases());
+        Integer actual = last.getNumberOfCases();
+
+        // then
+        assertThat(actual).isEqualTo(totalConfirmedCasesGroundTruth);
     }
 
     @Test
-    public void totalDeathsIsCorrect() {
+    void totalDeathsIsCorrect() {
+        // given
         Integer totalDeathsGroundTruth = 40_883;
+
+        // when
         ArrayList<CountryDeathsTotal> deaths = countryDeathStats.getTotalDeaths();
         CountryTotal last = deaths.get(deaths.size() - 1);
-        Assertions.assertEquals(totalDeathsGroundTruth, last.getNumberOfCases());
+        Integer actual = last.getNumberOfCases();
+
+        // then
+        assertThat(actual).isEqualTo(totalDeathsGroundTruth);
     }
 }

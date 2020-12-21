@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
 import java.util.TreeMap;
 
-public class SummaryStatsTest {
+class SummaryStatsTest {
     private static JSONObject jsonObject;
     private static SummaryStats summaryStats;
 
@@ -36,31 +36,31 @@ public class SummaryStatsTest {
      * Check if the time is correctly displayed as HH:MM:SS
      */
     @Test
-    public void timeCorrectlyFormatted() {
+    void timeCorrectlyFormatted() {
         String timeGroundTruth = "12:26:39";
         Assertions.assertEquals(summaryStats.getTime(), timeGroundTruth);
     }
 
     @Test
-    public void checkTotalRecovered() {
+    void checkTotalRecovered() {
         Integer totalRecoveredGroundTruth = 3_000_504;
         Assertions.assertEquals(summaryStats.getTotalRecovered(), totalRecoveredGroundTruth);
     }
 
     @Test
-    public void checkTotalConfirmedCases() {
+    void checkTotalConfirmedCases() {
         Integer totalConfirmedCasesGroundTruth = 6_829_314;
         Assertions.assertEquals(summaryStats.getTotalConfirmedCases(), totalConfirmedCasesGroundTruth);
     }
 
     @Test
-    public void checkTotalDeaths() {
+    void checkTotalDeaths() {
         Integer totalDeathsGroundTruth = 402_636;
         Assertions.assertEquals(summaryStats.getTotalDeaths(), totalDeathsGroundTruth);
     }
 
     @Test
-    public void checkIfCacheCorrectlyStoresData() {
+    void checkIfCacheCorrectlyStoresData() {
         try {
             Cache<String, JSONObject> testCache = Caffeine.newBuilder()
                     .build();
@@ -80,7 +80,7 @@ public class SummaryStatsTest {
     }
 
     @Test
-    public void mostCasesCorrectlySet() {
+    void mostCasesCorrectlySet() {
         TreeMap<Integer, String> mostCasesGroundTruth = new TreeMap<>();
         mostCasesGroundTruth.put(1_897_380, CountryName.UNITED_STATES_OF_AMERICA.toString());
         mostCasesGroundTruth.put(614_941, CountryName.BRAZIL.toString());
@@ -92,7 +92,7 @@ public class SummaryStatsTest {
     }
 
     @Test
-    public void mostDeathsCorrectlySet() {
+    void mostDeathsCorrectlySet() {
         TreeMap<Integer, String> mostDeathsGroundTruth = new TreeMap<>();
         mostDeathsGroundTruth.put(109_132, CountryName.UNITED_STATES_OF_AMERICA.toString());
         mostDeathsGroundTruth.put(40_344, CountryName.UNITED_KINGDOM.toString());

@@ -8,6 +8,7 @@ import com.karankumar.covid19dashboard.backend.domain.dayone.CountryTotal;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.assertj.core.util.VisibleForTesting;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -73,7 +74,8 @@ public class DayOneTotalStats <T extends CountryTotal> {
         return jsonArray;
     }
 
-    private String getUrl() {
+    @VisibleForTesting
+    String getUrl() {
         String dayOneUrl = ApiConst.apiUrl + DayOneTotalConst.PREFIX_URL + slug;
         switch (caseType) {
             case CONFIMRED:
@@ -90,7 +92,8 @@ public class DayOneTotalStats <T extends CountryTotal> {
         return dayOneUrl;
     }
 
-    private ArrayList<T> fetchDayOneTotal(JSONArray jsonArray, CaseType caseType) {
+    @VisibleForTesting
+    ArrayList<T> fetchDayOneTotal(JSONArray jsonArray, CaseType caseType) {
         ArrayList<T> caseTotals = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
