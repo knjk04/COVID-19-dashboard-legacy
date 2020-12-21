@@ -5,6 +5,12 @@
     <img src="https://travis-ci.com/knjk04/COVID-19-dashboard.svg?branch=master" alt="Build Status"/>
   </a>
   
+  
+  <a href="https://codecov.io/gh/knjk04/COVID-19-dashboard">
+     <img src="https://codecov.io/gh/knjk04/COVID-19-dashboard/branch/master/graph/badge.svg?token=QIRBKE7P0T"/>
+  </a>
+    
+  
   <a href="https://education.github.com/pack/gallery#c19Dash">
     <img src="https://img.shields.io/static/v1?label=Featured%20in&message=GitHub%20Student%20Gallery&color=00a8ff&logo=github&labelColor=192a56" alt="GitHub Student Gallery"/>
   </a>
