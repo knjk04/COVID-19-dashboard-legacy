@@ -1,0 +1,9 @@
+coverage:
+  status:
+    project:
+      default:
+        target: 75%
+        threshold: 0%
+    patch: off
+ignore:
+  - "src/main/java/com/karankumar/bookproject/BookProjectApplication.java"
