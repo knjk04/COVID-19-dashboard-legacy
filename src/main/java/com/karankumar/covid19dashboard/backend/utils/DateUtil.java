@@ -1,7 +1,5 @@
 package com.karankumar.covid19dashboard.backend.utils;
 
-import java.util.StringJoiner;
-
 public final class DateUtil {
 
     private DateUtil() { }
@@ -12,8 +10,7 @@ public final class DateUtil {
      * @return a date of the form dd-MM-yyyy
      */
     public static String formatDate(String dateAndTime) {
-        String[] split = dateAndTime.split("T");
-        String date = split[0];
+        String date = removeTimeFromDate(dateAndTime);
 
         String[] yearMonthDay = date.split("-");
         String year = yearMonthDay[0];
@@ -21,11 +18,10 @@ public final class DateUtil {
         String day = yearMonthDay[2];
         String[] dayMonthYear = {day, month, year};
 
-        StringJoiner joiner = new StringJoiner("-");
-        for (String s : dayMonthYear) {
-            joiner.add(s);
-        }
+        return String.join("-", dayMonthYear);
+    }
 
-        return joiner.toString();
+    private static String removeTimeFromDate(String dateAndTime) {
+        return dateAndTime.split("T")[0];
     }
 }
