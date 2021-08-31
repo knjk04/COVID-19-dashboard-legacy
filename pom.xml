@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <vaadin.version>14.6.2</vaadin.version>
+        <vaadin.version>14.6.8</vaadin.version>
         <java.version>11</java.version>
 
     </properties>
