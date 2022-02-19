@@ -15,19 +15,10 @@ public class Feedback extends HorizontalLayout {
     public Feedback() {
         VerticalLayout verticalLayout = new VerticalLayout();
 
-        Span span1 = new Span("Thank you for trying the COVID-19 dashboard. If you have any suggestions or if you " +
-                "found any bugs, you can get in touch via one of the following methods: ");
+        Span span = new Span("Thank you for trying the COVID-19 dashboard. If you have any suggestions or if you " +
+                "found any bugs, please raise an issue on GitHub: https://github.com/knjk04/COVID-19-dashboard");
 
-        Anchor github = new Anchor("https://github.com/knjk04/COVID-19-dashboard", "GitHub");
-        Text option1 = new Text("1. (Preferred) Raise an issue on ");
-        Span span2 = new Span(option1, github);
-
-        Text option2 = new Text("2. Send a message via the ");
-        Anchor contactForm = new Anchor("https://karan648584.typeform.com/to/nJWxDDeL", "contact form");
-        Text option2a = new Text(" with the subject line 'COVID-19 dashboard'");
-        Span span3 = new Span(option2, contactForm, option2a);
-
-        verticalLayout.add(span1, span2, span3);
+        verticalLayout.add(span);
         verticalLayout.setAlignItems(Alignment.CENTER);
 
         this.add(verticalLayout);
